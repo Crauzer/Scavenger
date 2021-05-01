@@ -15,7 +15,14 @@ namespace Scavenger.MVVM.ViewModels
         public virtual string Header { get; set; }
         public string Name
         {
-            get => Hashtables.GetField(this._nameHash);
+            get
+            {
+                return this switch
+                {
+                    BinTreeObjectViewModel _ => Hashtables.GetObject(this._nameHash),
+                    _ => Hashtables.GetField(this._nameHash)
+                };
+            }
             set
             {
                 this._nameHash = Fnv1a.HashLower(value);

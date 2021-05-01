@@ -15,209 +15,319 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <TemplateSelectors:BinPropertyTemplateSelector x:Key="BinPropertyTemplateSelector"/>
         <DataTemplate x:Key="BinTreePropertyTemplate">
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                <Border Height="25" Margin="0,5,0,5">
-                    <TextBox Text="{Binding Name}"
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <Border Height="25" Margin="0,5,0,5">
+                            <TextBox Text="{Binding Name}"
                             VerticalAlignment="Center" Width="250"
                             Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <Border Height="25">
-                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-            </StackPanel>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeBoolTemplate">
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                <TextBox Text="{Binding Name}"
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <TextBox Text="{Binding Name}"
                          VerticalAlignment="Center" Width="250"
                          Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <Border Height="25">
-                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
-            </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeNumberTemplate">
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                <TextBox Text="{Binding Name}" 
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <TextBox Text="{Binding Name}" 
                          VerticalAlignment="Center" Width="250"
                          Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <Border Height="25">
-                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <ModernWpf:NumberBox Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Margin="10,0,0,0"/>
-            </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <ModernWpf:NumberBox Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeVector2Template">
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                <TextBox Text="{Binding Name}" 
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <TextBox Text="{Binding Name}" 
                          VerticalAlignment="Center" Width="250"
                          Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <Border Height="25">
-                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <ModernWpf:NumberBox Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" Header="X" Margin="10,0,0,0"/>
-                <ModernWpf:NumberBox Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Header="Y" Margin="10,0,0,0"/>
-            </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <ModernWpf:NumberBox Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" Header="X" Margin="10,0,0,0"/>
+                        <ModernWpf:NumberBox Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Header="Y" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeVector3Template">
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                <TextBox Text="{Binding Name}"
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <TextBox Text="{Binding Name}"
                          VerticalAlignment="Center" Width="250"
                          Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <Border Height="25">
-                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <ModernWpf:NumberBox Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" Header="X" Margin="10,0,0,0"/>
-                <ModernWpf:NumberBox Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Header="Y" Margin="10,0,0,0"/>
-                <ModernWpf:NumberBox Value="{Binding Z, UpdateSourceTrigger=PropertyChanged}" Header="Z" Margin="10,0,0,0"/>
-            </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <ModernWpf:NumberBox Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" Header="X" Margin="10,0,0,0"/>
+                        <ModernWpf:NumberBox Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Header="Y" Margin="10,0,0,0"/>
+                        <ModernWpf:NumberBox Value="{Binding Z, UpdateSourceTrigger=PropertyChanged}" Header="Z" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeVector4Template">
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                <TextBox Text="{Binding Name}"
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <TextBox Text="{Binding Name}"
                          VerticalAlignment="Center" Width="250"
                          Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <Border Height="25">
-                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <CheckBox Content="Is Color" IsChecked="{Binding IsColorMode, UpdateSourceTrigger=PropertyChanged}"/>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <ModernWpf:NumberBox Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" Header="X" Margin="10,0,0,0" Width="140"/>
-                <ModernWpf:NumberBox Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Header="Y" Margin="10,0,0,0" Width="140"/>
-                <ModernWpf:NumberBox Value="{Binding Z, UpdateSourceTrigger=PropertyChanged}" Header="Z" Margin="10,0,0,0" Width="140"/>
-                <ModernWpf:NumberBox Value="{Binding W, UpdateSourceTrigger=PropertyChanged}" Header="W" Margin="10,0,0,0" Width="140"/>
-                <WpfToolkit:ColorCanvas SelectedColor="{Binding SelectedColor, UpdateSourceTrigger=PropertyChanged}"
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <CheckBox Content="Is Color" IsChecked="{Binding IsColorMode, UpdateSourceTrigger=PropertyChanged}"/>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <ModernWpf:NumberBox Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" Header="X" Margin="10,0,0,0" Width="140"/>
+                        <ModernWpf:NumberBox Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Header="Y" Margin="10,0,0,0" Width="140"/>
+                        <ModernWpf:NumberBox Value="{Binding Z, UpdateSourceTrigger=PropertyChanged}" Header="Z" Margin="10,0,0,0" Width="140"/>
+                        <ModernWpf:NumberBox Value="{Binding W, UpdateSourceTrigger=PropertyChanged}" Header="W" Margin="10,0,0,0" Width="140"/>
+                        <WpfToolkit:ColorCanvas SelectedColor="{Binding SelectedColor, UpdateSourceTrigger=PropertyChanged}"
                                         Visibility="{Binding IsColorMode, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"
                                         Background="Black" Foreground="#FFD8D8D8" Margin="10,0,0,0"/>
-            </StackPanel>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeStringTemplate">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5">
-                <TextBox Text="{Binding Name}" 
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5">
+                        <TextBox Text="{Binding Name}" 
                          VerticalAlignment="Center" Width="250"
                          Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <Border Height="25">
-                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
-            </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeColorTemplate">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5">
-                <TextBox Text="{Binding Name}"
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5">
+                        <TextBox Text="{Binding Name}"
                          VerticalAlignment="Center" Width="250"
                          Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <Border Height="25">
-                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
-                </Border>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <WpfToolkit:ColorCanvas R="{Binding R, UpdateSourceTrigger=PropertyChanged}"
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <WpfToolkit:ColorCanvas R="{Binding R, UpdateSourceTrigger=PropertyChanged}"
                                         G="{Binding G, UpdateSourceTrigger=PropertyChanged}"
                                         B="{Binding B, UpdateSourceTrigger=PropertyChanged}"
                                         A="{Binding A, UpdateSourceTrigger=PropertyChanged}"
                                         Background="Black" Foreground="#FFD8D8D8" Margin="10,0,0,0"/>
-
-
-            </StackPanel>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeStructureTemplate">
-            <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
-                <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
+                        <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
+                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                              ModernWpf:ControlHelper.Header="Name"
                              ModernWpf:ControlHelper.PlaceholderText="Name"
                              Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
-                    <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
+                            <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
                              ModernWpf:ControlHelper.Header="Meta Class"
                              ModernWpf:ControlHelper.PlaceholderText="Meta Class"/>
-                    <TreeViewItem Header="{Binding Header}" 
+                            <TreeViewItem Header="{Binding Header}" 
                                   Margin="0,5,0,0" 
                                   ItemsSource="{Binding Children}" 
                                   ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
-                        <TreeViewItem.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Add Field" Click="OnBinTreeStructureAddField" />
-                                <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField" />
-                            </ContextMenu>
-                        </TreeViewItem.ContextMenu>
-                    </TreeViewItem>
-                </ModernWpf:SimpleStackPanel>
-            </Border>
+                                <TreeViewItem.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Add Field" Click="OnBinTreeStructureAddField" />
+                                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField" />
+                                    </ContextMenu>
+                                </TreeViewItem.ContextMenu>
+                            </TreeViewItem>
+                        </ModernWpf:SimpleStackPanel>
+                    </Border>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeContainerTemplate">
-            <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
-                <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
+                        <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
+                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                              ModernWpf:ControlHelper.Header="Name"
                              ModernWpf:ControlHelper.PlaceholderText="Name"
                              Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
-                    <TreeViewItem Header="{Binding Header}" Margin="0,5,0,0" ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
-                </ModernWpf:SimpleStackPanel>
-            </Border>
+                            <TreeViewItem Header="{Binding Header}" Margin="0,5,0,0" 
+                                  ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                                <TreeViewItem.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                                    </ContextMenu>
+                                </TreeViewItem.ContextMenu>
+                            </TreeViewItem>
+                        </ModernWpf:SimpleStackPanel>
+                    </Border>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeMapTemplate">
-            <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
-                <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
+                        <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
+                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                              ModernWpf:ControlHelper.Header="Name"
                              ModernWpf:ControlHelper.PlaceholderText="Name"
                              Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
-                    <TreeViewItem 
+                            <TreeViewItem 
                         Header="{Binding Header, UpdateSourceTrigger=PropertyChanged}"
                         ItemsSource="{Binding Children, UpdateSourceTrigger=PropertyChanged}"
-                        ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
-                </ModernWpf:SimpleStackPanel>
-            </Border>
+                        ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                                <TreeViewItem.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                                    </ContextMenu>
+                                </TreeViewItem.ContextMenu>
+                            </TreeViewItem>
+                        </ModernWpf:SimpleStackPanel>
+                    </Border>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeMapEntryTemplate">
             <TreeViewItem>
@@ -234,15 +344,25 @@
             </TreeViewItem>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeOptionalTemplate">
-            <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
-                <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
-                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
+                        <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
+                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                              ModernWpf:ControlHelper.Header="Name"
                              ModernWpf:ControlHelper.PlaceholderText="Name"
                              Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
-                    <TreeViewItem Header="{Binding Header}" Margin="0,5,0,0" ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
-                </ModernWpf:SimpleStackPanel>
-            </Border>
+                            <TreeViewItem Header="{Binding Header}" Margin="0,5,0,0" 
+                                          ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
+                        </ModernWpf:SimpleStackPanel>
+                    </Border>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
         </DataTemplate>
     </Window.Resources>
     <Grid IsEnabled="{Binding IsGloballyEnabled, UpdateSourceTrigger=PropertyChanged}">

@@ -68,9 +68,24 @@ namespace Scavenger.MVVM.ViewModels
             this.Infobar.Progress = 100;
         }
 
-        public void LoadBinTree(string binName, BinTree binTree)
+        public async Task LoadBinTree(string binName, BinTree binTree)
         {
-            this.BinTrees.Add(new BinTreeViewModel(binName, binTree));
+            this.Infobar.Message = "Loading BIN Tree...";
+            this.Infobar.IsProgressIndefinite = true;
+            this.IsGloballyEnabled = false;
+
+            BinTreeViewModel binTreeViewModel = await CreateBinTreeViewModel();
+            this.BinTrees.Add(binTreeViewModel);
+
+            this.Infobar.Message = "";
+            this.Infobar.IsProgressIndefinite = false;
+            this.Infobar.Progress = 100;
+            this.IsGloballyEnabled = true;
+
+            Task<BinTreeViewModel> CreateBinTreeViewModel()
+            {
+                return Task.FromResult(new BinTreeViewModel(binName, binTree));
+            }
         }
 
         public async Task UpdateHashtables()

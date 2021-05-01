@@ -8,24 +8,16 @@ using System.Text;
 
 namespace Scavenger.MVVM.ViewModels
 {
-    public class BinTreeMapViewModel : BinTreePropertyViewModel
+    public class BinTreeMapViewModel : BinTreeParentViewModel
     {
-        public override string Header => $"{this.Name} -> {this.TreeProperty.Type} : {Hashtables.GetType((this.TreeProperty as BinTreeStructure).MetaClassHash)}";
-        public ObservableCollection<BinTreePropertyViewModel> Children
-        {
-            get => this._children;
-            set
-            {
-                this._children = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private ObservableCollection<BinTreePropertyViewModel> _children = new ObservableCollection<BinTreePropertyViewModel>();
+        public override string Header => $"{this.Name} -> {this.TreeProperty.Type}<{(this.TreeProperty as BinTreeMap).KeyType}, {(this.TreeProperty as BinTreeMap).ValueType}>";
 
         public BinTreeMapViewModel(BinTreeParentViewModel parent, BinTreeMap treeProperty) : base(parent, treeProperty)
         {
-            
+            foreach(var pair in treeProperty.Map)
+            {
+                this.Children.Add(new BinTreeMapEntryViewModel(this, pair));
+            }
         }
     }
 }

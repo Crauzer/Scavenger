@@ -2,6 +2,7 @@
 using LeagueToolkit.IO.PropertyBin.Properties;
 using Scavenger.Utilities;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Scavenger.MVVM.ViewModels
 {
@@ -23,9 +24,15 @@ namespace Scavenger.MVVM.ViewModels
 
         public BinTreeStructureViewModel(BinTreeParentViewModel parent, BinTreeStructure treeProperty) : base(parent, treeProperty)
         {
-            this.MetaClass = Hashtables.GetType((this.TreeProperty as BinTreeStructure).MetaClassHash);
+            BinTreeStructure structure = (this.TreeProperty as BinTreeStructure);
 
-            foreach (BinTreeProperty genericProperty in treeProperty.Properties)
+            this.MetaClass = structure.MetaClassHash switch
+            {
+                0 => "NULL",
+                _ => Hashtables.GetType(structure.MetaClassHash)
+            };
+
+            foreach (BinTreeProperty genericProperty in treeProperty.Properties ?? Enumerable.Empty<BinTreeProperty>())
             {
                 this.Children.Add(BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty));
             }

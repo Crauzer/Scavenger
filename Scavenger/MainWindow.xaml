@@ -195,6 +195,34 @@
                 </ModernWpf:SimpleStackPanel>
             </Border>
         </DataTemplate>
+        <DataTemplate x:Key="BinTreeMapTemplate">
+            <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
+                <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                             ModernWpf:ControlHelper.Header="Name"
+                             ModernWpf:ControlHelper.PlaceholderText="Name"
+                             Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
+                    <TreeViewItem 
+                        Header="{Binding Header, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding Children, UpdateSourceTrigger=PropertyChanged}"
+                        ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
+                </ModernWpf:SimpleStackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeMapEntryTemplate">
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <ContentControl 
+                        Content="{Binding KeyProperty, UpdateSourceTrigger=PropertyChanged}"
+                        ContentTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                    </ContentControl>
+                </TreeViewItem.Header>
+                <ContentControl
+                                Content="{Binding ValueProperty, UpdateSourceTrigger=PropertyChanged}"
+                                ContentTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                </ContentControl>
+            </TreeViewItem>
+        </DataTemplate>
         <DataTemplate x:Key="BinTreeOptionalTemplate">
             <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
                 <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">

@@ -45,7 +45,7 @@ namespace Scavenger
             Hashtables.Load();
         }
 
-        private void OnFileOpen(object sender, RoutedEventArgs e)
+        private async void OnFileOpen(object sender, RoutedEventArgs e)
         {
             using CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             dialog.Multiselect = false;
@@ -53,7 +53,7 @@ namespace Scavenger
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                this.ViewModel.LoadBinTree(PathIO.GetFileName(dialog.FileName), new BinTree(dialog.FileName));
+                await this.ViewModel.LoadBinTree(PathIO.GetFileName(dialog.FileName), new BinTree(dialog.FileName));
             }
         }
     }

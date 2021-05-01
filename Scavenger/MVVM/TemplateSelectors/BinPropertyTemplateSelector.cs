@@ -40,6 +40,8 @@ namespace Scavenger.MVVM.TemplateSelectors
                     BinTreeEmbeddedViewModel _ => element.FindResource("BinTreeStructureTemplate") as DataTemplate,
                     BinTreeStructureViewModel _ => element.FindResource("BinTreeStructureTemplate") as DataTemplate,
                     BinTreeObjectLinkViewModel _ => element.FindResource("BinTreeStringTemplate") as DataTemplate,
+                    BinTreeMapEntryViewModel _ => element.FindResource("BinTreeMapEntryTemplate") as DataTemplate,
+                    BinTreeMapViewModel _ => element.FindResource("BinTreeMapTemplate") as DataTemplate,
                     BinTreeOptionalViewModel _ => element.FindResource("BinTreeOptionalTemplate") as DataTemplate,
                     BinTreeBitBoolViewModel _ => element.FindResource("BinTreeNumberTemplate") as DataTemplate,
                     _ => element.FindResource("BinTreePropertyTemplate") as DataTemplate

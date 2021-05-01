@@ -1,4 +1,6 @@
-﻿using LeagueToolkit.IO.PropertyBin.Properties;
+﻿using LeagueToolkit.Helpers.Hashing;
+using LeagueToolkit.IO.PropertyBin;
+using LeagueToolkit.IO.PropertyBin.Properties;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,6 +26,13 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeBitBoolViewModel(BinTreeParentViewModel parent, BinTreeBitBool treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;
+        }
+
+        public override BinTreeProperty BuildProperty()
+        {
+            uint nameHash = Fnv1a.HashLower(this.Name);
+
+            return new BinTreeBitBool(null, nameHash, this.Value);
         }
     }
 }

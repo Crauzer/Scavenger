@@ -46,5 +46,17 @@ namespace Scavenger.MVVM.ViewModels
                 this.Objects.Add(new BinTreeObjectViewModel(treeObject));
             }
         }
+    
+        public BinTree BuildBinTree()
+        {
+            BinTree binTree = new BinTree();
+
+            foreach(BinTreeObjectViewModel objectViewModel in this.Objects)
+            {
+                binTree.AddObject(objectViewModel.BuildObject());
+            }
+
+            return binTree;
+        }
     }
 }

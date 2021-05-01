@@ -1,6 +1,8 @@
-﻿using LeagueToolkit.IO.PropertyBin;
+﻿using LeagueToolkit.Helpers.Hashing;
+using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
 using Scavenger.Utilities;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -36,6 +38,20 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this.Children.Add(BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty));
             }
+        }
+
+        public override BinTreeProperty BuildProperty()
+        {
+            uint nameHash = Fnv1a.HashLower(this.Name);
+            uint metaClassHash = Fnv1a.HashLower(this.MetaClass);
+
+            List<BinTreeProperty> properties = new List<BinTreeProperty>();
+            foreach (BinTreePropertyViewModel propertyViewModel in this.Children)
+            {
+                properties.Add(propertyViewModel.BuildProperty());
+            }
+
+            return new BinTreeStructure(null, nameHash, metaClassHash, properties);
         }
     }
 }

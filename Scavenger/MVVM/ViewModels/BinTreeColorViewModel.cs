@@ -1,4 +1,7 @@
-﻿using LeagueToolkit.IO.PropertyBin.Properties;
+﻿using LeagueToolkit.Helpers.Hashing;
+using LeagueToolkit.Helpers.Structures;
+using LeagueToolkit.IO.PropertyBin;
+using LeagueToolkit.IO.PropertyBin.Properties;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -79,6 +82,13 @@ namespace Scavenger.MVVM.ViewModels
             this.G = treeProperty.Value.G;
             this.B = treeProperty.Value.B;
             this.A = treeProperty.Value.A;
+        }
+
+        public override BinTreeProperty BuildProperty()
+        {
+            uint nameHash = Fnv1a.HashLower(this.Name);
+
+            return new BinTreeColor(null, nameHash, new Color(this._r, this._g, this._b, this._a));
         }
     }
 }

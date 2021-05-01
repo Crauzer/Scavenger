@@ -34,5 +34,16 @@ namespace Scavenger.MVVM.ViewModels
                 this.Children.Add(BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty));
             }
         }
+
+        public BinTreeObject BuildObject()
+        {
+            List<BinTreeProperty> properties = new List<BinTreeProperty>();
+            foreach(BinTreePropertyViewModel propertyViewModel in this.Children)
+            {
+                properties.Add(propertyViewModel.BuildProperty());
+            }
+
+            return new BinTreeObject(this.MetaClass, this.Name, properties);
+        }
     }
 }

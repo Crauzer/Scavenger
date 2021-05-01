@@ -37,7 +37,7 @@ namespace Scavenger.Utilities
             }
             else
             {
-                return key.ToString("x16");
+                return string.Format("0x{0:x8}", key);
             }
         }
         public static string GetField(uint key)
@@ -48,7 +48,7 @@ namespace Scavenger.Utilities
             }
             else
             {
-                return key.ToString("x16");
+                return string.Format("0x{0:x8}", key);
             }
         }
         public static string GetHash(uint key)
@@ -59,7 +59,7 @@ namespace Scavenger.Utilities
             }
             else
             {
-                return key.ToString("x16");
+                return string.Format("0x{0:x8}", key);
             }
         }
         public static string GetType(uint key)
@@ -70,7 +70,7 @@ namespace Scavenger.Utilities
             }
             else
             {
-                return key.ToString("x16");
+                return string.Format("0x{0:x8}", key);
             }
         }
         public static string GetWadEntry(ulong key)
@@ -81,7 +81,7 @@ namespace Scavenger.Utilities
             }
             else
             {
-                return key.ToString("x16");
+                return string.Format("0x{0:x16}", key);
             }
         }
 

@@ -232,9 +232,20 @@
                             <TreeView ItemsSource="{Binding Objects, UpdateSourceTrigger=PropertyChanged}">
                                 <TreeView.ItemTemplate>
                                     <DataTemplate>
-                                        <TreeViewItem Header="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
-                                            <ListView ItemsSource="{Binding Properties}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
-                                        </TreeViewItem>
+                                        <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
+                                            <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
+                                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                                         ModernWpf:ControlHelper.Header="Name"
+                                                         ModernWpf:ControlHelper.PlaceholderText="Name"/>
+                                                <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
+                                                         ModernWpf:ControlHelper.Header="Meta Class"
+                                                         ModernWpf:ControlHelper.PlaceholderText="Meta Class"/>
+                                                <TreeViewItem Header="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                                              ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                                                </TreeViewItem>
+                                            </ModernWpf:SimpleStackPanel>
+                                        </Border>
+
                                     </DataTemplate>
                                 </TreeView.ItemTemplate>
                             </TreeView>

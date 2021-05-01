@@ -33,11 +33,13 @@ namespace Scavenger.MVVM.ViewModels
         private bool _showName;
         private string _name;
 
+        public BinTreeParentViewModel Parent { get; private set; }
         public BinTreeProperty TreeProperty { get; private set; }
 
-        public BinTreePropertyViewModel(BinTreeProperty treeProperty, bool showName = true)
+        public BinTreePropertyViewModel(BinTreeParentViewModel parent, BinTreeProperty treeProperty, bool showName = true)
         {
-            this.Name = Hashtables.GetField(treeProperty.NameHash);
+            this.Parent = parent;
+            this.Name = treeProperty is null ? "" : Hashtables.GetField(treeProperty.NameHash);
             this.ShowName = showName;
             this.TreeProperty = treeProperty;
         }

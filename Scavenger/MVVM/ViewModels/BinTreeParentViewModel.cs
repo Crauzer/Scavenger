@@ -1,16 +1,10 @@
 ﻿using LeagueToolkit.IO.PropertyBin;
-using LeagueToolkit.IO.PropertyBin.Properties;
-using Scavenger.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Scavenger.MVVM.ViewModels
 {
-    public class BinTreeMapViewModel : BinTreePropertyViewModel
+    public class BinTreeParentViewModel : BinTreePropertyViewModel
     {
-        public override string Header => $"{this.Name} -> {this.TreeProperty.Type} : {Hashtables.GetType((this.TreeProperty as BinTreeStructure).MetaClassHash)}";
         public ObservableCollection<BinTreePropertyViewModel> Children
         {
             get => this._children;
@@ -22,10 +16,10 @@ namespace Scavenger.MVVM.ViewModels
         }
 
         private ObservableCollection<BinTreePropertyViewModel> _children = new ObservableCollection<BinTreePropertyViewModel>();
-
-        public BinTreeMapViewModel(BinTreeParentViewModel parent, BinTreeMap treeProperty) : base(parent, treeProperty)
+    
+        public BinTreeParentViewModel(BinTreeParentViewModel parent, BinTreeProperty treeProperty) : base(parent, treeProperty)
         {
-            
+
         }
     }
 }

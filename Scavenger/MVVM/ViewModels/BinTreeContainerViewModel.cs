@@ -10,29 +10,18 @@ using System.Windows.Input;
 
 namespace Scavenger.MVVM.ViewModels
 {
-    public class BinTreeContainerViewModel : BinTreePropertyViewModel
+    public class BinTreeContainerViewModel : BinTreeParentViewModel
     {
         public override string Header => $"{this.Name} -> {this.TreeProperty.Type} : {(this.TreeProperty as BinTreeContainer).PropertiesType}";
-        public ObservableCollection<BinTreePropertyViewModel> Children
-        {
-            get => this._children;
-            set
-            {
-                this._children = value;
-                NotifyPropertyChanged();
-            }
-        }
 
         public ICommand AddChildCommand => new RelayCommand(AddChild);
 
-        private ObservableCollection<BinTreePropertyViewModel> _children = new ObservableCollection<BinTreePropertyViewModel>();
-
-        public BinTreeContainerViewModel(BinTreeContainer treeProperty) : base(treeProperty)
+        public BinTreeContainerViewModel(BinTreeParentViewModel parent, BinTreeContainer treeProperty) : base(parent, treeProperty)
         {
             int itemIndex = 0;
             foreach (BinTreeProperty genericProperty in treeProperty.Properties)
             {
-                BinTreePropertyViewModel propertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(genericProperty);
+                BinTreePropertyViewModel propertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty);
                 propertyViewModel.Name = itemIndex.ToString();
                 propertyViewModel.ShowName = false;
 

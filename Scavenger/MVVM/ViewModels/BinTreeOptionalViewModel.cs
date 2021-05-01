@@ -4,24 +4,13 @@ using System.Collections.ObjectModel;
 
 namespace Scavenger.MVVM.ViewModels
 {
-    public class BinTreeOptionalViewModel : BinTreePropertyViewModel
+    public class BinTreeOptionalViewModel : BinTreeParentViewModel
     {
         public override string Header => $"{this.Name} -> Optional : {(this.TreeProperty as BinTreeOptional).ValueType}";
-        public ObservableCollection<BinTreePropertyViewModel> Children
-        {
-            get => this._children;
-            set
-            {
-                this._children = value;
-                NotifyPropertyChanged();
-            }
-        }
 
-        private ObservableCollection<BinTreePropertyViewModel> _children = new ObservableCollection<BinTreePropertyViewModel>();
-
-        public BinTreeOptionalViewModel(BinTreeOptional treeProperty) : base(treeProperty)
+        public BinTreeOptionalViewModel(BinTreeParentViewModel parent, BinTreeOptional treeProperty) : base(parent, treeProperty)
         {
-            BinTreePropertyViewModel valueViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(treeProperty.Value);
+            BinTreePropertyViewModel valueViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(this, treeProperty.Value);
             valueViewModel.ShowName = false;
 
             this.Children.Add(valueViewModel);

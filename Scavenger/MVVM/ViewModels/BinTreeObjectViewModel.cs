@@ -8,40 +8,30 @@ using System.Text;
 
 namespace Scavenger.MVVM.ViewModels
 {
-    public class BinTreeObjectViewModel : PropertyNotifier
+    public class BinTreeObjectViewModel : BinTreeParentViewModel
     {
-        public string Name
+        public string MetaClass
         {
-            get => this._name;
+            get => this._metaClass;
             set
             {
-                this._name = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public ObservableCollection<BinTreePropertyViewModel> Properties
-        {
-            get => this._properties;
-            set
-            {
-                this._properties = value;
+                this._metaClass = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private string _name;
-
+        private string _metaClass;
         private BinTreeObject _treeObject;
-        private ObservableCollection<BinTreePropertyViewModel> _properties = new ObservableCollection<BinTreePropertyViewModel>();
 
-        public BinTreeObjectViewModel(BinTreeObject treeObject)
+        public BinTreeObjectViewModel(BinTreeObject treeObject) : base(null, null)
         {
             this._treeObject = treeObject;
             this.Name = Hashtables.GetObject(treeObject.PathHash);
+            this.MetaClass = Hashtables.GetType(treeObject.MetaClassHash);
 
             foreach(BinTreeProperty genericProperty in treeObject.Properties)
             {
-                this.Properties.Add(BinTreeUtilities.ConstructTreePropertyViewModel(genericProperty));
+                this.Children.Add(BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty));
             }
         }
     }

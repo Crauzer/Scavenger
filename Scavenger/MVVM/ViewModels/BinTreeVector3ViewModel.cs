@@ -39,7 +39,7 @@ namespace Scavenger.MVVM.ViewModels
         private float _y;
         private float _z;
 
-        public BinTreeVector3ViewModel(BinTreeVector3 treeProperty) : base(treeProperty)
+        public BinTreeVector3ViewModel(BinTreeParentViewModel parent, BinTreeVector3 treeProperty) : base(parent, treeProperty)
         {
             this.X = treeProperty.Value.X;
             this.Y = treeProperty.Value.Y;

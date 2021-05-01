@@ -21,7 +21,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private float _value;
 
-        public BinTreeFloatViewModel(BinTreeFloat treeProperty) : base(treeProperty)
+        public BinTreeFloatViewModel(BinTreeParentViewModel parent, BinTreeFloat treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;
         }

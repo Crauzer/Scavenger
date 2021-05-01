@@ -19,7 +19,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private string _value;
 
-        public BinTreeStringViewModel(BinTreeString treeProperty) : base(treeProperty)
+        public BinTreeStringViewModel(BinTreeParentViewModel parent, BinTreeString treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;
         }

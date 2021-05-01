@@ -327,22 +327,27 @@
             <TreeViewItem>
                 <TreeViewItem.Header>
                     <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
-                        <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
-                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                             ModernWpf:ControlHelper.Header="Name"
-                             ModernWpf:ControlHelper.PlaceholderText="Name"
-                             Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
-                            <TreeViewItem 
-                        Header="{Binding Header, UpdateSourceTrigger=PropertyChanged}"
-                        ItemsSource="{Binding Children, UpdateSourceTrigger=PropertyChanged}"
-                        ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
-                                <TreeViewItem.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
-                                    </ContextMenu>
-                                </TreeViewItem.ContextMenu>
-                            </TreeViewItem>
-                        </ModernWpf:SimpleStackPanel>
+                        <TreeViewItem
+                                ItemsSource="{Binding Children, UpdateSourceTrigger=PropertyChanged}"
+                                ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                            <TreeViewItem.Header>
+                                <ModernWpf:SimpleStackPanel Orientation="Horizontal" Spacing="5">
+                                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                             MinWidth="250"
+                                             ModernWpf:ControlHelper.Header="Name"
+                                             ModernWpf:ControlHelper.PlaceholderText="Name"
+                                             Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
+                                    <Border VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Metadata, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Border>
+                                </ModernWpf:SimpleStackPanel>
+                            </TreeViewItem.Header>
+                            <TreeViewItem.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                                </ContextMenu>
+                            </TreeViewItem.ContextMenu>
+                        </TreeViewItem>
                     </Border>
                 </TreeViewItem.Header>
                 <TreeViewItem.ContextMenu>

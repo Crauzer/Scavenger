@@ -219,15 +219,28 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TreeView Grid.Row="0" ItemsSource="{Binding BinTree.Objects}">
-                    <TreeView.ItemTemplate>
+                <TabControl Grid.Row="0" 
+                            SelectedItem="{Binding SelectedBinTree, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding BinTrees, UpdateSourceTrigger=PropertyChanged}">
+                    <TabControl.ItemTemplate>
                         <DataTemplate>
-                            <TreeViewItem Header="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
-                                <ListView ItemsSource="{Binding Properties}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
-                            </TreeViewItem>
+                            <TextBlock Text="{Binding BinName, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
-                    </TreeView.ItemTemplate>
-                </TreeView>
+                    </TabControl.ItemTemplate>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <TreeView ItemsSource="{Binding Objects, UpdateSourceTrigger=PropertyChanged}">
+                                <TreeView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TreeViewItem Header="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
+                                            <ListView ItemsSource="{Binding Properties}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
+                                        </TreeViewItem>
+                                    </DataTemplate>
+                                </TreeView.ItemTemplate>
+                            </TreeView>
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
                 <Grid Grid.Row="1" DataContext="{Binding Infobar}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

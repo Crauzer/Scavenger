@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PathIO = System.IO.Path;
 
 namespace Scavenger
 {
@@ -52,7 +53,7 @@ namespace Scavenger
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                this.ViewModel.LoadBinTree(new BinTree(dialog.FileName));
+                this.ViewModel.LoadBinTree(PathIO.GetFileName(dialog.FileName), new BinTree(dialog.FileName));
             }
         }
     }

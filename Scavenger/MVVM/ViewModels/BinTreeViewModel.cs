@@ -8,6 +8,15 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeViewModel : PropertyNotifier
     {
+        public string BinName
+        {
+            get => this._binName;
+            set
+            {
+                this._binName = value;
+                NotifyPropertyChanged();
+            }
+        }
         public ObservableCollection<BinTreeObjectViewModel> Objects
         {
             get => this._objects;
@@ -18,11 +27,13 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
+        private string _binName;
         private BinTree _tree;
         private ObservableCollection<BinTreeObjectViewModel> _objects = new ObservableCollection<BinTreeObjectViewModel>();
 
-        public BinTreeViewModel(BinTree binTree)
+        public BinTreeViewModel(string binName, BinTree binTree)
         {
+            this._binName = binName;
             this._tree = binTree;
 
             GenerateObjects();

@@ -3,6 +3,7 @@ using Octokit;
 using Scavenger.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -13,12 +14,21 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class MainWindowViewModel : PropertyNotifier
     {
-        public BinTreeViewModel BinTree
+        public ObservableCollection<BinTreeViewModel> BinTrees
         {
-            get => this._binTree;
+            get => this._binTrees;
             set
             {
-                this._binTree = value;
+                this._binTrees = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public BinTreeViewModel SelectedBinTree
+        {
+            get => this._selectedBinTree;
+            set
+            {
+                this._selectedBinTree = value;
                 NotifyPropertyChanged();
             }
         }
@@ -41,7 +51,8 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-        private BinTreeViewModel _binTree;
+        private ObservableCollection<BinTreeViewModel> _binTrees = new ObservableCollection<BinTreeViewModel>();
+        private BinTreeViewModel _selectedBinTree;
         private bool _isGloballyEnabled = true;
         private InfobarViewModel _infobar = new InfobarViewModel();
 
@@ -57,9 +68,9 @@ namespace Scavenger.MVVM.ViewModels
             this.Infobar.Progress = 100;
         }
 
-        public void LoadBinTree(BinTree binTree)
+        public void LoadBinTree(string binName, BinTree binTree)
         {
-            this.BinTree = new BinTreeViewModel(binTree);
+            this.BinTrees.Add(new BinTreeViewModel(binName, binTree));
         }
 
         public async Task UpdateHashtables()

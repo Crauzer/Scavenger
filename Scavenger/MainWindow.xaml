@@ -418,58 +418,58 @@
                             </Grid.RowDefinitions>
                             <ModernWpf:SimpleStackPanel Grid.Row="0" Spacing="5" Orientation="Horizontal">
                                 <ModernWpf:NumberBox Value="{Binding M11, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M11"
+                                                     ModernWpf:ControlHelper.Header="M11" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M12, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M12"
+                                                     ModernWpf:ControlHelper.Header="M12" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M13, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M13"
+                                                     ModernWpf:ControlHelper.Header="M13" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M14, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M14"
+                                                     ModernWpf:ControlHelper.Header="M14" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                             </ModernWpf:SimpleStackPanel>
                             <ModernWpf:SimpleStackPanel Grid.Row="1" Spacing="5" Orientation="Horizontal">
                                 <ModernWpf:NumberBox Value="{Binding M21, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M11"
+                                                     ModernWpf:ControlHelper.Header="M11" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M22, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M22"
+                                                     ModernWpf:ControlHelper.Header="M22" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M23, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M23"
+                                                     ModernWpf:ControlHelper.Header="M23" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M24, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M24"
+                                                     ModernWpf:ControlHelper.Header="M24" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                             </ModernWpf:SimpleStackPanel>
                             <ModernWpf:SimpleStackPanel Grid.Row="2" Spacing="5" Orientation="Horizontal">
                                 <ModernWpf:NumberBox Value="{Binding M31, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M31"
+                                                     ModernWpf:ControlHelper.Header="M31" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M32, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M32"
+                                                     ModernWpf:ControlHelper.Header="M32" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M33, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M33"
+                                                     ModernWpf:ControlHelper.Header="M33" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M34, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M34"
+                                                     ModernWpf:ControlHelper.Header="M34" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                             </ModernWpf:SimpleStackPanel>
                             <ModernWpf:SimpleStackPanel Grid.Row="3" Spacing="5" Orientation="Horizontal">
                                 <ModernWpf:NumberBox Value="{Binding M41, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M41"
+                                                     ModernWpf:ControlHelper.Header="M41" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M42, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M42"
+                                                     ModernWpf:ControlHelper.Header="M42" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M43, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M43"
+                                                     ModernWpf:ControlHelper.Header="M43" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                                 <ModernWpf:NumberBox Value="{Binding M44, UpdateSourceTrigger=PropertyChanged}"
-                                                     ModernWpf:ControlHelper.Header="M44"
+                                                     ModernWpf:ControlHelper.Header="M44" MinWidth="150"
                                                      Margin="10,0,0,0"/>
                             </ModernWpf:SimpleStackPanel>
                         </Grid>

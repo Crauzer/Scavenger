@@ -1,0 +1,233 @@
+﻿<Window x:Class="Scavenger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Scavenger"
+        xmlns:ModernWpf="http://schemas.modernwpf.com/2019" 
+        xmlns:TemplateSelectors="clr-namespace:Scavenger.MVVM.TemplateSelectors" xmlns:WpfToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        ModernWpf:WindowHelper.UseModernWindowStyle="True"
+        mc:Ignorable="d"
+        Title="Scavenger" Height="720" Width="1280">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <TemplateSelectors:BinPropertyTemplateSelector x:Key="BinPropertyTemplateSelector"/>
+        <DataTemplate x:Key="BinTreePropertyTemplate">
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <Border Height="25" Margin="0,5,0,5">
+                    <TextBox Text="{Binding Name}" 
+                         VerticalAlignment="Center"
+                         Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <Border Height="25">
+                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeBoolTemplate">
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBox Text="{Binding Name}"
+                         VerticalAlignment="Center"
+                         Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <Border Height="25">
+                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeNumberTemplate">
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBox Text="{Binding Name}" 
+                         VerticalAlignment="Center"
+                         Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <Border Height="25">
+                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <ModernWpf:NumberBox Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Minimum="{Binding MinValue}" Maximum="{Binding MaxValue}" Margin="10,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeVector2Template">
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBox Text="{Binding Name}" 
+                         VerticalAlignment="Center"
+                         Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <Border Height="25">
+                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <ModernWpf:NumberBox Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" Header="X" Margin="10,0,0,0"/>
+                <ModernWpf:NumberBox Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Header="Y" Margin="10,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeVector3Template">
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBox Text="{Binding Name}"
+                         VerticalAlignment="Center"
+                         Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <Border Height="25">
+                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <ModernWpf:NumberBox Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" Header="X" Margin="10,0,0,0"/>
+                <ModernWpf:NumberBox Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Header="Y" Margin="10,0,0,0"/>
+                <ModernWpf:NumberBox Value="{Binding Z, UpdateSourceTrigger=PropertyChanged}" Header="Z" Margin="10,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeVector4Template">
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBox Text="{Binding Name}"
+                         VerticalAlignment="Center"
+                         Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <Border Height="25">
+                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <CheckBox Content="Is Color" IsChecked="{Binding IsColorMode, UpdateSourceTrigger=PropertyChanged}"/>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <ModernWpf:NumberBox Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" Header="X" Margin="10,0,0,0" Width="140"/>
+                <ModernWpf:NumberBox Value="{Binding Y, UpdateSourceTrigger=PropertyChanged}" Header="Y" Margin="10,0,0,0" Width="140"/>
+                <ModernWpf:NumberBox Value="{Binding Z, UpdateSourceTrigger=PropertyChanged}" Header="Z" Margin="10,0,0,0" Width="140"/>
+                <ModernWpf:NumberBox Value="{Binding W, UpdateSourceTrigger=PropertyChanged}" Header="W" Margin="10,0,0,0" Width="140"/>
+                <WpfToolkit:ColorCanvas SelectedColor="{Binding SelectedColor, UpdateSourceTrigger=PropertyChanged}"
+                                        Visibility="{Binding IsColorMode, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"
+                                        Background="Black" Foreground="#FFD8D8D8" Margin="10,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeStringTemplate">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5">
+                <TextBox Text="{Binding Name}" 
+                         VerticalAlignment="Center"
+                         Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <Border Height="25">
+                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeColorTemplate">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5">
+                <TextBox Text="{Binding Name}"
+                         VerticalAlignment="Center" 
+                         Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <Border Height="25">
+                    <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Orientation="Horizontal" Margin="10,0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                </StackPanel>
+                <WpfToolkit:ColorCanvas R="{Binding R, UpdateSourceTrigger=PropertyChanged}"
+                                        G="{Binding G, UpdateSourceTrigger=PropertyChanged}"
+                                        B="{Binding B, UpdateSourceTrigger=PropertyChanged}"
+                                        A="{Binding A, UpdateSourceTrigger=PropertyChanged}"
+                                        Background="Black" Foreground="#FFD8D8D8" Margin="10,0,0,0"/>
+
+
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeStructureTemplate">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Padding="8" Margin="0,5,0,5">
+                <StackPanel Orientation="Vertical">
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                             Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
+                    <TreeViewItem Header="{Binding Header}" Margin="0,5,0,0" ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeContainerTemplate">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Padding="8" Margin="0,5,0,5">
+                <StackPanel Orientation="Vertical">
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                             Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
+                    <TreeViewItem Header="{Binding Header}" Margin="0,5,0,0" ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeOptionalTemplate">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Padding="8" Margin="0,5,0,5">
+                <StackPanel Orientation="Vertical">
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                             Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
+                    <TreeViewItem Header="{Binding Header}" Margin="0,5,0,0" ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid IsEnabled="{Binding IsGloballyEnabled, UpdateSourceTrigger=PropertyChanged}">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="Open" Click="OnFileOpen"/>
+                </MenuItem>
+            </Menu>
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TreeView Grid.Row="0" ItemsSource="{Binding BinTree.Objects}">
+                    <TreeView.ItemTemplate>
+                        <DataTemplate>
+                            <TreeViewItem Header="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
+                                <ListView ItemsSource="{Binding Properties}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
+                            </TreeViewItem>
+                        </DataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+                <Grid Grid.Row="1" DataContext="{Binding Infobar}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,0,5"/>
+                    <ModernWpf:ProgressBar Grid.Row="1" 
+                                           Value="{Binding Progress, UpdateSourceTrigger=PropertyChanged}"
+                                           IsIndeterminate="{Binding IsProgressIndefinite, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>

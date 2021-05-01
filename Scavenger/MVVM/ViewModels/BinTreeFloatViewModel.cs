@@ -1,0 +1,29 @@
+﻿using LeagueToolkit.IO.PropertyBin.Properties;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Scavenger.MVVM.ViewModels
+{
+    public class BinTreeFloatViewModel : BinTreePropertyViewModel
+    {
+        public float Value
+        {
+            get => this._value;
+            set
+            {
+                this._value = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public float MaxValue => float.MaxValue;
+        public float MinValue => float.MinValue;
+
+        private float _value;
+
+        public BinTreeFloatViewModel(BinTreeFloat treeProperty) : base(treeProperty)
+        {
+            this.Value = treeProperty.Value;
+        }
+    }
+}

@@ -245,13 +245,17 @@
                 <TreeViewItem.Header>
                     <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
                         <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
-                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                             ModernWpf:ControlHelper.Header="Name"
-                             ModernWpf:ControlHelper.PlaceholderText="Name"
-                             Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
-                            <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
-                             ModernWpf:ControlHelper.Header="Meta Class"
-                             ModernWpf:ControlHelper.PlaceholderText="Meta Class"/>
+                            <ModernWpf:SimpleStackPanel Spacing="5" Orientation="Horizontal">
+                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                         MinWidth="250"
+                                         ModernWpf:ControlHelper.Header="Name"
+                                         ModernWpf:ControlHelper.PlaceholderText="Name"
+                                         Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
+                                <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
+                                         MinWidth="250"
+                                         ModernWpf:ControlHelper.Header="Meta Class"
+                                         ModernWpf:ControlHelper.PlaceholderText="Meta Class"/>
+                            </ModernWpf:SimpleStackPanel>
                             <TreeViewItem Header="{Binding Header}" 
                                   Margin="0,5,0,0" 
                                   ItemsSource="{Binding Children}" 
@@ -393,14 +397,19 @@
                                     <DataTemplate>
                                         <Border BorderThickness="1" BorderBrush="{StaticResource DarkBorderBrush}" Padding="8" Margin="0,5,0,5">
                                             <ModernWpf:SimpleStackPanel Orientation="Vertical" Spacing="5">
-                                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                                                         ModernWpf:ControlHelper.Header="Name"
-                                                         ModernWpf:ControlHelper.PlaceholderText="Name"/>
-                                                <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
-                                                         ModernWpf:ControlHelper.Header="Meta Class"
-                                                         ModernWpf:ControlHelper.PlaceholderText="Meta Class"/>
-                                                <TreeViewItem Header="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                                                              ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                                                <TreeViewItem ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                                                    <TreeViewItem.Header>
+                                                        <ModernWpf:SimpleStackPanel Spacing="5" Orientation="Horizontal">
+                                                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                                             MinWidth="550"
+                                                             ModernWpf:ControlHelper.Header="Name"
+                                                             ModernWpf:ControlHelper.PlaceholderText="Name"/>
+                                                            <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
+                                                             MinWidth="250"
+                                                             ModernWpf:ControlHelper.Header="Meta Class"
+                                                             ModernWpf:ControlHelper.PlaceholderText="Meta Class"/>
+                                                        </ModernWpf:SimpleStackPanel>
+                                                    </TreeViewItem.Header>
                                                 </TreeViewItem>
                                             </ModernWpf:SimpleStackPanel>
                                         </Border>

@@ -1,4 +1,5 @@
-﻿using Scavenger.MVVM.ViewModels;
+﻿using LeagueToolkit.IO.PropertyBin;
+using Scavenger.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,11 +20,11 @@ namespace Scavenger.MVVM.ModelViews
     /// </summary>
     public partial class NewBinPropertyDialog
     {
-        public NewBinPropertyDialog()
+        public NewBinPropertyDialog(IEnumerable<BinPropertyType> restrictTo)
         {
             InitializeComponent();
 
-            this.DataContext = new NewBinPropertyViewModel();
+            this.DataContext = new NewBinPropertyViewModel(restrictTo);
         }
     }
 }

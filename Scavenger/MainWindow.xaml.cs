@@ -64,7 +64,7 @@ namespace Scavenger
             if (e.Source is FrameworkElement frameworkElement &&
                 frameworkElement.DataContext is BinTreeParentViewModel parentViewModel)
             {
-                NewBinPropertyDialog dialog = new NewBinPropertyDialog();
+                NewBinPropertyDialog dialog = new NewBinPropertyDialog(null);
 
                 ContentDialogResult result = await dialog.ShowAsync(ContentDialogPlacement.Popup);
                 if (result == ContentDialogResult.Primary)

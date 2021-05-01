@@ -75,7 +75,9 @@ namespace Scavenger.MVVM.ViewModels
             this.IsGloballyEnabled = false;
 
             BinTreeViewModel binTreeViewModel = await CreateBinTreeViewModel();
+
             this.BinTrees.Add(binTreeViewModel);
+            this.SelectedBinTree = binTreeViewModel;
 
             this.Infobar.Message = "";
             this.Infobar.IsProgressIndefinite = false;

@@ -286,6 +286,7 @@
                                   ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
                                 <TreeViewItem.ContextMenu>
                                     <ContextMenu>
+                                        <MenuItem Header="Add Item" Click="OnBinTreeContainerAddItem"/>
                                         <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
                                     </ContextMenu>
                                 </TreeViewItem.ContextMenu>

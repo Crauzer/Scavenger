@@ -20,7 +20,7 @@
                  ui:ControlHelper.Header="Meta Class (Structure/Embedded)"/>
             <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"
                   SelectedValue="{Binding PropertyType, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding Types, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding PropertyTypes, UpdateSourceTrigger=PropertyChanged}"
                   ui:ControlHelper.Header="Type"/>
             <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"
                   SelectedValue="{Binding PrimaryType, UpdateSourceTrigger=PropertyChanged}"

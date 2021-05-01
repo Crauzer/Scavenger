@@ -15,12 +15,25 @@ namespace Scavenger.MVVM.ViewModels
         public virtual string Header { get; set; }
         public string Name
         {
-            get => this._name;
+            get => Hashtables.GetField(this._nameHash);
             set
             {
-                this._name = value;
+                this._nameHash = Fnv1a.HashLower(value);
+
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(this.Header));
+                NotifyPropertyChanged(nameof(this.NameHash));
+            }
+        }
+        public uint NameHash
+        {
+            get => this._nameHash;
+            set
+            {
+                this._nameHash = value;
+
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(this.Name));
             }
         }
         public bool ShowName
@@ -34,7 +47,7 @@ namespace Scavenger.MVVM.ViewModels
         }
 
         private bool _showName;
-        private string _name;
+        private uint _nameHash;
 
         public BinTreeParentViewModel Parent { get; private set; }
         public BinTreeProperty TreeProperty { get; private set; }
@@ -42,16 +55,14 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreePropertyViewModel(BinTreeParentViewModel parent, BinTreeProperty treeProperty, bool showName = true)
         {
             this.Parent = parent;
-            this.Name = treeProperty is null ? "" : Hashtables.GetField(treeProperty.NameHash);
+            this.NameHash = treeProperty is null ? 0 : treeProperty.NameHash;
             this.ShowName = showName;
             this.TreeProperty = treeProperty;
         }
 
         public virtual BinTreeProperty BuildProperty()
         {
-            uint nameHash = Fnv1a.HashLower(this.Name);
-
-            return new BinTreeNone(null, nameHash);
+            return new BinTreeNone(null, this._nameHash);
         }
     }
 }

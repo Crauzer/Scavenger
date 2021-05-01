@@ -31,11 +31,11 @@ namespace Scavenger.Utilities
                 BinTreeVector2 property => new BinTreeVector2ViewModel(parent, property),
                 BinTreeVector3 property => new BinTreeVector3ViewModel(parent, property),
                 BinTreeVector4 property => new BinTreeVector4ViewModel(parent, property),
-                //matrix
+                BinTreeMatrix44 property => new BinTreeMatrix44ViewModel(parent, property),
                 BinTreeColor property => new BinTreeColorViewModel(parent, property),
                 BinTreeHash property => new BinTreeHashViewModel(parent, property),
                 BinTreeWadEntryLink property => new BinTreeWadEntryLinkViewModel(parent, property),
-                BinTreeUnorderedContainer property => new BinTreeContainerViewModel(parent, property),
+                BinTreeUnorderedContainer property => new BinTreeUnorderedContainerViewModel(parent, property),
                 BinTreeContainer property => new BinTreeContainerViewModel(parent, property),
                 BinTreeString property => new BinTreeStringViewModel(parent, property),
                 BinTreeEmbedded property => new BinTreeEmbeddedViewModel(parent, property),

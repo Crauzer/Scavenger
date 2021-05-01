@@ -22,14 +22,13 @@ namespace Scavenger.MVVM.ViewModels
         public override BinTreeProperty BuildProperty()
         {
             BinTreeOptional treeOptional = this.TreeProperty as BinTreeOptional;
-            uint nameHash = Fnv1a.HashLower(this.Name);
 
             if (this.Children.Count != 1)
             {
                 throw new InvalidOperationException("Optional Property must contain one child");
             }
 
-            return new BinTreeOptional(null, nameHash, treeOptional.ValueType, this.Children[0].BuildProperty());
+            return new BinTreeOptional(null, this.NameHash, treeOptional.ValueType, this.Children[0].BuildProperty());
         }
     }
 }

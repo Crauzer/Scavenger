@@ -42,7 +42,6 @@ namespace Scavenger.MVVM.ViewModels
 
         public override BinTreeProperty BuildProperty()
         {
-            uint nameHash = Fnv1a.HashLower(this.Name);
             uint metaClassHash = Fnv1a.HashLower(this.MetaClass);
 
             List<BinTreeProperty> properties = new List<BinTreeProperty>();
@@ -51,7 +50,7 @@ namespace Scavenger.MVVM.ViewModels
                 properties.Add(propertyViewModel.BuildProperty());
             }
 
-            return new BinTreeStructure(null, nameHash, metaClassHash, properties);
+            return new BinTreeStructure(null, this.NameHash, metaClassHash, properties);
         }
     }
 }

@@ -31,10 +31,11 @@ namespace Scavenger.MVVM.TemplateSelectors
                     BinTreeVector2ViewModel _ => element.FindResource("BinTreeVector2Template") as DataTemplate,
                     BinTreeVector3ViewModel _ => element.FindResource("BinTreeVector3Template") as DataTemplate,
                     BinTreeVector4ViewModel _ => element.FindResource("BinTreeVector4Template") as DataTemplate,
-                    //matrix
+                    BinTreeMatrix44ViewModel _ => element.FindResource("BinTreeMatrix44Template") as DataTemplate,
                     BinTreeColorViewModel _ => element.FindResource("BinTreeColorTemplate") as DataTemplate,
                     BinTreeWadEntryLinkViewModel _ => element.FindResource("BinTreeStringTemplate") as DataTemplate,
                     BinTreeHashViewModel _ => element.FindResource("BinTreeStringTemplate") as DataTemplate,
+                    BinTreeUnorderedContainerViewModel _ => element.FindResource("BinTreeContainerTemplate") as DataTemplate,
                     BinTreeContainerViewModel _ => element.FindResource("BinTreeContainerTemplate") as DataTemplate,
                     BinTreeStringViewModel _ => element.FindResource("BinTreeStringTemplate") as DataTemplate,
                     BinTreeEmbeddedViewModel _ => element.FindResource("BinTreeStructureTemplate") as DataTemplate,

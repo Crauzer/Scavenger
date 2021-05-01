@@ -30,9 +30,7 @@ namespace Scavenger.MVVM.ViewModels
 
         public override BinTreeProperty BuildProperty()
         {
-            uint nameHash = Fnv1a.HashLower(this.Name);
-
-            return new BinTreeInt32(null, nameHash, this.Value);
+            return new BinTreeInt32(null, this.NameHash, this.Value);
         }
     }
 }

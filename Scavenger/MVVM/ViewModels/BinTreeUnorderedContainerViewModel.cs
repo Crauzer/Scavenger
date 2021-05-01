@@ -1,21 +1,18 @@
 ﻿using LeagueToolkit.Helpers.Hashing;
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
-using Scavenger.MVVM.Commands;
 using Scavenger.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
-using System.Windows.Input;
 
 namespace Scavenger.MVVM.ViewModels
 {
-    public class BinTreeContainerViewModel : BinTreeParentViewModel
+    public class BinTreeUnorderedContainerViewModel : BinTreeParentViewModel
     {
-        public string Metadata => $" -> {this.TreeProperty.Type} : {(this.TreeProperty as BinTreeContainer).PropertiesType}";
+        public string Metadata => $" -> {this.TreeProperty.Type} : {(this.TreeProperty as BinTreeUnorderedContainer).PropertiesType}";
 
-        public BinTreeContainerViewModel(BinTreeParentViewModel parent, BinTreeContainer treeProperty) : base(parent, treeProperty)
+        public BinTreeUnorderedContainerViewModel(BinTreeParentViewModel parent, BinTreeUnorderedContainer treeProperty) : base(parent, treeProperty)
         {
             int itemIndex = 0;
             foreach (BinTreeProperty genericProperty in treeProperty.Properties)
@@ -32,14 +29,14 @@ namespace Scavenger.MVVM.ViewModels
 
         public override BinTreeProperty BuildProperty()
         {
-            BinTreeContainer container = this.TreeProperty as BinTreeContainer;
+            BinTreeUnorderedContainer container = this.TreeProperty as BinTreeUnorderedContainer;
             List<BinTreeProperty> properties = new List<BinTreeProperty>();
-            foreach(BinTreePropertyViewModel propertyViewModel in this.Children)
+            foreach (BinTreePropertyViewModel propertyViewModel in this.Children)
             {
                 properties.Add(propertyViewModel.BuildProperty());
             }
 
-            return new BinTreeContainer(null, this.NameHash, container.PropertiesType, properties);
+            return new BinTreeUnorderedContainer(null, this.NameHash, container.PropertiesType, properties);
         }
     }
 }

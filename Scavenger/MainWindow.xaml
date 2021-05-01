@@ -392,6 +392,96 @@
                 </TreeViewItem.ContextMenu>
             </TreeViewItem>
         </DataTemplate>
+        <DataTemplate x:Key="BinTreeMatrix44Template">
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                        <ModernWpf:FontIcon Glyph="&#xE104;" Margin="0,0,15,0"/>
+                        <TextBox Text="{Binding Name}" 
+                         VerticalAlignment="Center" Width="250"
+                         Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Margin="10,0">
+                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                        </StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ModernWpf:SimpleStackPanel Grid.Row="0" Spacing="5" Orientation="Horizontal">
+                                <ModernWpf:NumberBox Value="{Binding M11, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M11"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M12, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M12"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M13, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M13"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M14, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M14"
+                                                     Margin="10,0,0,0"/>
+                            </ModernWpf:SimpleStackPanel>
+                            <ModernWpf:SimpleStackPanel Grid.Row="1" Spacing="5" Orientation="Horizontal">
+                                <ModernWpf:NumberBox Value="{Binding M21, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M11"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M22, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M22"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M23, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M23"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M24, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M24"
+                                                     Margin="10,0,0,0"/>
+                            </ModernWpf:SimpleStackPanel>
+                            <ModernWpf:SimpleStackPanel Grid.Row="2" Spacing="5" Orientation="Horizontal">
+                                <ModernWpf:NumberBox Value="{Binding M31, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M31"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M32, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M32"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M33, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M33"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M34, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M34"
+                                                     Margin="10,0,0,0"/>
+                            </ModernWpf:SimpleStackPanel>
+                            <ModernWpf:SimpleStackPanel Grid.Row="3" Spacing="5" Orientation="Horizontal">
+                                <ModernWpf:NumberBox Value="{Binding M41, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M41"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M42, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M42"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M43, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M43"
+                                                     Margin="10,0,0,0"/>
+                                <ModernWpf:NumberBox Value="{Binding M44, UpdateSourceTrigger=PropertyChanged}"
+                                                     ModernWpf:ControlHelper.Header="M44"
+                                                     Margin="10,0,0,0"/>
+                            </ModernWpf:SimpleStackPanel>
+                        </Grid>
+                    </StackPanel>
+                </TreeViewItem.Header>
+                <TreeViewItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                    </ContextMenu>
+                </TreeViewItem.ContextMenu>
+            </TreeViewItem>
+        </DataTemplate>
     </Window.Resources>
     <Grid IsEnabled="{Binding IsGloballyEnabled, UpdateSourceTrigger=PropertyChanged}">
         <DockPanel>

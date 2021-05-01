@@ -180,12 +180,29 @@ namespace Scavenger.MVVM.ViewModels
 
         public BinTreeMatrix44ViewModel(BinTreeParentViewModel parent, BinTreeMatrix44 treeProperty) : base(parent, treeProperty)
         {
+            this.M11 = treeProperty.Value.M11;
+            this.M12 = treeProperty.Value.M12;
+            this.M13 = treeProperty.Value.M13;
+            this.M14 = treeProperty.Value.M14;
 
+            this.M21 = treeProperty.Value.M21;
+            this.M22 = treeProperty.Value.M22;
+            this.M23 = treeProperty.Value.M23;
+            this.M24 = treeProperty.Value.M24;
+
+            this.M31 = treeProperty.Value.M31;
+            this.M32 = treeProperty.Value.M32;
+            this.M33 = treeProperty.Value.M33;
+            this.M34 = treeProperty.Value.M34;
+
+            this.M41 = treeProperty.Value.M41;
+            this.M42 = treeProperty.Value.M42;
+            this.M43 = treeProperty.Value.M43;
+            this.M44 = treeProperty.Value.M44;
         }
 
         public override BinTreeProperty BuildProperty()
         {
-            uint nameHash = Fnv1a.HashLower(this.Name);
             Matrix4x4 matrix = new Matrix4x4()
             {
                 M11 = this._m11,
@@ -209,7 +226,7 @@ namespace Scavenger.MVVM.ViewModels
                 M44 = this._m44,
             };
 
-            return new BinTreeMatrix44(null, nameHash, matrix);
+            return new BinTreeMatrix44(null, this.NameHash, matrix);
         }
     }
 }

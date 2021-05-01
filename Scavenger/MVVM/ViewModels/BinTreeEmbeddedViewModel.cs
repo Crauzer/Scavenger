@@ -7,7 +7,7 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeEmbeddedViewModel : BinTreeParentViewModel
     {
-        public override string Header => $"{this.Name} -> {this.TreeProperty.Type} : {this.MetaClass}";
+        public string Metadata => $" -> {this.TreeProperty.Type} : {this.MetaClass}";
         public string MetaClass
         {
             get => this._metaClass;
@@ -15,7 +15,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._metaClass = value;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(this.Header));
+                NotifyPropertyChanged(nameof(this.Metadata));
             }
         }
 

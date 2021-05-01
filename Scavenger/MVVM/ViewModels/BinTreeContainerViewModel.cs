@@ -12,9 +12,7 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeContainerViewModel : BinTreeParentViewModel
     {
-        public override string Header => $"{this.Name} -> {this.TreeProperty.Type} : {(this.TreeProperty as BinTreeContainer).PropertiesType}";
-
-        public ICommand AddChildCommand => new RelayCommand(AddChild);
+        public string Metadata => $" -> {this.TreeProperty.Type} : {(this.TreeProperty as BinTreeContainer).PropertiesType}";
 
         public BinTreeContainerViewModel(BinTreeParentViewModel parent, BinTreeContainer treeProperty) : base(parent, treeProperty)
         {
@@ -29,11 +27,6 @@ namespace Scavenger.MVVM.ViewModels
 
                 itemIndex++;
             }
-        }
-
-        private void AddChild(object o)
-        {
-
         }
     }
 }

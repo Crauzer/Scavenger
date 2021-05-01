@@ -7,7 +7,17 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeStructureViewModel : BinTreePropertyViewModel
     {
-        public override string Header => $"{this.Name} -> {this.TreeProperty.Type} : {Hashtables.GetType((this.TreeProperty as BinTreeStructure).MetaClassHash)}";
+        public override string Header => $"{this.Name} -> {this.TreeProperty.Type} : {this.MetaClass}";
+        public string MetaClass
+        {
+            get => this._metaClass;
+            set
+            {
+                this._metaClass = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(this.Header));
+            }
+        }
         public ObservableCollection<BinTreePropertyViewModel> Children
         {
             get => this._children;
@@ -18,11 +28,14 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
+        private string _metaClass;
         private ObservableCollection<BinTreePropertyViewModel> _children = new ObservableCollection<BinTreePropertyViewModel>();
 
         public BinTreeStructureViewModel(BinTreeStructure treeProperty) : base(treeProperty)
         {
-            foreach(BinTreeProperty genericProperty in treeProperty.Properties)
+            this.MetaClass = Hashtables.GetType((this.TreeProperty as BinTreeStructure).MetaClassHash);
+
+            foreach (BinTreeProperty genericProperty in treeProperty.Properties)
             {
                 this.Children.Add(BinTreeUtilities.ConstructTreePropertyViewModel(genericProperty));
             }

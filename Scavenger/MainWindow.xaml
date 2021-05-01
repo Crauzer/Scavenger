@@ -246,7 +246,12 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,0,5"/>
+                    <DockPanel Grid.Row="0">
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,0,5"/>
+                        <Image DockPanel.Dock="Right" Source="Resources/icon.ico" Width="48" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    </DockPanel>
                     <ModernWpf:ProgressBar Grid.Row="1" 
                                            Value="{Binding Progress, UpdateSourceTrigger=PropertyChanged}"
                                            IsIndeterminate="{Binding IsProgressIndefinite, UpdateSourceTrigger=PropertyChanged}"/>

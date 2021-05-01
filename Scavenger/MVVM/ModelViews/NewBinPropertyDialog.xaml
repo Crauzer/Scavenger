@@ -11,13 +11,26 @@
     CloseButtonText="Cancel"
     PrimaryButtonText="Create">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBox Grid.Row="0"/>
-        <ComboBox Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                  SelectedValue="{Binding Type, UpdateSourceTrigger=PropertyChanged}"
-                  ItemsSource="{Binding Types, UpdateSourceTrigger=PropertyChanged}"/>
+        <ui:SimpleStackPanel Spacing="10">
+            <TextBox
+                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                 ui:ControlHelper.Header="Name"/>
+            <TextBox
+                 Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
+                 ui:ControlHelper.Header="Meta Class (Structure/Embedded)"/>
+            <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"
+                  SelectedValue="{Binding PropertyType, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Types, UpdateSourceTrigger=PropertyChanged}"
+                  ui:ControlHelper.Header="Type"/>
+            <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"
+                  SelectedValue="{Binding PrimaryType, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Types, UpdateSourceTrigger=PropertyChanged}"
+                  ui:ControlHelper.Header="Primary/Key Type"/>
+            <ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"
+                  SelectedValue="{Binding SecondaryType, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding Types, UpdateSourceTrigger=PropertyChanged}"
+                  ui:ControlHelper.Header="Secondary/Value Type"/>
+        </ui:SimpleStackPanel>
+        
     </Grid>
 </ui:ContentDialog>

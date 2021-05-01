@@ -1,8 +1,12 @@
-﻿using LeagueToolkit.IO.PropertyBin;
+﻿using LeagueToolkit.Helpers.Hashing;
+using LeagueToolkit.Helpers.Structures;
+using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
 using Scavenger.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
 using System.Text;
 
 namespace Scavenger.Utilities
@@ -41,6 +45,45 @@ namespace Scavenger.Utilities
                 BinTreeMap property => new BinTreeMapViewModel(parent, property),
                 BinTreeBitBool property => new BinTreeBitBoolViewModel(parent, property),
                 _ => new BinTreePropertyViewModel(parent, genericProperty),
+            };
+        }
+
+        public static BinTreeProperty BuildProperty(string name, string metaClass,
+            IBinTreeParent parent, BinPropertyType propertyType, BinPropertyType primaryType, BinPropertyType secondaryType)
+        {
+            uint nameHash = Fnv1a.HashLower(name);
+            uint metaClassHash = Fnv1a.HashLower(metaClass);
+
+            return propertyType switch
+            {
+                BinPropertyType.None => new BinTreeNone(parent, nameHash),
+                BinPropertyType.Bool => new BinTreeBool(parent, nameHash, false),
+                BinPropertyType.SByte => new BinTreeSByte(parent, nameHash, 0),
+                BinPropertyType.Byte => new BinTreeByte(parent, nameHash, 0),
+                BinPropertyType.Int16 => new BinTreeInt16(parent, nameHash, 0),
+                BinPropertyType.UInt16 => new BinTreeUInt16(parent, nameHash, 0),
+                BinPropertyType.Int32 => new BinTreeInt32(parent, nameHash, 0),
+                BinPropertyType.UInt32 => new BinTreeUInt32(parent, nameHash, 0),
+                BinPropertyType.Int64 => new BinTreeInt64(parent, nameHash, 0),
+                BinPropertyType.UInt64 => new BinTreeUInt64(parent, nameHash, 0),
+                BinPropertyType.Float => new BinTreeFloat(parent, nameHash, 0),
+                BinPropertyType.Vector2 => new BinTreeVector2(parent, nameHash, new Vector2()),
+                BinPropertyType.Vector3 => new BinTreeVector3(parent, nameHash, new Vector3()),
+                BinPropertyType.Vector4 => new BinTreeVector4(parent, nameHash, new Vector4()),
+                BinPropertyType.Matrix44 => new BinTreeMatrix44(parent, nameHash, new Matrix4x4()),
+                BinPropertyType.Color => new BinTreeColor(parent, nameHash, new Color()),
+                BinPropertyType.String => new BinTreeString(parent, nameHash, ""),
+                BinPropertyType.Hash => new BinTreeHash(parent, nameHash, 0),
+                BinPropertyType.WadEntryLink => new BinTreeWadEntryLink(parent, nameHash, 0),
+                BinPropertyType.Container => new BinTreeContainer(parent, nameHash, primaryType, Enumerable.Empty<BinTreeProperty>()),
+                BinPropertyType.UnorderedContainer => new BinTreeUnorderedContainer(parent, nameHash, primaryType, Enumerable.Empty<BinTreeProperty>()),
+                BinPropertyType.Structure => new BinTreeStructure(parent, nameHash, metaClassHash, Enumerable.Empty<BinTreeProperty>()),
+                BinPropertyType.Embedded => new BinTreeEmbedded(parent, nameHash, metaClassHash, Enumerable.Empty<BinTreeProperty>()),
+                BinPropertyType.ObjectLink => new BinTreeObjectLink(parent, nameHash, 0),
+                BinPropertyType.Optional => new BinTreeOptional(parent, nameHash, primaryType, BuildProperty("", "", null, primaryType, secondaryType, BinPropertyType.None)),
+                BinPropertyType.Map => new BinTreeMap(parent, nameHash, primaryType, secondaryType, Enumerable.Empty<KeyValuePair<BinTreeProperty, BinTreeProperty>>()),
+                BinPropertyType.BitBool => new BinTreeBitBool(parent, nameHash, 0),
+                _ => new BinTreeNone(parent, nameHash),
             };
         }
     }

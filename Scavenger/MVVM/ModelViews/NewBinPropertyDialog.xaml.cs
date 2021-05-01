@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scavenger.MVVM.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,8 @@ namespace Scavenger.MVVM.ModelViews
         public NewBinPropertyDialog()
         {
             InitializeComponent();
+
+            this.DataContext = new NewBinPropertyViewModel();
         }
     }
 }

@@ -1,4 +1,12 @@
-﻿using LeagueToolkit.IO.PropertyBin;
+﻿using LeagueToolkit.Helpers.Hashing;
+using LeagueToolkit.Helpers.Structures;
+using LeagueToolkit.IO.PropertyBin;
+using LeagueToolkit.IO.PropertyBin.Properties;
+using Scavenger.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
 
 namespace Scavenger.MVVM.ViewModels
 {
@@ -10,6 +18,15 @@ namespace Scavenger.MVVM.ViewModels
             set
             {
                 this._name = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public string MetaClass
+        {
+            get => this._metaClass;
+            set
+            {
+                this._metaClass = value;
                 NotifyPropertyChanged();
             }
         }
@@ -41,11 +58,17 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-        private string _name;
+        public IEnumerable<BinPropertyType> Types => Enum.GetValues(typeof(BinPropertyType)).Cast<BinPropertyType>();
+
+        private string _name = string.Empty;
+        private string _metaClass = string.Empty;
         private BinPropertyType _propertyType;
         private BinPropertyType _primaryType;
         private BinPropertyType _secondaryType;
 
-
+        public BinTreeProperty BuildProperty(IBinTreeParent parent)
+        {
+            return BinTreeUtilities.BuildProperty(this.Name, this.MetaClass, parent, this.PropertyType, this.PrimaryType, this.SecondaryType);
+        }
     }
 }

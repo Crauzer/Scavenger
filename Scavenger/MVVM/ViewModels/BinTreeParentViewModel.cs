@@ -21,5 +21,10 @@ namespace Scavenger.MVVM.ViewModels
         {
 
         }
+
+        public void RemoveField(BinTreePropertyViewModel propertyViewModel)
+        {
+            this.Children.Remove(propertyViewModel);
+        }
     }
 }

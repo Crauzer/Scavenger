@@ -180,7 +180,17 @@
                     <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
                              ModernWpf:ControlHelper.Header="Meta Class"
                              ModernWpf:ControlHelper.PlaceholderText="Meta Class"/>
-                    <TreeViewItem Header="{Binding Header}" Margin="0,5,0,0" ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"/>
+                    <TreeViewItem Header="{Binding Header}" 
+                                  Margin="0,5,0,0" 
+                                  ItemsSource="{Binding Children}" 
+                                  ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add Field" Click="OnBinTreeStructureAddField" />
+                                <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField" />
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
                 </ModernWpf:SimpleStackPanel>
             </Border>
         </DataTemplate>

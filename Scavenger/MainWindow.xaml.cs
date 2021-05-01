@@ -1,5 +1,7 @@
 ﻿using LeagueToolkit.IO.PropertyBin;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using ModernWpf.Controls;
+using Scavenger.MVVM.ModelViews;
 using Scavenger.MVVM.ViewModels;
 using Scavenger.Utilities;
 using System;
@@ -54,6 +56,34 @@ namespace Scavenger
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 await this.ViewModel.LoadBinTree(PathIO.GetFileName(dialog.FileName), new BinTree(dialog.FileName));
+            }
+        }
+
+        private async void OnBinTreeStructureAddField(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is FrameworkElement frameworkElement &&
+                frameworkElement.DataContext is BinTreeParentViewModel parentViewModel)
+            {
+                NewBinPropertyDialog dialog = new NewBinPropertyDialog();
+
+                ContentDialogResult result = await dialog.ShowAsync(ContentDialogPlacement.Popup);
+                if (result == ContentDialogResult.Primary)
+                {
+                    NewBinPropertyViewModel dialogViewModel = dialog.DataContext as NewBinPropertyViewModel;
+                    BinTreeProperty newProperty = dialogViewModel.BuildProperty(parentViewModel.TreeProperty.Parent);
+                    BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(parentViewModel, newProperty);
+
+                    parentViewModel.Children.Add(newPropertyViewModel);
+                }
+            }
+        }
+
+        private void OnBinTreePropertyDeleteField(object sender, RoutedEventArgs e)
+        {
+            if(e.Source is FrameworkElement frameworkElement && 
+                frameworkElement.DataContext is BinTreePropertyViewModel propertyViewModel)
+            {
+                propertyViewModel.Parent.RemoveField(propertyViewModel);
             }
         }
     }

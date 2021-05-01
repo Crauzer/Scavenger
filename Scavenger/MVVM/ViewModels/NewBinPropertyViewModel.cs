@@ -79,16 +79,15 @@ namespace Scavenger.MVVM.ViewModels
 
         private string _name = string.Empty;
         private string _metaClass = string.Empty;
-        private IEnumerable<BinPropertyType> _propertyTypes;
-        private IEnumerable<BinPropertyType> _types;
+        private IEnumerable<BinPropertyType> _propertyTypes = Enum.GetValues(typeof(BinPropertyType)).Cast<BinPropertyType>();
+        private IEnumerable<BinPropertyType> _types = Enum.GetValues(typeof(BinPropertyType)).Cast<BinPropertyType>();
         private BinPropertyType _propertyType;
         private BinPropertyType _primaryType;
         private BinPropertyType _secondaryType;
 
         public NewBinPropertyViewModel(IEnumerable<BinPropertyType> restirctToTypes)
         {
-            if (restirctToTypes is null is false && restirctToTypes.Any() is false) this.PropertyTypes = Enum.GetValues(typeof(BinPropertyType)).Cast<BinPropertyType>();
-            else this.PropertyTypes = restirctToTypes;
+            if (restirctToTypes is null is false && restirctToTypes.Any()) this._propertyTypes = restirctToTypes;
         }
 
         public BinTreeProperty BuildProperty(IBinTreeParent parent)

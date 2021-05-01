@@ -501,7 +501,12 @@
                             ItemsSource="{Binding BinTrees, UpdateSourceTrigger=PropertyChanged}">
                     <TabControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding BinName, UpdateSourceTrigger=PropertyChanged}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding BinName, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Border VerticalAlignment="Center">
+                                    <ModernWpf:FontIcon Glyph="&#xE10A;" MouseDown="OnBinTreeTabClose" FontSize="15" Cursor="Hand" Margin="5,0,0,0"/>
+                                </Border>
+                            </StackPanel>
                         </DataTemplate>
                     </TabControl.ItemTemplate>
                     <TabControl.ContentTemplate>

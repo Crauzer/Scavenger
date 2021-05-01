@@ -66,7 +66,7 @@ namespace Scavenger
             using CommonSaveFileDialog dialog = new CommonSaveFileDialog();
             dialog.Filters.Add(new CommonFileDialogFilter("BIN Files", "*.bin"));
 
-            if(dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 BinTree binTree = this.ViewModel.SelectedBinTree.BuildBinTree();
                 binTree.Write(dialog.FileName, FileVersionProvider.GetSupportedVersions(LeagueFileType.PropertyBin).Last());
@@ -94,7 +94,7 @@ namespace Scavenger
 
         private void OnBinTreePropertyDeleteField(object sender, RoutedEventArgs e)
         {
-            if(e.Source is FrameworkElement frameworkElement && 
+            if (e.Source is FrameworkElement frameworkElement &&
                 frameworkElement.DataContext is BinTreePropertyViewModel propertyViewModel)
             {
                 propertyViewModel.Parent.RemoveField(propertyViewModel);
@@ -119,6 +119,20 @@ namespace Scavenger
                     newPropertyViewModel.ShowName = false;
 
                     containerViewModel.Children.Add(newPropertyViewModel);
+                }
+            }
+        }
+
+        private void OnBinTreeTabClose(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Source is FrameworkElement frameworkElement &&
+                frameworkElement.DataContext is BinTreeViewModel binTreeViewModel)
+            {
+                this.ViewModel.BinTrees.Remove(binTreeViewModel);
+
+                if (this.ViewModel.BinTrees.Count != 0)
+                {
+                    this.ViewModel.SelectedBinTree = this.ViewModel.BinTrees.Last();
                 }
             }
         }

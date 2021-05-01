@@ -7,6 +7,7 @@
         xmlns:ModernWpf="http://schemas.modernwpf.com/2019" 
         xmlns:TemplateSelectors="clr-namespace:Scavenger.MVVM.TemplateSelectors" xmlns:WpfToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         ModernWpf:WindowHelper.UseModernWindowStyle="True"
+        Icon="Resources/icon.ico"
         mc:Ignorable="d"
         Title="Scavenger" Height="720" Width="1280">
     <Window.Resources>

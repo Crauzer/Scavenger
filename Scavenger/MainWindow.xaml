@@ -397,7 +397,8 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="File">
-                    <MenuItem Header="Open" Click="OnFileOpen"/>
+                    <MenuItem Header="Open BIN" Click="OnBinFileOpen"/>
+                    <MenuItem Header="Save BIN" Click="OnBinFileSave"/>
                 </MenuItem>
             </Menu>
             <Grid DockPanel.Dock="Bottom">

@@ -1,4 +1,5 @@
-﻿using LeagueToolkit.IO.PropertyBin;
+﻿using LeagueToolkit.Helpers;
+using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using ModernWpf.Controls;
@@ -48,7 +49,7 @@ namespace Scavenger
             Hashtables.Load();
         }
 
-        private async void OnFileOpen(object sender, RoutedEventArgs e)
+        private async void OnBinFileOpen(object sender, RoutedEventArgs e)
         {
             using CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             dialog.Multiselect = false;
@@ -57,6 +58,18 @@ namespace Scavenger
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 await this.ViewModel.LoadBinTree(PathIO.GetFileName(dialog.FileName), new BinTree(dialog.FileName));
+            }
+        }
+
+        private void OnBinFileSave(object sender, RoutedEventArgs e)
+        {
+            using CommonSaveFileDialog dialog = new CommonSaveFileDialog();
+            dialog.Filters.Add(new CommonFileDialogFilter("BIN Files", "*.bin"));
+
+            if(dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                BinTree binTree = this.ViewModel.SelectedBinTree.BuildBinTree();
+                binTree.Write(dialog.FileName, FileVersionProvider.GetSupportedVersions(LeagueFileType.PropertyBin).Last());
             }
         }
 

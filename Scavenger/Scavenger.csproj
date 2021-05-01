@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
-    <PackageReference Include="LeagueToolkit" Version="2.1.5" />
+    <PackageReference Include="LeagueToolkit" Version="2.1.8" />
     <PackageReference Include="LeagueToolkit.Meta.Classes" Version="10.21.339.2173" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.4" />

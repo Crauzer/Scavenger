@@ -8,10 +8,23 @@
     <Platforms>x64</Platforms>
     <Configurations>Debug;Release;ReleasePortable</Configurations>
     <Authors>Crauzer</Authors>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <WarningsAsErrors />
+    <SelfContained>false</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SatelliteResourceLanguages> en </SatelliteResourceLanguages>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleasePortable|x64'">
-    <Optimize>true</Optimize>
+    <WarningsAsErrors />
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SatelliteResourceLanguages> en </SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>

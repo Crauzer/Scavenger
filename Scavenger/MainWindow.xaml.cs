@@ -43,9 +43,14 @@ namespace Scavenger
         {
             this.ViewModel.Initialize();
 
+            DialogHelper.MessageDialog = this.MessageDialog;
             DialogHelper.RootDialog = this.RootDialog;
 
-            await this.ViewModel.UpdateHashtables();
+            try
+            {
+                await this.ViewModel.UpdateHashtables();
+            }
+            catch (Exception exception) { await DialogHelper.ShowMessgeDialog($"Failed to update Hashtables\n{exception}"); }
 
             Hashtables.Load();
         }
@@ -58,19 +63,32 @@ namespace Scavenger
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                await this.ViewModel.LoadBinTree(PathIO.GetFileName(dialog.FileName), new BinTree(dialog.FileName));
+                try
+                {
+                    await this.ViewModel.LoadBinTree(PathIO.GetFileName(dialog.FileName), new BinTree(dialog.FileName));
+                }
+                catch(Exception exception)
+                {
+                    await DialogHelper.ShowMessgeDialog($"Failed to load BIN Tree\n{exception}");
+                }
             }
         }
-
-        private void OnBinFileSave(object sender, RoutedEventArgs e)
+        private async void OnBinFileSave(object sender, RoutedEventArgs e)
         {
             using CommonSaveFileDialog dialog = new CommonSaveFileDialog();
             dialog.Filters.Add(new CommonFileDialogFilter("BIN Files", "*.bin"));
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                BinTree binTree = this.ViewModel.SelectedBinTree.BuildBinTree();
-                binTree.Write(dialog.FileName, FileVersionProvider.GetSupportedVersions(LeagueFileType.PropertyBin).Last());
+                try
+                {
+                    BinTree binTree = this.ViewModel.SelectedBinTree.BuildBinTree();
+                    binTree.Write(dialog.FileName, FileVersionProvider.GetSupportedVersions(LeagueFileType.PropertyBin).Last());
+                }
+                catch(Exception exception)
+                {
+                    await DialogHelper.ShowMessgeDialog($"Failed to save BIN Tree\n{exception}");
+                }
             }
         }
 
@@ -89,16 +107,6 @@ namespace Scavenger
                 }
             }
         }
-
-        private void OnBinTreePropertyDeleteField(object sender, RoutedEventArgs e)
-        {
-            if (e.Source is FrameworkElement frameworkElement &&
-                frameworkElement.DataContext is BinTreePropertyViewModel propertyViewModel)
-            {
-                propertyViewModel.Parent.RemoveField(propertyViewModel);
-            }
-        }
-
         private async void OnBinTreeContainerAddItem(object sender, RoutedEventArgs e)
         {
             if (e.Source is FrameworkElement frameworkElement &&
@@ -106,7 +114,7 @@ namespace Scavenger
             {
                 BinTreeContainer container = containerViewModel.TreeProperty as BinTreeContainer;
                 NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(new List<BinPropertyType>() { container.PropertiesType });
-                if(dialogViewModel is not null)
+                if (dialogViewModel is not null)
                 {
                     BinTreeProperty newProperty = dialogViewModel.BuildProperty(container);
                     BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(containerViewModel, newProperty);
@@ -117,6 +125,28 @@ namespace Scavenger
                         containerViewModel.Children.Add(newPropertyViewModel);
                     }
                 }
+            }
+        }
+        private async void OnBinTreeMapAddItem(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is FrameworkElement frameworkElement &&
+                frameworkElement.DataContext is BinTreeMapViewModel mapViewModel)
+            {
+                BinTreeMap map = mapViewModel.TreeProperty as BinTreeMap;
+                BinTreeProperty keyProperty = BinTreeUtilities.BuildProperty("", "", map, map.KeyType, BinPropertyType.None, BinPropertyType.None);
+                BinTreeProperty valueProperty = BinTreeUtilities.BuildProperty("", "", map, map.ValueType, BinPropertyType.None, BinPropertyType.None);
+
+                BinTreeMapEntryViewModel newEntryViewModel = new BinTreeMapEntryViewModel(mapViewModel, new KeyValuePair<BinTreeProperty, BinTreeProperty>(keyProperty, valueProperty));
+
+                mapViewModel.Children.Add(newEntryViewModel);
+            }
+        }
+        private void OnBinTreePropertyDeleteField(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is FrameworkElement frameworkElement &&
+                frameworkElement.DataContext is BinTreePropertyViewModel propertyViewModel)
+            {
+                propertyViewModel.Parent.RemoveField(propertyViewModel);
             }
         }
 

@@ -28,5 +28,12 @@ namespace Scavenger.Utilities
                 return null;
             }
         }
+
+        public static async Task ShowMessgeDialog(string message)
+        {
+            MessageDialog dialog = new MessageDialog(message);
+
+            await DialogHost.Show(dialog, nameof(MessageDialog));
+        }
     }
 }

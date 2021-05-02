@@ -417,6 +417,7 @@
                     </TreeViewItem.Header>
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
+                            <MenuItem Header="Add Item" Click="OnBinTreeMapAddItem"/>
                             <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
@@ -612,87 +613,89 @@
             </MaterialDesign:ColorZone>
         </DataTemplate>
     </Window.Resources>
-    <MaterialDesign:DialogHost Identifier="RootDialog" Name="RootDialog">
-        <Grid IsEnabled="{Binding IsGloballyEnabled, UpdateSourceTrigger=PropertyChanged}">
-            <DockPanel>
-                <MaterialDesign:ColorZone DockPanel.Dock="Top" Margin="0,0,0,10" MaterialDesign:ShadowAssist.ShadowDepth="Depth3">
-                    <Menu>
-                        <MenuItem Header="File">
-                            <MenuItem Header="Open BIN" Click="OnBinFileOpen"/>
-                            <MenuItem Header="Save BIN" Click="OnBinFileSave"/>
-                        </MenuItem>
-                    </Menu>
-                </MaterialDesign:ColorZone>
-                <Grid DockPanel.Dock="Bottom">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <MaterialDesign:ColorZone Grid.Row="0" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
-                        <TabControl SelectedItem="{Binding SelectedBinTree, UpdateSourceTrigger=PropertyChanged}"
+    <MaterialDesign:DialogHost Identifier="MessageDialog" Name="MessageDialog">
+        <MaterialDesign:DialogHost Identifier="RootDialog" Name="RootDialog">
+            <Grid IsEnabled="{Binding IsGloballyEnabled, UpdateSourceTrigger=PropertyChanged}">
+                <DockPanel>
+                    <MaterialDesign:ColorZone DockPanel.Dock="Top" Margin="0,0,0,10" MaterialDesign:ShadowAssist.ShadowDepth="Depth3">
+                        <Menu>
+                            <MenuItem Header="File">
+                                <MenuItem Header="Open BIN" Click="OnBinFileOpen"/>
+                                <MenuItem Header="Save BIN" Click="OnBinFileSave"/>
+                            </MenuItem>
+                        </Menu>
+                    </MaterialDesign:ColorZone>
+                    <Grid DockPanel.Dock="Bottom">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <MaterialDesign:ColorZone Grid.Row="0" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
+                            <TabControl SelectedItem="{Binding SelectedBinTree, UpdateSourceTrigger=PropertyChanged}"
                                     ItemsSource="{Binding BinTrees, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource MaterialDesignTabControl}">
-                            <TabControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding BinName, UpdateSourceTrigger=PropertyChanged}"/>
-                                        <Border VerticalAlignment="Center">
-                                            <MaterialDesign:PackIcon Kind="Close" MouseDown="OnBinTreeTabClose" FontSize="15" Cursor="Hand" Margin="5,0,0,0"/>
-                                        </Border>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </TabControl.ItemTemplate>
-                            <TabControl.ContentTemplate>
-                                <DataTemplate>
-                                    <TreeView ItemsSource="{Binding Objects, UpdateSourceTrigger=PropertyChanged}"
+                                <TabControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding BinName, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Border VerticalAlignment="Center">
+                                                <MaterialDesign:PackIcon Kind="Close" MouseDown="OnBinTreeTabClose" FontSize="15" Cursor="Hand" Margin="5,0,0,0"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </TabControl.ItemTemplate>
+                                <TabControl.ContentTemplate>
+                                    <DataTemplate>
+                                        <TreeView ItemsSource="{Binding Objects, UpdateSourceTrigger=PropertyChanged}"
                                           VirtualizingStackPanel.IsVirtualizing="True">
-                                        <TreeView.ItemTemplate>
-                                            <DataTemplate>
-                                                <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth4">
-                                                    <TreeViewItem ItemsSource="{Binding Children}" 
+                                            <TreeView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth4">
+                                                        <TreeViewItem ItemsSource="{Binding Children}" 
                                                               ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
-                                                        <TreeViewItem.Header>
-                                                            <StackPanel Orientation="Horizontal">
-                                                                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                                            <TreeViewItem.Header>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                                                                      Style="{StaticResource MaterialDesignFilledTextBox}"
                                                                      MinWidth="550"
                                                                      Margin="15"
                                                                      MaterialDesign:HintAssist.Hint="Name"/>
-                                                                <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
+                                                                    <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
                                                                      Style="{StaticResource MaterialDesignFilledTextBox}"
                                                                      MinWidth="250"
                                                                      Margin="15"
                                                                      MaterialDesign:HintAssist.Hint="Meta Class"/>
-                                                            </StackPanel>
-                                                        </TreeViewItem.Header>
-                                                    </TreeViewItem>
-                                                </MaterialDesign:ColorZone>
-                                            </DataTemplate>
-                                        </TreeView.ItemTemplate>
-                                    </TreeView>
-                                </DataTemplate>
-                            </TabControl.ContentTemplate>
-                        </TabControl>
-                    </MaterialDesign:ColorZone>
-                    <MaterialDesign:ColorZone Grid.Row="1" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="15">
-                        <Grid DataContext="{Binding Infobar}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <DockPanel Grid.Row="0">
-                                <TextBlock
+                                                                </StackPanel>
+                                                            </TreeViewItem.Header>
+                                                        </TreeViewItem>
+                                                    </MaterialDesign:ColorZone>
+                                                </DataTemplate>
+                                            </TreeView.ItemTemplate>
+                                        </TreeView>
+                                    </DataTemplate>
+                                </TabControl.ContentTemplate>
+                            </TabControl>
+                        </MaterialDesign:ColorZone>
+                        <MaterialDesign:ColorZone Grid.Row="1" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="15">
+                            <Grid DataContext="{Binding Infobar}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <DockPanel Grid.Row="0">
+                                    <TextBlock
                             DockPanel.Dock="Left"
                             Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,0,5"/>
-                                <Image DockPanel.Dock="Right" Source="Resources/icon.ico" Width="48" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                            </DockPanel>
-                            <ProgressBar Grid.Row="1" 
+                                    <Image DockPanel.Dock="Right" Source="Resources/icon.ico" Width="48" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                                </DockPanel>
+                                <ProgressBar Grid.Row="1" 
                                  Value="{Binding Progress, UpdateSourceTrigger=PropertyChanged}"
                                  IsIndeterminate="{Binding IsProgressIndefinite, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Grid>
-                    </MaterialDesign:ColorZone>
-                </Grid>
-            </DockPanel>
-        </Grid>
+                            </Grid>
+                        </MaterialDesign:ColorZone>
+                    </Grid>
+                </DockPanel>
+            </Grid>
+        </MaterialDesign:DialogHost>
     </MaterialDesign:DialogHost>
 </Window>

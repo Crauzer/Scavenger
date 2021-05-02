@@ -127,7 +127,7 @@ namespace Scavenger
                 }
             }
         }
-        private async void OnBinTreeMapAddItem(object sender, RoutedEventArgs e)
+        private void OnBinTreeMapAddItem(object sender, RoutedEventArgs e)
         {
             if (e.Source is FrameworkElement frameworkElement &&
                 frameworkElement.DataContext is BinTreeMapViewModel mapViewModel)

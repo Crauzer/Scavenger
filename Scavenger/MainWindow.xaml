@@ -668,6 +668,20 @@
                                                                 </StackPanel>
                                                             </TreeViewItem.Header>
                                                         </TreeViewItem>
+                                                        <MaterialDesign:ColorZone.ContextMenu>
+                                                            <ContextMenu>
+                                                                <MenuItem Header="Add Object Item" Click="OnBinTreeObjectAddItem">
+                                                                    <MenuItem.Icon>
+                                                                        <MaterialDesign:PackIcon Kind="Plus"/>
+                                                                    </MenuItem.Icon>
+                                                                </MenuItem>
+                                                                <MenuItem Header="Delete Object" Click="OnBinTreeObjectDelete">
+                                                                    <MenuItem.Icon>
+                                                                        <MaterialDesign:PackIcon Kind="Remove"/>
+                                                                    </MenuItem.Icon>
+                                                                </MenuItem>
+                                                            </ContextMenu>
+                                                        </MaterialDesign:ColorZone.ContextMenu>
                                                     </MaterialDesign:ColorZone>
                                                 </DataTemplate>
                                             </TreeView.ItemTemplate>

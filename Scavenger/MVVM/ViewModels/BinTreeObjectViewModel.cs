@@ -21,11 +21,12 @@ namespace Scavenger.MVVM.ViewModels
         }
 
         private string _metaClass;
-        private BinTreeObject _treeObject;
+
+        public BinTreeObject TreeObject { get; private set; }
 
         public BinTreeObjectViewModel(BinTreeObject treeObject) : base(null, null)
         {
-            this._treeObject = treeObject;
+            this.TreeObject = treeObject;
             this.Name = Hashtables.GetObject(treeObject.PathHash);
             this.MetaClass = Hashtables.GetType(treeObject.MetaClassHash);
 

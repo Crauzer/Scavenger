@@ -92,6 +92,32 @@ namespace Scavenger
             }
         }
 
+        private async void OnBinTreeObjectAddItem(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is FrameworkElement frameworkElement &&
+                frameworkElement.DataContext is BinTreeObjectViewModel objectViewModel)
+            {
+                NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(null);
+                if (dialogViewModel is not null)
+                {
+                    BinTreeProperty newProperty = dialogViewModel.BuildProperty(objectViewModel.TreeObject);
+                    BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(objectViewModel, newProperty);
+                    if (newPropertyViewModel is not null)
+                    {
+                        objectViewModel.Children.Add(newPropertyViewModel);
+                    }
+                }
+            }
+        }
+        private void OnBinTreeObjectDelete(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is FrameworkElement frameworkElement &&
+                frameworkElement.DataContext is BinTreeObjectViewModel propertyViewModel)
+            {
+                this.ViewModel.SelectedBinTree.Objects.Remove(propertyViewModel);
+            }
+        }
+
         private async void OnBinTreeStructureAddField(object sender, RoutedEventArgs e)
         {
             if (e.Source is FrameworkElement frameworkElement &&

@@ -15,16 +15,10 @@ namespace Scavenger.MVVM.ViewModels
         public virtual string Header { get; set; }
         public string Name
         {
-            get
-            {
-                return this switch
-                {
-                    BinTreeObjectViewModel _ => Hashtables.GetObject(this._nameHash),
-                    _ => Hashtables.GetField(this._nameHash)
-                };
-            }
+            get => this._name;
             set
             {
+                this._name = value;
                 this._nameHash = Fnv1a.HashLower(value);
 
                 NotifyPropertyChanged();
@@ -37,6 +31,11 @@ namespace Scavenger.MVVM.ViewModels
             get => this._nameHash;
             set
             {
+                this._name = this switch
+                {
+                    BinTreeObjectViewModel _ => Hashtables.GetObject(value),
+                    _ => Hashtables.GetField(value)
+                };
                 this._nameHash = value;
 
                 NotifyPropertyChanged();
@@ -54,6 +53,7 @@ namespace Scavenger.MVVM.ViewModels
         }
 
         private bool _showName;
+        private string _name;
         private uint _nameHash;
 
         public BinTreeParentViewModel Parent { get; private set; }

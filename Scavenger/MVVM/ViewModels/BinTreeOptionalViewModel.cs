@@ -9,7 +9,7 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeOptionalViewModel : BinTreeParentViewModel
     {
-        public override string Header => $"{this.Name} -> Optional : {(this.TreeProperty as BinTreeOptional).ValueType}";
+        public string Metadata => $"Optional<{(this.TreeProperty as BinTreeOptional).ValueType}>";
 
         public BinTreeOptionalViewModel(BinTreeParentViewModel parent, BinTreeOptional treeProperty) : base(parent, treeProperty)
         {

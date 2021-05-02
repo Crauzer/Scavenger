@@ -3,15 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Scavenger"
              StartupUri="MainWindow.xaml"
-             xmlns:ui="http://schemas.modernwpf.com/2019">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemeResources  RequestedTheme="Dark" AccentColor="Green" />
-                <ui:XamlControlsResources />
-                <!-- Other merged dictionaries here -->
+                <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="LightGreen" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignDarkTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <!-- Other app resources here -->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

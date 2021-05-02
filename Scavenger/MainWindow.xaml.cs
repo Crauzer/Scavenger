@@ -2,7 +2,6 @@
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using ModernWpf.Controls;
 using Scavenger.MVVM.ModelViews;
 using Scavenger.MVVM.ViewModels;
 using Scavenger.Utilities;
@@ -44,6 +43,8 @@ namespace Scavenger
         {
             this.ViewModel.Initialize();
 
+            DialogHelper.RootDialog = this.RootDialog;
+
             await this.ViewModel.UpdateHashtables();
 
             Hashtables.Load();
@@ -78,12 +79,9 @@ namespace Scavenger
             if (e.Source is FrameworkElement frameworkElement &&
                 frameworkElement.DataContext is BinTreeParentViewModel parentViewModel)
             {
-                NewBinPropertyDialog dialog = new NewBinPropertyDialog(null);
-
-                ContentDialogResult result = await dialog.ShowAsync(ContentDialogPlacement.Popup);
-                if (result == ContentDialogResult.Primary)
+                NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(null);
+                if(dialogViewModel is not null)
                 {
-                    NewBinPropertyViewModel dialogViewModel = dialog.DataContext as NewBinPropertyViewModel;
                     BinTreeProperty newProperty = dialogViewModel.BuildProperty(parentViewModel.TreeProperty.Parent);
                     BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(parentViewModel, newProperty);
 
@@ -107,12 +105,9 @@ namespace Scavenger
                 frameworkElement.DataContext is BinTreeContainerViewModel containerViewModel)
             {
                 BinTreeContainer container = containerViewModel.TreeProperty as BinTreeContainer;
-                NewBinPropertyDialog dialog = new NewBinPropertyDialog(new List<BinPropertyType>() { container.PropertiesType });
-
-                ContentDialogResult result = await dialog.ShowAsync(ContentDialogPlacement.Popup);
-                if (result == ContentDialogResult.Primary)
+                NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(new List<BinPropertyType>() { container.PropertiesType });
+                if(dialogViewModel is not null)
                 {
-                    NewBinPropertyViewModel dialogViewModel = dialog.DataContext as NewBinPropertyViewModel;
                     BinTreeProperty newProperty = dialogViewModel.BuildProperty(container);
                     BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(containerViewModel, newProperty);
 

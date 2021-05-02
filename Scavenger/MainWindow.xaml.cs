@@ -1,6 +1,7 @@
 ﻿using LeagueToolkit.Helpers;
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
+using MaterialDesignExtensions.Controls;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Scavenger.MVVM.ModelViews;
 using Scavenger.MVVM.ViewModels;
@@ -26,7 +27,7 @@ namespace Scavenger
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MaterialWindow
     {
         public MainWindowViewModel ViewModel { get; private set; } = new MainWindowViewModel();
 

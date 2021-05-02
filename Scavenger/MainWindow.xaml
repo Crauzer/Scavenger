@@ -517,6 +517,10 @@
                                      Margin="10"
                                      MaterialDesign:HintAssist.HelperText="Name"
                                      Visibility="{Binding ShowName, Converter={StaticResource BoolToVis}}"/>
+                            <CheckBox Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"
+                                      IsChecked="{Binding IsSome, UpdateSourceTrigger=PropertyChanged}"
+                                      Margin="10"
+                                      Content="Is Enabled" />
                             <MaterialDesign:Chip >
                                 <Border VerticalAlignment="Center">
                                     <TextBlock Text="{Binding Metadata, UpdateSourceTrigger=PropertyChanged}"/>
@@ -708,7 +712,7 @@
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding BinName, UpdateSourceTrigger=PropertyChanged}"/>
                                             <Border VerticalAlignment="Center">
-                                                <MaterialDesign:PackIcon Kind="Close" MouseDown="OnBinTreeTabClose" FontSize="15" Cursor="Hand" Margin="5,0,0,0"/>
+                                                <MaterialDesign:PackIcon Kind="Close" MouseDown="OnBinTreeTabClose" Cursor="Hand" Margin="5,0,0,0"/>
                                             </Border>
                                         </StackPanel>
                                     </DataTemplate>

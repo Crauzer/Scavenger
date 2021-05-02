@@ -447,6 +447,9 @@
                 <TreeViewItem ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
                     <TreeViewItem.Header>
                         <StackPanel Orientation="Horizontal">
+                            <Border VerticalAlignment="Center">
+                                <MaterialDesign:PackIcon Kind="CheckboxMultipleBlankOutline"/>
+                            </Border>
                             <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                                      Width="250"
                                      Margin="10"

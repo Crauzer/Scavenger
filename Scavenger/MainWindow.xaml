@@ -46,7 +46,11 @@
                 </TreeViewItem.Header>
                 <TreeViewItem.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Property" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </TreeViewItem.ContextMenu>
             </TreeViewItem>
@@ -74,7 +78,11 @@
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Bool" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -112,7 +120,11 @@
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Number" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -153,7 +165,11 @@
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Vector2" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -200,7 +216,11 @@
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Vector3" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -264,7 +284,11 @@
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Vector4" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -296,7 +320,11 @@
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Text" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -326,7 +354,11 @@
                                                 Margin="10,0,0,0"/>
                 <StackPanel.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Color" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </StackPanel.ContextMenu>
             </StackPanel>
@@ -360,8 +392,16 @@
                 </TreeViewItem>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Add Field" Click="OnBinTreeStructureAddField" />
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Add Structure Field" Click="OnBinTreeStructureAddField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Add"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Delete Structure" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -390,7 +430,16 @@
                 </TreeViewItem>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Add Container Item" Click="OnBinTreeContainerAddItem">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Add"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Delete Container" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -417,14 +466,26 @@
                     </TreeViewItem.Header>
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Add Item" Click="OnBinTreeMapAddItem"/>
-                            <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                            <MenuItem Header="Add Map Item" Click="OnBinTreeMapAddItem">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="Add"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Delete Map Item" Click="OnBinTreePropertyDeleteField">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="Remove"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Map" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -465,7 +526,11 @@
                     </TreeViewItem.Header>
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                            <MenuItem Header="Delete Optional" Click="OnBinTreePropertyDeleteField">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="Remove"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
@@ -607,7 +672,11 @@
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Click="OnBinTreePropertyDeleteField"/>
+                        <MenuItem Header="Delete Matrix44" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>

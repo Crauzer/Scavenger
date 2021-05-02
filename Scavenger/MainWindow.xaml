@@ -612,12 +612,14 @@
     <MaterialDesign:DialogHost Identifier="RootDialog" Name="RootDialog">
         <Grid IsEnabled="{Binding IsGloballyEnabled, UpdateSourceTrigger=PropertyChanged}">
             <DockPanel>
-                <Menu DockPanel.Dock="Top">
-                    <MenuItem Header="File">
-                        <MenuItem Header="Open BIN" Click="OnBinFileOpen"/>
-                        <MenuItem Header="Save BIN" Click="OnBinFileSave"/>
-                    </MenuItem>
-                </Menu>
+                <MaterialDesign:ColorZone DockPanel.Dock="Top" Margin="0,0,0,10" MaterialDesign:ShadowAssist.ShadowDepth="Depth3">
+                    <Menu>
+                        <MenuItem Header="File">
+                            <MenuItem Header="Open BIN" Click="OnBinFileOpen"/>
+                            <MenuItem Header="Save BIN" Click="OnBinFileSave"/>
+                        </MenuItem>
+                    </Menu>
+                </MaterialDesign:ColorZone>
                 <Grid DockPanel.Dock="Bottom">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

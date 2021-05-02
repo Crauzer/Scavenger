@@ -10,7 +10,7 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeStructureViewModel : BinTreeParentViewModel
     {
-        public string Metadata => $"{this.TreeProperty.Type} : {this.MetaClass}";
+        public string Metadata => $"{this.TreeProperty.Type}<{this.MetaClass}>";
         public string MetaClass
         {
             get => this._metaClass;

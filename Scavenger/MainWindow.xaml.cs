@@ -110,10 +110,12 @@ namespace Scavenger
                 {
                     BinTreeProperty newProperty = dialogViewModel.BuildProperty(container);
                     BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(containerViewModel, newProperty);
+                    if (newPropertyViewModel is not null)
+                    {
+                        newPropertyViewModel.ShowName = false;
 
-                    newPropertyViewModel.ShowName = false;
-
-                    containerViewModel.Children.Add(newPropertyViewModel);
+                        containerViewModel.Children.Add(newPropertyViewModel);
+                    }
                 }
             }
         }

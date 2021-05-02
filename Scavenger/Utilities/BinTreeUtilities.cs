@@ -44,7 +44,7 @@ namespace Scavenger.Utilities
                 BinTreeOptional property => new BinTreeOptionalViewModel(parent, property),
                 BinTreeMap property => new BinTreeMapViewModel(parent, property),
                 BinTreeBitBool property => new BinTreeBitBoolViewModel(parent, property),
-                _ => new BinTreePropertyViewModel(parent, genericProperty),
+                _ => null,
             };
         }
 

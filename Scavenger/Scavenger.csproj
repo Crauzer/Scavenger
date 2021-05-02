@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
-    <PackageReference Include="LeagueToolkit" Version="2.1.8" />
+    <PackageReference Include="LeagueToolkit" Version="2.1.9" />
     <PackageReference Include="LeagueToolkit.Meta.Classes" Version="10.21.339.2173" />
     <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
     <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />

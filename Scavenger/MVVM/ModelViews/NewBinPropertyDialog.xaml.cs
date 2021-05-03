@@ -22,7 +22,7 @@ namespace Scavenger.MVVM.ModelViews
     /// </summary>
     public partial class NewBinPropertyDialog : UserControl
     {
-        public NewBinPropertyDialog(IEnumerable<StructureTemplate> structureTemplates, IEnumerable<BinPropertyType> restrictTo = null)
+        public NewBinPropertyDialog(ICollection<StructureTemplate> structureTemplates, ICollection<BinPropertyType> restrictTo = null)
         {
             InitializeComponent();
 

@@ -15,7 +15,7 @@ namespace Scavenger.Utilities
         public static DialogHost MessageDialog { get; set; }
         public static DialogHost RootDialog { get; set; }
 
-        public static async Task<NewBinPropertyViewModel> ShowNewBinPropertyDialog(IEnumerable<StructureTemplate> structureTemplates, IEnumerable<BinPropertyType> restrictTo = null)
+        public static async Task<NewBinPropertyViewModel> ShowNewBinPropertyDialog(ICollection<StructureTemplate> structureTemplates, ICollection<BinPropertyType> restrictTo = null)
         {
             NewBinPropertyDialog dialog = new NewBinPropertyDialog(structureTemplates, restrictTo);
 

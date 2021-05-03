@@ -13,6 +13,15 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class NewBinPropertyViewModel : PropertyNotifier
     {
+        public bool IsStructureTemplateSelectable
+        {
+            get => this._IsStructureTemplateSelectable;
+            set
+            {
+                this._IsStructureTemplateSelectable = value;
+                NotifyPropertyChanged();
+            }
+        }
         public StructureTemplate StructureTemplate
         {
             get => this._structureTemplate;
@@ -23,11 +32,17 @@ namespace Scavenger.MVVM.ViewModels
                 if (value is not null)
                 {
                     this.MetaClass = value.MetaClass;
-                    this.PropertyType = value.IsEmbedded ? BinPropertyType.Embedded : BinPropertyType.Structure;
                     this.PropertyTypes = new List<BinPropertyType>()
                     {
                         BinPropertyType.Structure, BinPropertyType.Embedded
-                    };
+                    }.Intersect(this.PropertyTypes);
+
+                    BinPropertyType requestedType = value.IsEmbedded ? BinPropertyType.Embedded : BinPropertyType.Structure;
+                    if (this.PropertyTypes.Contains(requestedType))
+                    {
+                        this.PropertyType = requestedType;
+                    }
+                    else this.PropertyType = this.PropertyTypes.First();
                 }
                 else
                 {
@@ -103,6 +118,7 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
+        private bool _IsStructureTemplateSelectable = true;
         private StructureTemplate _structureTemplate;
         private string _name = string.Empty;
         private string _metaClass = string.Empty;
@@ -112,7 +128,7 @@ namespace Scavenger.MVVM.ViewModels
         private BinPropertyType _primaryType;
         private BinPropertyType _secondaryType;
 
-        public NewBinPropertyViewModel(IEnumerable<StructureTemplate> structureTemplates, IEnumerable<BinPropertyType> restirctToTypes = null)
+        public NewBinPropertyViewModel(ICollection<StructureTemplate> structureTemplates, ICollection<BinPropertyType> restirctToTypes = null)
         {
             this.StructureTemplates = structureTemplates;
             

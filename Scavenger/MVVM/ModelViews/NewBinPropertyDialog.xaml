@@ -16,12 +16,16 @@
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{MaterialDesign:MaterialDesignFont}"
     d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
     <Grid>
         <StackPanel Margin="20">
             <ComboBox SelectedValue="{Binding StructureTemplate, UpdateSourceTrigger=PropertyChanged}"
                       VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="300"
                       ItemsSource="{Binding StructureTemplates, UpdateSourceTrigger=PropertyChanged}"
-                      MaterialDesign:HintAssist.HelperText="Structure Template">
+                      MaterialDesign:HintAssist.HelperText="Structure Template"
+                      Visibility="{Binding IsStructureTemplateSelectable, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding TemplateName}"/>

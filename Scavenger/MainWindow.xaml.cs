@@ -180,5 +180,13 @@ namespace Scavenger
                 await this.ViewModel.ExportStructureToTemplate(structureViewModel);
             }
         }
+
+        private void OnBinTreeContainerDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Source is TreeViewItem treeViemItem)
+            {
+                treeViemItem.IsExpanded = false;
+            }
+        }
     }
 }

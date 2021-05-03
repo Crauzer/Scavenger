@@ -360,7 +360,7 @@
                                      MaxHeight="45"
                                      MaterialDesign:HintAssist.Hint="Value"/>
                             <CheckBox Content="Preview Asset"
-                                      Margin="5"
+                                      Margin="15,5,5,5"
                                       Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"
                                       IsChecked="{Binding ShouldPreviewAsset, UpdateSourceTrigger=PropertyChanged}"
                                       Visibility="{Binding IsAsset, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>

@@ -736,10 +736,13 @@
                                 <TabControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding BinName, UpdateSourceTrigger=PropertyChanged}"/>
                                             <Border VerticalAlignment="Center">
-                                                <MaterialDesign:PackIcon Kind="Close" MouseDown="OnBinTreeTabClose" Cursor="Hand" Margin="5,0,0,0"/>
+                                                <TextBlock Text="{Binding BinName, UpdateSourceTrigger=PropertyChanged}"/>
                                             </Border>
+                                            <Button Style="{StaticResource MaterialDesignIconButton}" Width="25" Height="25" Margin="5,0,0,0"
+                                                    Click="OnBinTreeTabClose">
+                                                <MaterialDesign:PackIcon Kind="Close" Width="15"/>
+                                            </Button>
                                         </StackPanel>
                                     </DataTemplate>
                                 </TabControl.ItemTemplate>

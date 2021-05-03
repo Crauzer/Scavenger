@@ -93,7 +93,7 @@ namespace Scavenger
             }
         }
 
-        private void OnBinTreeTabClose(object sender, MouseButtonEventArgs e)
+        private void OnBinTreeTabClose(object sender, RoutedEventArgs e)
         {
             if (e.Source is FrameworkElement frameworkElement &&
                 frameworkElement.DataContext is BinTreeViewModel binTreeViewModel)
@@ -182,6 +182,13 @@ namespace Scavenger
         }
 
         private void OnBinTreeContainerDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Source is TreeViewItem treeViemItem)
+            {
+                treeViemItem.IsExpanded = false;
+            }
+        }
+        private void OnBinTreeObjectDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.Source is TreeViewItem treeViemItem)
             {

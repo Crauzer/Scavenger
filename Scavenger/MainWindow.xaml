@@ -756,7 +756,8 @@
                                                 <DataTemplate>
                                                     <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth4">
                                                         <TreeViewItem ItemsSource="{Binding Children}" 
-                                                              ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
+                                                                      ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"
+                                                                      MouseDoubleClick="OnBinTreeObjectDoubleClick">
                                                             <TreeViewItem.Header>
                                                                 <StackPanel Orientation="Vertical">
                                                                     <StackPanel Orientation="Horizontal">

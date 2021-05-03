@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Data;
 
 namespace Scavenger.MVVM.ViewModels
 {
@@ -26,9 +29,36 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        public string Filter
+        {
+            get => this._filter;
+            set
+            {
+                this._filter = value;
+
+                ICollectionView view = CollectionViewSource.GetDefaultView(this.Objects);
+                view.Filter = treeObject =>
+                {
+                    BinTreeObjectViewModel item = treeObject as BinTreeObjectViewModel;
+
+                    //Do this in try-catch because Regex can throw an exception if pattern is wrong
+                    try
+                    {
+                        return Regex.IsMatch(item.Name, value);
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                };
+
+                NotifyPropertyChanged();
+            }
+        }
 
         private string _binName;
         private BinTree _tree;
+        private string _filter;
         private ObservableCollection<BinTreeObjectViewModel> _objects = new ObservableCollection<BinTreeObjectViewModel>();
 
         public BinTreeViewModel(string binName, BinTree binTree)

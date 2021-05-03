@@ -706,10 +706,19 @@
                     </MaterialDesign:ColorZone>
                     <Grid DockPanel.Dock="Bottom">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <MaterialDesign:ColorZone Grid.Row="0" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding SelectedBinTree.Filter, UpdateSourceTrigger=PropertyChanged}"
+                                         MaterialDesign:HintAssist.Hint="Entry Filter"
+                                         MaterialDesign:HintAssist.IsFloating="True"
+                                         Margin="10" MinWidth="500"/>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+                        <MaterialDesign:ColorZone Grid.Row="1" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
                             <TabControl SelectedItem="{Binding SelectedBinTree, UpdateSourceTrigger=PropertyChanged}"
                                     ItemsSource="{Binding BinTrees, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource MaterialDesignTabControl}">
@@ -769,16 +778,15 @@
                                 </TabControl.ContentTemplate>
                             </TabControl>
                         </MaterialDesign:ColorZone>
-                        <MaterialDesign:ColorZone Grid.Row="1" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="15">
+                        <MaterialDesign:ColorZone Grid.Row="2" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="15">
                             <Grid DataContext="{Binding Infobar}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <DockPanel Grid.Row="0">
-                                    <TextBlock
-                            DockPanel.Dock="Left"
-                            Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,0,5"/>
+                                    <TextBlock DockPanel.Dock="Left"
+                                               Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,0,5"/>
                                     <Image DockPanel.Dock="Right" Source="Resources/icon.ico" Width="48" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                                 </DockPanel>
                                 <ProgressBar Grid.Row="1" 

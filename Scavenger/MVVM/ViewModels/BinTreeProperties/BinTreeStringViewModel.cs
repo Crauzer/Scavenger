@@ -48,11 +48,15 @@ namespace Scavenger.MVVM.ViewModels
             set
             {
                 this._value = value;
+
+                this.IsAsset = BinTreeUtilities.IsAsset(this) && BinTreeUtilities.IsPreviewableAsset(this);
+                PreviewAsset();
+
                 NotifyPropertyChanged();
             }
         }
 
-        private PreviewViewModel _preview;
+        private PreviewViewModel _preview = new PreviewViewModel();
         private bool _isAsset;
         private bool _shouldPreviewAsset;
         private string _value;
@@ -60,57 +64,65 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeStringViewModel(BinTreeParentViewModel parent, BinTreeString treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;
-            this.Preview = new PreviewViewModel();
             this.IsAsset = BinTreeUtilities.IsAsset(this) && BinTreeUtilities.IsPreviewableAsset(this);
-            this.ShouldPreviewAsset = false;
 
+            PreviewAsset();
+        }
+
+        private void PreviewAsset()
+        {
             // Check if the string is an asset
             string extension = Path.GetExtension(this.Value);
-            if(string.IsNullOrEmpty(extension) is false)
+            if (string.IsNullOrEmpty(extension) is false)
             {
-                string binPath = parent.BinTree.BinPath;
+                string binPath = this.Parent.BinTree.BinPath;
                 int indexOfData = binPath.LastIndexOf("\\data\\");
                 string binFolder = indexOfData == -1 ? Path.GetDirectoryName(binPath) : binPath.Remove(binPath.LastIndexOf("\\data\\"));
                 string assetPath = Path.Combine(binFolder, this.Value);
                 string assetExtension = Path.GetExtension(assetPath);
 
-                switch (assetExtension)
+                if (File.Exists(assetPath))
                 {
-                    case ".skn":
+                    switch (assetExtension)
                     {
-                        this.Preview.Preview(new SimpleSkin(assetPath));
-                        break;
-                    }
-                    case ".scb":
-                    {
-                        this.Preview.Preview(StaticObject.ReadSCB(assetPath));
-                        break;
-                    }
-                    case ".sco":
-                    {
-                        this.Preview.Preview(StaticObject.ReadSCO(assetPath));
-                        break;
-                    }
-                    case ".dds":
-                    {
-                        try
+                        case ".skn":
                         {
-                            MemoryStream imageStream = new MemoryStream(File.ReadAllBytes(assetPath));
-                            this.Preview.Preview(new ImageEngineImage(imageStream));
+                            this.Preview.Preview(new SimpleSkin(assetPath));
+                            break;
                         }
-                        catch (FileFormatException)
+                        case ".scb":
                         {
-                            this.Preview.Clear();
+                            this.Preview.Preview(StaticObject.ReadSCB(assetPath));
+                            break;
                         }
-                        break;
-                    }
-                    case ".mapgeo":
-                    {
-                        this.Preview.Preview(new MapGeometry(assetPath));
-                        break;
+                        case ".sco":
+                        {
+                            this.Preview.Preview(StaticObject.ReadSCO(assetPath));
+                            break;
+                        }
+                        case ".dds":
+                        {
+                            try
+                            {
+                                MemoryStream imageStream = new MemoryStream(File.ReadAllBytes(assetPath));
+                                this.Preview.Preview(new ImageEngineImage(imageStream));
+                            }
+                            catch (FileFormatException)
+                            {
+                                this.Preview.Clear();
+                            }
+                            break;
+                        }
+                        case ".mapgeo":
+                        {
+                            this.Preview.Preview(new MapGeometry(assetPath));
+                            break;
+                        }
                     }
                 }
             }
+
+            
         }
 
         public override BinTreeProperty BuildProperty()

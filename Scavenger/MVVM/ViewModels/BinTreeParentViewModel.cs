@@ -51,6 +51,54 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        public string TextValueFilter
+        {
+            get => this._textValueFilter;
+            set
+            {
+                this._textValueFilter = value;
+
+                ICollectionView view = CollectionViewSource.GetDefaultView(this.Children);
+                view.Filter = child =>
+                {
+                    try
+                    {
+                        if (child is BinTreeParentViewModel parent)
+                        {
+                            if (parent.GetAllProperties().Any(x => DoesValueMatch(x)))
+                            {
+                                parent.TextValueFilter = value;
+                                return true;
+                            }
+                        }
+                        else if (child is BinTreePropertyViewModel property)
+                        {
+                            return DoesValueMatch(property);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+
+                    return false;
+                };
+
+                NotifyPropertyChanged();
+            
+                bool DoesValueMatch(BinTreePropertyViewModel property)
+                {
+                    return property switch
+                    {
+                        BinTreeStringViewModel @string => Regex.IsMatch(@string.Value, value),
+                        BinTreeObjectLinkViewModel objectLink => Regex.IsMatch(objectLink.Value, value),
+                        BinTreeWadEntryLinkViewModel wadEntryLink => Regex.IsMatch(wadEntryLink.Value, value),
+                        BinTreeHashViewModel hash => Regex.IsMatch(hash.Value, value),
+                        _ => false
+                    };
+                }
+            }
+        }
         public ObservableCollection<BinTreePropertyViewModel> Children
         {
             get => this._children;
@@ -61,8 +109,8 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-
         private string _propertyFilter;
+        private string _textValueFilter;
         private ObservableCollection<BinTreePropertyViewModel> _children = new ObservableCollection<BinTreePropertyViewModel>();
     
         public BinTreeParentViewModel(BinTreeParentViewModel parent, BinTreeProperty treeProperty) : base(parent, treeProperty)

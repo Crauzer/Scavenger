@@ -15,7 +15,7 @@ namespace Scavenger.MVVM.ViewModels
     {
         public string Metadata => $"{this.TreeProperty.Type}<{(this.TreeProperty as BinTreeContainer).PropertiesType}>";
 
-        public BinTreeContainerViewModel(BinTreeParentViewModel parent, BinTreeContainer treeProperty) : base(parent, treeProperty)
+        public BinTreeContainerViewModel(BinTreeParentViewModel parent, BinTreeContainer treeProperty) : base(parent.BinTree, parent, treeProperty)
         {
             int itemIndex = 0;
             foreach (BinTreeProperty genericProperty in treeProperty.Properties)

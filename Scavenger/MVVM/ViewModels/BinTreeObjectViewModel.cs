@@ -27,7 +27,7 @@ namespace Scavenger.MVVM.ViewModels
 
         public BinTreeObject TreeObject { get; private set; }
 
-        public BinTreeObjectViewModel(BinTreeObject treeObject) : base(null, null)
+        public BinTreeObjectViewModel(BinTreeViewModel tree, BinTreeObject treeObject) : base(tree, null, null)
         {
             this.TreeObject = treeObject;
             this.Name = Hashtables.GetObject(treeObject.PathHash);

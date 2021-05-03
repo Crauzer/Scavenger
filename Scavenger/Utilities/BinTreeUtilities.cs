@@ -5,6 +5,7 @@ using LeagueToolkit.IO.PropertyBin.Properties;
 using Scavenger.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -85,6 +86,37 @@ namespace Scavenger.Utilities
                 BinPropertyType.BitBool => new BinTreeBitBool(parent, nameHash, 0),
                 _ => new BinTreeNone(parent, nameHash),
             };
+        }
+    
+        public static bool IsAsset(BinTreeStringViewModel treeString)
+        {
+            string extension = Path.GetExtension(treeString.Value);
+            return string.IsNullOrEmpty(extension) is false;
+        }
+        public static bool IsPreviewableAsset(BinTreeStringViewModel treeString)
+        {
+            string extension = Path.GetExtension(treeString.Value);
+            if (string.IsNullOrEmpty(extension) is false)
+            {
+                string binPath = treeString.Parent.BinTree.BinPath;
+                
+                int indexOfData = binPath.LastIndexOf("\\data\\");
+                string binFolder = indexOfData == -1 ? Path.GetDirectoryName(binPath) : binPath.Remove(binPath.LastIndexOf("\\data\\"));
+                string assetPath = Path.Combine(binFolder, treeString.Value);
+                string assetExtension = Path.GetExtension(assetPath);
+
+                return assetExtension switch
+                {
+                    ".skn" => true,
+                    ".scb" => true,
+                    ".sco" => true,
+                    ".mapgeo" => true,
+                    ".dds" => true,
+                    _ => false
+                };
+            }
+
+            return false;
         }
     }
 }

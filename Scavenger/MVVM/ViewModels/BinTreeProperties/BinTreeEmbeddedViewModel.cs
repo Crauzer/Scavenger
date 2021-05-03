@@ -23,7 +23,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private string _metaClass;
 
-        public BinTreeEmbeddedViewModel(BinTreeParentViewModel parent, BinTreeEmbedded treeProperty) : base(parent, treeProperty)
+        public BinTreeEmbeddedViewModel(BinTreeParentViewModel parent, BinTreeEmbedded treeProperty) : base(parent.BinTree, parent, treeProperty)
         {
             this.MetaClass = Hashtables.GetType((this.TreeProperty as BinTreeStructure).MetaClassHash);
 

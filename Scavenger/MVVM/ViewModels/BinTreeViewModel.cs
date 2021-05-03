@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Data;
+using System.IO;
 
 namespace Scavenger.MVVM.ViewModels
 {
@@ -13,10 +14,19 @@ namespace Scavenger.MVVM.ViewModels
     {
         public string BinName
         {
-            get => this._binName;
+            get => Path.GetFileName(this._binPath);
             set
             {
-                this._binName = value;
+                this._binPath = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public string BinPath
+        {
+            get => this._binPath;
+            set
+            {
+                this._binPath = value;
                 NotifyPropertyChanged();
             }
         }
@@ -56,14 +66,14 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-        private string _binName;
+        private string _binPath;
         private BinTree _tree;
         private string _objectFilter;
         private ObservableCollection<BinTreeObjectViewModel> _objects = new ObservableCollection<BinTreeObjectViewModel>();
 
-        public BinTreeViewModel(string binName, BinTree binTree)
+        public BinTreeViewModel(string binPath, BinTree binTree)
         {
-            this._binName = binName;
+            this._binPath = binPath;
             this._tree = binTree;
 
             GenerateObjects();
@@ -73,7 +83,7 @@ namespace Scavenger.MVVM.ViewModels
         {
             foreach(BinTreeObject treeObject in this._tree.Objects)
             {
-                this.Objects.Add(new BinTreeObjectViewModel(treeObject));
+                this.Objects.Add(new BinTreeObjectViewModel(this, treeObject));
             }
         }
     

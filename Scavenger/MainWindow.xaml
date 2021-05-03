@@ -8,6 +8,8 @@
         xmlns:WpfToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+        xmlns:Helix="http://helix-toolkit.org/wpf"
+        xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -22,6 +24,32 @@
         <SolidColorBrush x:Key="DarkBorderBrush" Color="#2f2f2f"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <TemplateSelectors:BinPropertyTemplateSelector x:Key="BinPropertyTemplateSelector"/>
+        <Style x:Key="ContentPreviewViewport" TargetType="Helix:HelixViewport3D">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Preview.PreviewType, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static ViewModels:PreviewType.None}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Preview.PreviewType, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static ViewModels:PreviewType.Image}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Preview.PreviewType, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static ViewModels:PreviewType.Viewport}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ContentPreviewImage" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Preview.PreviewType, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static ViewModels:PreviewType.None}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Preview.PreviewType, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static ViewModels:PreviewType.Viewport}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Preview.PreviewType, UpdateSourceTrigger=PropertyChanged}" Value="{x:Static ViewModels:PreviewType.Image}">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <DataTemplate x:Key="BinTreePropertyTemplate">
             <TreeViewItem>
                 <TreeViewItem.Header>
@@ -325,8 +353,154 @@
                     <StackPanel Orientation="Horizontal" Margin="10,0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
                     </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                                     Style="{StaticResource MaterialDesignFilledTextBox}"
+                                     MaxHeight="45"
+                                     MaterialDesign:HintAssist.Hint="Value"/>
+                            <CheckBox Content="Preview Asset"
+                                      Margin="5"
+                                      Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"
+                                      IsChecked="{Binding ShouldPreviewAsset, UpdateSourceTrigger=PropertyChanged}"
+                                      Visibility="{Binding IsAsset, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                        </StackPanel>
+                        <Grid Visibility="{Binding ShouldPreviewAsset, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}">
+                            <Helix:HelixViewport3D HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                   Style="{StaticResource ContentPreviewViewport}"
+                                                   ItemsSource="{Binding Preview.Viewport.Content}"
+                                                   ShowCoordinateSystem="True" ModelUpDirection="0, 1, 0" 
+                                                   CameraRotationMode="Trackball" CoordinateSystemWidth="82" MinWidth="500" MinHeight="500"
+                                                   ShowTriangleCountInfo="True"
+                                                   Margin="15">
+                                <Helix:HelixViewport3D.ContextMenu>
+                                    <ContextMenu>
+                                        <ContextMenu.ItemContainerStyle>
+                                            <Style TargetType="MenuItem">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                            </Style>
+                                        </ContextMenu.ItemContainerStyle>
+                                    </ContextMenu>
+                                </Helix:HelixViewport3D.ContextMenu>
+                            </Helix:HelixViewport3D>
+                            <Image Source="{Binding Preview.Image, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource ContentPreviewImage}"
+                                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" MaxWidth="512"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+                <MaterialDesign:ColorZone.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete Text" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </MaterialDesign:ColorZone.ContextMenu>
+            </MaterialDesign:ColorZone>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeObjectLinkTemplate">
+            <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
+                        <MaterialDesign:PackIcon Kind="Link"/>
+                    </Border>
+                    <TextBox Text="{Binding Name}" 
+                             VerticalAlignment="Center" Width="250"
+                             MaterialDesign:HintAssist.Hint="Name"
+                             MaterialDesign:HintAssist.IsFloating="True"
+                             Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
+                    <MaterialDesign:Chip>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                    </MaterialDesign:Chip>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource MaterialDesignFilledTextBox}"
+                             MaxHeight="45"
+                             MaterialDesign:HintAssist.Hint="Value"/>
+                </StackPanel>
+                <MaterialDesign:ColorZone.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete Text" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </MaterialDesign:ColorZone.ContextMenu>
+            </MaterialDesign:ColorZone>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeWadEntryLinkTemplate">
+            <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
+                        <MaterialDesign:PackIcon Kind="Link"/>
+                    </Border>
+                    <TextBox Text="{Binding Name}" 
+                             VerticalAlignment="Center" Width="250"
+                             MaterialDesign:HintAssist.Hint="Name"
+                             MaterialDesign:HintAssist.IsFloating="True"
+                             Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
+                    <MaterialDesign:Chip>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                    </MaterialDesign:Chip>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
+                    <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MaterialDesignFilledTextBox}"
+                             MaxHeight="45"
+                             MaterialDesign:HintAssist.Hint="Value"/>
+                </StackPanel>
+                <MaterialDesign:ColorZone.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Delete Text" Click="OnBinTreePropertyDeleteField">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </MaterialDesign:ColorZone.ContextMenu>
+            </MaterialDesign:ColorZone>
+        </DataTemplate>
+        <DataTemplate x:Key="BinTreeHashTemplate">
+            <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
+                        <MaterialDesign:PackIcon Kind="Link"/>
+                    </Border>
+                    <TextBox Text="{Binding Name}" 
+                             VerticalAlignment="Center" Width="250"
+                             MaterialDesign:HintAssist.Hint="Name"
+                             MaterialDesign:HintAssist.IsFloating="True"
+                             Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
+                    <MaterialDesign:Chip>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                    </MaterialDesign:Chip>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
+                    <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MaterialDesignFilledTextBox}"
+                             MaxHeight="45"
                              MaterialDesign:HintAssist.Hint="Value"/>
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>

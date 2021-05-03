@@ -23,7 +23,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private bool _isSome;
 
-        public BinTreeOptionalViewModel(BinTreeParentViewModel parent, BinTreeOptional treeProperty) : base(parent, treeProperty)
+        public BinTreeOptionalViewModel(BinTreeParentViewModel parent, BinTreeOptional treeProperty) : base(parent.BinTree, parent, treeProperty)
         {
             BinTreePropertyViewModel valueViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(this, treeProperty.Value);
             if (valueViewModel is not null)

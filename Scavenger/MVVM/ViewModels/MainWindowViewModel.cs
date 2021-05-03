@@ -92,7 +92,7 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-        public async Task LoadBinTree(string binName, BinTree binTree)
+        public async Task LoadBinTree(string binPath, BinTree binTree)
         {
             this.Infobar.Message = "Loading BIN Tree...";
             this.Infobar.IsProgressIndefinite = true;
@@ -107,10 +107,10 @@ namespace Scavenger.MVVM.ViewModels
             this.Infobar.IsProgressIndefinite = false;
             this.Infobar.Progress = 100;
             this.IsGloballyEnabled = true;
-
+            
             Task<BinTreeViewModel> CreateBinTreeViewModel()
             {
-                return Task.FromResult(new BinTreeViewModel(binName, binTree));
+                return Task.FromResult(new BinTreeViewModel(binPath, binTree));
             }
         }
 

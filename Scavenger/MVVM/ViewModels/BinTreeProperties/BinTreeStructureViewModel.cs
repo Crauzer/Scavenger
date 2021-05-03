@@ -24,7 +24,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private string _metaClass;
 
-        public BinTreeStructureViewModel(BinTreeParentViewModel parent, BinTreeStructure treeProperty) : base(parent, treeProperty)
+        public BinTreeStructureViewModel(BinTreeParentViewModel parent, BinTreeStructure treeProperty) : base(parent.BinTree, parent, treeProperty)
         {
             BinTreeStructure structure = (this.TreeProperty as BinTreeStructure);
 

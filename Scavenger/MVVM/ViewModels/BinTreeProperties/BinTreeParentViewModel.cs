@@ -99,6 +99,7 @@ namespace Scavenger.MVVM.ViewModels
                 }
             }
         }
+        public BinTreeViewModel BinTree => this._binTree;
         public ObservableCollection<BinTreePropertyViewModel> Children
         {
             get => this._children;
@@ -111,11 +112,12 @@ namespace Scavenger.MVVM.ViewModels
 
         private string _propertyFilter;
         private string _textValueFilter;
+        private BinTreeViewModel _binTree;
         private ObservableCollection<BinTreePropertyViewModel> _children = new ObservableCollection<BinTreePropertyViewModel>();
     
-        public BinTreeParentViewModel(BinTreeParentViewModel parent, BinTreeProperty treeProperty) : base(parent, treeProperty)
+        public BinTreeParentViewModel(BinTreeViewModel tree, BinTreeParentViewModel parent, BinTreeProperty treeProperty) : base(parent, treeProperty)
         {
-
+            this._binTree = tree;
         }
 
         public void RemoveField(BinTreePropertyViewModel propertyViewModel)

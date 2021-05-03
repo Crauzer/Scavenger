@@ -1,4 +1,5 @@
-﻿using LeagueToolkit.Helpers;
+﻿using HelixToolkit.Wpf;
+using LeagueToolkit.Helpers;
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
 using MaterialDesignExtensions.Controls;
@@ -66,7 +67,7 @@ namespace Scavenger
             {
                 try
                 {
-                    await this.ViewModel.LoadBinTree(PathIO.GetFileName(dialog.FileName), new BinTree(dialog.FileName));
+                    await this.ViewModel.LoadBinTree(dialog.FileName, new BinTree(dialog.FileName));
                 }
                 catch(Exception exception)
                 {

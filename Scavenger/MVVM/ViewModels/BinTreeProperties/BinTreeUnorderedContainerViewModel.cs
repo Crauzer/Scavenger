@@ -10,7 +10,7 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeUnorderedContainerViewModel : BinTreeParentViewModel
     {
-        public string Metadata => $" -> {this.TreeProperty.Type} : {(this.TreeProperty as BinTreeUnorderedContainer).PropertiesType}";
+        public string Metadata => $"{this.TreeProperty.Type} : {(this.TreeProperty as BinTreeUnorderedContainer).PropertiesType}";
 
         public BinTreeUnorderedContainerViewModel(BinTreeParentViewModel parent, BinTreeUnorderedContainer treeProperty) : base(parent, treeProperty)
         {

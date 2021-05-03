@@ -749,7 +749,8 @@
                                 <TabControl.ContentTemplate>
                                     <DataTemplate>
                                         <TreeView ItemsSource="{Binding Objects, UpdateSourceTrigger=PropertyChanged}"
-                                          VirtualizingStackPanel.IsVirtualizing="True">
+                                                  VirtualizingStackPanel.IsVirtualizing="True"
+                                                  MaterialDesign:RippleAssist.IsDisabled="True">
                                             <TreeView.ItemTemplate>
                                                 <DataTemplate>
                                                     <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth4">

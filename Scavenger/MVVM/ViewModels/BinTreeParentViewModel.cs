@@ -1,10 +1,56 @@
 ﻿using LeagueToolkit.IO.PropertyBin;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Data;
 
 namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeParentViewModel : BinTreePropertyViewModel
     {
+        public string PropertyFilter
+        {
+            get => this._propertyFilter;
+            set
+            {
+                this._propertyFilter = value;
+
+                ICollectionView view = CollectionViewSource.GetDefaultView(this.Children);
+                view.Filter = child =>
+                {
+                    try
+                    {
+                        if (child is BinTreeParentViewModel parent)
+                        {
+                            if(parent.Find(x => Regex.IsMatch(x.Name, value)) == null)
+                            {
+                                return false;
+                            }
+                            else
+                            {
+                                parent.PropertyFilter = value;
+                                return true;
+                            }
+                        }
+                        else if (child is BinTreePropertyViewModel property)
+                        {
+                            return Regex.IsMatch(property.Name, value);
+                        }
+                    }
+                    catch(Exception)
+                    {
+                        return false;
+                    }
+
+                    return false;
+                };
+
+                NotifyPropertyChanged();
+            }
+        }
         public ObservableCollection<BinTreePropertyViewModel> Children
         {
             get => this._children;
@@ -15,6 +61,8 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
+
+        private string _propertyFilter;
         private ObservableCollection<BinTreePropertyViewModel> _children = new ObservableCollection<BinTreePropertyViewModel>();
     
         public BinTreeParentViewModel(BinTreeParentViewModel parent, BinTreeProperty treeProperty) : base(parent, treeProperty)
@@ -25,6 +73,35 @@ namespace Scavenger.MVVM.ViewModels
         public void RemoveField(BinTreePropertyViewModel propertyViewModel)
         {
             this.Children.Remove(propertyViewModel);
+        }
+
+        public BinTreePropertyViewModel Find(Func<BinTreePropertyViewModel, bool> predicate)
+        {
+            return GetAllProperties().FirstOrDefault(predicate);
+        }
+
+        public IEnumerable<BinTreePropertyViewModel> GetAllProperties()
+        {
+            foreach(BinTreePropertyViewModel property in this.Children)
+            {
+                switch (property)
+                {
+                    case BinTreeParentViewModel parentChild:
+                    {
+                        foreach(BinTreePropertyViewModel childProperty in parentChild.GetAllProperties() ?? Enumerable.Empty<BinTreePropertyViewModel>())
+                        {
+                            yield return childProperty;
+                        }
+
+                        break;
+                    }
+                    case BinTreePropertyViewModel propertyChild:
+                    {
+                        yield return propertyChild;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

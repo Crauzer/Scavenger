@@ -742,17 +742,30 @@
                                                         <TreeViewItem ItemsSource="{Binding Children}" 
                                                               ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
                                                             <TreeViewItem.Header>
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                                                <StackPanel Orientation="Vertical">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBox Text="{Binding PropertyFilter, UpdateSourceTrigger=PropertyChanged}"
+                                                                                 MaterialDesign:HintAssist.Hint="Property Filter"
+                                                                                 MaterialDesign:HintAssist.IsFloating="True"
+                                                                                 Margin="5" MinWidth="300"/>
+                                                                        <TextBox Text="{Binding TextValueFilter, UpdateSourceTrigger=PropertyChanged}"
+                                                                                 MaterialDesign:HintAssist.Hint="Text Value Filter"
+                                                                                 MaterialDesign:HintAssist.IsFloating="True"
+                                                                                 Margin="5" MinWidth="300"/>
+                                                                    </StackPanel>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                                                                      Style="{StaticResource MaterialDesignFilledTextBox}"
                                                                      MinWidth="550"
-                                                                     Margin="15"
+                                                                     Margin="10"
                                                                      MaterialDesign:HintAssist.Hint="Name"/>
-                                                                    <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
+                                                                        <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
                                                                      Style="{StaticResource MaterialDesignFilledTextBox}"
                                                                      MinWidth="250"
-                                                                     Margin="15"
+                                                                     Margin="10"
                                                                      MaterialDesign:HintAssist.Hint="Meta Class"/>
+                                                                        <MaterialDesign:Chip Content="Object" Margin="15"/>
+                                                                    </StackPanel>
                                                                 </StackPanel>
                                                             </TreeViewItem.Header>
                                                         </TreeViewItem>

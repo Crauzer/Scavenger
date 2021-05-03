@@ -57,7 +57,7 @@
         </DataTemplate>
         <DataTemplate x:Key="BinTreeBoolTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Orientation="Horizontal" Margin="20">
+                <StackPanel Orientation="Horizontal" Margin="10">
                     <MaterialDesign:PackIcon Kind="CheckboxMarkedOutline" Margin="0,8,15,0"/>
                     <TextBox Text="{Binding Name}"
                              VerticalAlignment="Center" Width="250"
@@ -89,7 +89,7 @@
         </DataTemplate>
         <DataTemplate x:Key="BinTreeNumberTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Orientation="Horizontal" Margin="20">
+                <StackPanel Orientation="Horizontal" Margin="10">
                     <Border VerticalAlignment="Center" Margin="0,0,10,0">
                         <MaterialDesign:PackIcon Kind="Counter"/>
                     </Border>
@@ -131,7 +131,7 @@
         </DataTemplate>
         <DataTemplate x:Key="BinTreeVector2Template">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Orientation="Horizontal" Margin="20">
+                <StackPanel Orientation="Horizontal" Margin="10">
                     <Border VerticalAlignment="Center" Margin="0,0,10,0">
                         <MaterialDesign:PackIcon Kind="VectorPolyline"/>
                     </Border>
@@ -176,7 +176,7 @@
         </DataTemplate>
         <DataTemplate x:Key="BinTreeVector3Template">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Orientation="Horizontal" Margin="20">
+                <StackPanel Orientation="Horizontal" Margin="10">
                     <Border VerticalAlignment="Center" Margin="0,0,10,0">
                         <MaterialDesign:PackIcon Kind="VectorPolyline"/>
                     </Border>
@@ -227,7 +227,7 @@
         </DataTemplate>
         <DataTemplate x:Key="BinTreeVector4Template">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Orientation="Horizontal" Margin="20">
+                <StackPanel Orientation="Horizontal" Margin="10">
                     <Border VerticalAlignment="Center" Margin="0,0,10,0">
                         <MaterialDesign:PackIcon Kind="VectorPolyline"/>
                     </Border>
@@ -295,7 +295,7 @@
         </DataTemplate>
         <DataTemplate x:Key="BinTreeStringTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                     <Border VerticalAlignment="Center" Margin="0,0,10,0">
                         <MaterialDesign:PackIcon Kind="Link"/>
                     </Border>
@@ -548,7 +548,7 @@
         </DataTemplate>
         <DataTemplate x:Key="BinTreeMatrix44Template">
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2">
-                <StackPanel Orientation="Horizontal" Margin="20">
+                <StackPanel Orientation="Horizontal" Margin="10">
                     <Border VerticalAlignment="Center" Margin="0,0,10,0">
                         <MaterialDesign:PackIcon Kind="Matrix"/>
                     </Border>

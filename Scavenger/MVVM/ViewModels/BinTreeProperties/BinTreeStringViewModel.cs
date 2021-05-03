@@ -78,17 +78,17 @@ namespace Scavenger.MVVM.ViewModels
                 {
                     case ".skn":
                     {
-                        this.Preview.Viewport.LoadMesh(new SimpleSkin(assetPath));
+                        this.Preview.Preview(new SimpleSkin(assetPath));
                         break;
                     }
                     case ".scb":
                     {
-                        this.Preview.Viewport.LoadMesh(StaticObject.ReadSCB(assetPath));
+                        this.Preview.Preview(StaticObject.ReadSCB(assetPath));
                         break;
                     }
                     case ".sco":
                     {
-                        this.Preview.Viewport.LoadMesh(StaticObject.ReadSCO(assetPath));
+                        this.Preview.Preview(StaticObject.ReadSCO(assetPath));
                         break;
                     }
                     case ".dds":
@@ -106,7 +106,7 @@ namespace Scavenger.MVVM.ViewModels
                     }
                     case ".mapgeo":
                     {
-                        this.Preview.Viewport.LoadMap(new MapGeometry(assetPath));
+                        this.Preview.Preview(new MapGeometry(assetPath));
                         break;
                     }
                 }

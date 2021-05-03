@@ -372,7 +372,8 @@
                                                    ShowCoordinateSystem="True" ModelUpDirection="0, 1, 0" 
                                                    CameraRotationMode="Trackball" CoordinateSystemWidth="82" MinWidth="500" MinHeight="500"
                                                    ShowTriangleCountInfo="True"
-                                                   Margin="15">
+                                                   Margin="15"
+                                                   RotateGesture="LeftClick">
                                 <Helix:HelixViewport3D.ContextMenu>
                                     <ContextMenu>
                                         <ContextMenu.ItemContainerStyle>

@@ -713,7 +713,7 @@
                         <MaterialDesign:ColorZone Grid.Row="0" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
                             <StackPanel Orientation="Horizontal">
                                 <TextBox Text="{Binding SelectedBinTree.Filter, UpdateSourceTrigger=PropertyChanged}"
-                                         MaterialDesign:HintAssist.Hint="Entry Filter"
+                                         MaterialDesign:HintAssist.Hint="Object Filter"
                                          MaterialDesign:HintAssist.IsFloating="True"
                                          Margin="10" MinWidth="500"/>
                             </StackPanel>

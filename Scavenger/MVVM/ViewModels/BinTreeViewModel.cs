@@ -29,12 +29,12 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
-        public string Filter
+        public string ObjectFilter
         {
-            get => this._filter;
+            get => this._objectFilter;
             set
             {
-                this._filter = value;
+                this._objectFilter = value;
 
                 ICollectionView view = CollectionViewSource.GetDefaultView(this.Objects);
                 view.Filter = treeObject =>
@@ -58,7 +58,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private string _binName;
         private BinTree _tree;
-        private string _filter;
+        private string _objectFilter;
         private ObservableCollection<BinTreeObjectViewModel> _objects = new ObservableCollection<BinTreeObjectViewModel>();
 
         public BinTreeViewModel(string binName, BinTree binTree)

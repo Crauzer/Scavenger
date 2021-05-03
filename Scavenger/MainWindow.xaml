@@ -57,11 +57,14 @@
         </DataTemplate>
         <DataTemplate x:Key="BinTreeBoolTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Orientation="Horizontal" Margin="10">
-                    <MaterialDesign:PackIcon Kind="CheckboxMarkedOutline" Margin="0,8,15,0"/>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
+                        <MaterialDesign:PackIcon Kind="CheckboxMarkedOutline"/>
+                    </Border>
                     <TextBox Text="{Binding Name}"
                              VerticalAlignment="Center" Width="250"
-                             MaterialDesign:HintAssist.HelperText="Name"
+                             MaterialDesign:HintAssist.Hint="Name"
+                             MaterialDesign:HintAssist.IsFloating="True"
                              Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
                     <StackPanel Orientation="Horizontal" Margin="10,0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
@@ -74,7 +77,10 @@
                     <StackPanel Orientation="Horizontal" Margin="10,0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
                     </StackPanel>
-                    <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0"/>
+                    <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                              Content="Is Enabled"
+                              Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}"
+                              Margin="5"/>
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>
@@ -90,12 +96,13 @@
         <DataTemplate x:Key="BinTreeNumberTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <Border VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="Counter"/>
                     </Border>
                     <TextBox Text="{Binding Name}" 
                              VerticalAlignment="Center" Width="250"
-                             MaterialDesign:HintAssist.HelperText="Name"
+                             MaterialDesign:HintAssist.Hint="Name"
+                             MaterialDesign:HintAssist.IsFloating="True"
                              Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
                     <StackPanel Orientation="Horizontal" Margin="10,0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
@@ -132,12 +139,13 @@
         <DataTemplate x:Key="BinTreeVector2Template">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <Border VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="VectorPolyline"/>
                     </Border>
                     <TextBox Text="{Binding Name}" 
                              VerticalAlignment="Center" Width="250"
-                             MaterialDesign:HintAssist.HelperText="Name"
+                             MaterialDesign:HintAssist.Hint="Name"
+                             MaterialDesign:HintAssist.IsFloating="True"
                              Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
                     <StackPanel Orientation="Horizontal" Margin="10,0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
@@ -177,12 +185,13 @@
         <DataTemplate x:Key="BinTreeVector3Template">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <Border VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="VectorPolyline"/>
                     </Border>
                     <TextBox Text="{Binding Name}" 
                              VerticalAlignment="Center" Width="250"
-                             MaterialDesign:HintAssist.HelperText="Name"
+                             MaterialDesign:HintAssist.Hint="Name"
+                             MaterialDesign:HintAssist.IsFloating="True"
                              Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
                     <StackPanel Orientation="Horizontal" Margin="10,0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
@@ -228,12 +237,13 @@
         <DataTemplate x:Key="BinTreeVector4Template">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <Border VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="VectorPolyline"/>
                     </Border>
                     <TextBox Text="{Binding Name}" 
                              VerticalAlignment="Center" Width="250"
-                             MaterialDesign:HintAssist.HelperText="Name"
+                             MaterialDesign:HintAssist.Hint="Name"
+                             MaterialDesign:HintAssist.IsFloating="True"
                              Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
                     <StackPanel Orientation="Horizontal" Margin="10,0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
@@ -295,13 +305,14 @@
         </DataTemplate>
         <DataTemplate x:Key="BinTreeStringTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                    <Border VerticalAlignment="Center" Margin="0,0,10,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="Link"/>
                     </Border>
                     <TextBox Text="{Binding Name}" 
                              VerticalAlignment="Center" Width="250"
-                             MaterialDesign:HintAssist.HelperText="Name"
+                             MaterialDesign:HintAssist.Hint="Name"
+                             MaterialDesign:HintAssist.IsFloating="True"
                              Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
                     <StackPanel Orientation="Horizontal" Margin="10,0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
@@ -549,7 +560,7 @@
         <DataTemplate x:Key="BinTreeMatrix44Template">
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <Border VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="Matrix"/>
                     </Border>
                     <TextBox Text="{Binding Name}" 

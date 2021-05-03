@@ -1,5 +1,6 @@
 ﻿using LeagueToolkit.IO.PropertyBin;
 using MaterialDesignThemes.Wpf;
+using Scavenger.IO.Templates;
 using Scavenger.MVVM.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,11 @@ namespace Scavenger.MVVM.ModelViews
     /// </summary>
     public partial class NewBinPropertyDialog : UserControl
     {
-        public NewBinPropertyDialog(IEnumerable<BinPropertyType> restrictTo)
+        public NewBinPropertyDialog(IEnumerable<StructureTemplate> structureTemplates, IEnumerable<BinPropertyType> restrictTo = null)
         {
             InitializeComponent();
 
-            this.DataContext = new NewBinPropertyViewModel(restrictTo);
+            this.DataContext = new NewBinPropertyViewModel(structureTemplates, restrictTo);
         }
 
         public void OnOpen(object sender, DialogOpenedEventArgs eventArgs)

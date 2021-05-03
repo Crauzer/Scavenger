@@ -93,6 +93,20 @@ namespace Scavenger
             }
         }
 
+        private void OnBinTreeTabClose(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Source is FrameworkElement frameworkElement &&
+                frameworkElement.DataContext is BinTreeViewModel binTreeViewModel)
+            {
+                this.ViewModel.BinTrees.Remove(binTreeViewModel);
+
+                if (this.ViewModel.BinTrees.Count != 0)
+                {
+                    this.ViewModel.SelectedBinTree = this.ViewModel.BinTrees.Last();
+                }
+            }
+        }
+
         private async void OnBinTreeObjectAddItem(object sender, RoutedEventArgs e)
         {
             if (e.Source is FrameworkElement frameworkElement &&
@@ -124,34 +138,15 @@ namespace Scavenger
             if (e.Source is FrameworkElement frameworkElement &&
                 frameworkElement.DataContext is BinTreeParentViewModel parentViewModel)
             {
-                NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(null);
-                if(dialogViewModel is not null)
-                {
-                    BinTreeProperty newProperty = dialogViewModel.BuildProperty(parentViewModel.TreeProperty.Parent);
-                    BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(parentViewModel, newProperty);
-
-                    parentViewModel.Children.Add(newPropertyViewModel);
-                }
+                await this.ViewModel.AddFieldToStructure(parentViewModel);
             }
         }
         private async void OnBinTreeContainerAddItem(object sender, RoutedEventArgs e)
         {
             if (e.Source is FrameworkElement frameworkElement &&
-                frameworkElement.DataContext is BinTreeContainerViewModel containerViewModel)
+                frameworkElement.DataContext is BinTreeParentViewModel parentViewModel)
             {
-                BinTreeContainer container = containerViewModel.TreeProperty as BinTreeContainer;
-                NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(new List<BinPropertyType>() { container.PropertiesType });
-                if (dialogViewModel is not null)
-                {
-                    BinTreeProperty newProperty = dialogViewModel.BuildProperty(container);
-                    BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(containerViewModel, newProperty);
-                    if (newPropertyViewModel is not null)
-                    {
-                        newPropertyViewModel.ShowName = false;
-
-                        containerViewModel.Children.Add(newPropertyViewModel);
-                    }
-                }
+                await this.ViewModel.AddItemToContainer(parentViewModel);
             }
         }
         private void OnBinTreeMapAddItem(object sender, RoutedEventArgs e)
@@ -177,17 +172,12 @@ namespace Scavenger
             }
         }
 
-        private void OnBinTreeTabClose(object sender, MouseButtonEventArgs e)
+        private async void OnBinTreeStructureExportToTemplate(object sender, RoutedEventArgs e)
         {
             if (e.Source is FrameworkElement frameworkElement &&
-                frameworkElement.DataContext is BinTreeViewModel binTreeViewModel)
+                frameworkElement.DataContext is BinTreeParentViewModel structureViewModel)
             {
-                this.ViewModel.BinTrees.Remove(binTreeViewModel);
-
-                if (this.ViewModel.BinTrees.Count != 0)
-                {
-                    this.ViewModel.SelectedBinTree = this.ViewModel.BinTrees.Last();
-                }
+                await this.ViewModel.ExportStructureToTemplate(structureViewModel);
             }
         }
     }

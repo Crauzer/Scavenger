@@ -402,6 +402,12 @@
                                 <MaterialDesign:PackIcon Kind="Remove"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Export as Template" Click="OnBinTreeStructureExportToTemplate">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="FileExport"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>

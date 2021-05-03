@@ -1,5 +1,9 @@
 ﻿using LeagueToolkit.IO.PropertyBin;
+using LeagueToolkit.IO.PropertyBin.Properties;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using Newtonsoft.Json;
 using Octokit;
+using Scavenger.IO.Templates;
 using Scavenger.Utilities;
 using System;
 using System.Collections.Generic;
@@ -41,6 +45,15 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        public ObservableCollection<StructureTemplate> StructureTemplates
+        {
+            get => this._structureTemplates;
+            set
+            {
+                this._structureTemplates = value;
+                NotifyPropertyChanged();
+            }
+        }
         public bool IsGloballyEnabled
         {
             get => this._isGloballyEnabled;
@@ -51,10 +64,11 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-        private ObservableCollection<BinTreeViewModel> _binTrees = new ObservableCollection<BinTreeViewModel>();
+        private ObservableCollection<BinTreeViewModel> _binTrees = new();
+        private ObservableCollection<StructureTemplate> _structureTemplates = new();
         private BinTreeViewModel _selectedBinTree;
         private bool _isGloballyEnabled = true;
-        private InfobarViewModel _infobar = new InfobarViewModel();
+        private InfobarViewModel _infobar = new();
 
         public MainWindowViewModel()
         {
@@ -64,8 +78,18 @@ namespace Scavenger.MVVM.ViewModels
         public void Initialize()
         {
             Config.Load();
+            LoadStructureTemplates();
 
             this.Infobar.Progress = 100;
+        }
+        public void LoadStructureTemplates()
+        {
+            Directory.CreateDirectory("Templates");
+
+            foreach (string fileName in Directory.EnumerateFiles("Templates"))
+            {
+                this.StructureTemplates.Add(JsonConvert.DeserializeObject<StructureTemplate>(File.ReadAllText(fileName)));
+            }
         }
 
         public async Task LoadBinTree(string binName, BinTree binTree)
@@ -125,6 +149,70 @@ namespace Scavenger.MVVM.ViewModels
                     }
 
                     Config.Set(configChecksumPath, repositoryContent.Sha);
+                }
+            }
+        }
+
+        public async Task ExportStructureToTemplate(BinTreeParentViewModel parentViewModel)
+        {
+            ExportStructureTemplateViewModel exportStructureTemplateViewModel = await DialogHelper.ShowExportStructureTemplateDialog();
+            if (exportStructureTemplateViewModel is not null)
+            {
+                string templateName = exportStructureTemplateViewModel.TemplateName;
+
+                try
+                {
+                    Directory.CreateDirectory("Templates");
+
+                    StructureTemplate structureTemplate;
+                    if(parentViewModel is BinTreeStructureViewModel structureViewModel)
+                    {
+                        structureTemplate = new StructureTemplate(templateName, structureViewModel);
+                    }
+                    else if(parentViewModel is BinTreeEmbeddedViewModel embeddedViewModel)
+                    {
+                        structureTemplate = new StructureTemplate(templateName, embeddedViewModel);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException($"{nameof(parentViewModel)} is not a structure/embedded");
+                    }
+
+                    File.WriteAllText($"Templates/{templateName}.template.json", JsonConvert.SerializeObject(structureTemplate, Formatting.Indented));
+
+                    this.StructureTemplates.Add(structureTemplate);
+                }
+                catch (Exception exception)
+                {
+                    await DialogHelper.ShowMessgeDialog($"Failed to save Structure Template\n{exception}");
+                }
+            }
+        }
+
+        public async Task AddFieldToStructure(BinTreeParentViewModel parentViewModel)
+        {
+            NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(this.StructureTemplates);
+            if (dialogViewModel is not null)
+            {
+                BinTreeProperty newProperty = dialogViewModel.BuildProperty(parentViewModel.TreeProperty.Parent);
+                BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(parentViewModel, newProperty);
+
+                parentViewModel.Children.Add(newPropertyViewModel);
+            }
+        }
+        public async Task AddItemToContainer(BinTreeParentViewModel containerViewModel)
+        {
+            BinTreeContainer container = containerViewModel.TreeProperty as BinTreeContainer;
+            NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(this.StructureTemplates, new List<BinPropertyType>() { container.PropertiesType });
+            if (dialogViewModel is not null)
+            {
+                BinTreeProperty newProperty = dialogViewModel.BuildProperty(container);
+                BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(containerViewModel, newProperty);
+                if (newPropertyViewModel is not null)
+                {
+                    newPropertyViewModel.ShowName = false;
+
+                    containerViewModel.Children.Add(newPropertyViewModel);
                 }
             }
         }

@@ -2,6 +2,7 @@
 using LeagueToolkit.Helpers.Structures;
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
+using Scavenger.IO.Templates;
 using Scavenger.Utilities;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,30 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class NewBinPropertyViewModel : PropertyNotifier
     {
+        public StructureTemplate StructureTemplate
+        {
+            get => this._structureTemplate;
+            set
+            {
+                this._structureTemplate = value;
+
+                if (value is not null)
+                {
+                    this.MetaClass = value.MetaClass;
+                    this.PropertyType = value.IsEmbedded ? BinPropertyType.Embedded : BinPropertyType.Structure;
+                    this.PropertyTypes = new List<BinPropertyType>()
+                    {
+                        BinPropertyType.Structure, BinPropertyType.Embedded
+                    };
+                }
+                else
+                {
+                    this.PropertyTypes = GeneratePropertyTypes();
+                }
+
+                NotifyPropertyChanged();
+            }
+        }
         public string Name
         {
             get => this._name;
@@ -58,6 +83,7 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
+        public IEnumerable<StructureTemplate> StructureTemplates { get; }
         public IEnumerable<BinPropertyType> PropertyTypes
         {
             get => this._propertyTypes;
@@ -77,22 +103,50 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
+        private StructureTemplate _structureTemplate;
         private string _name = string.Empty;
         private string _metaClass = string.Empty;
-        private IEnumerable<BinPropertyType> _propertyTypes = Enum.GetValues(typeof(BinPropertyType)).Cast<BinPropertyType>();
-        private IEnumerable<BinPropertyType> _types = Enum.GetValues(typeof(BinPropertyType)).Cast<BinPropertyType>();
+        private IEnumerable<BinPropertyType> _propertyTypes;
+        private IEnumerable<BinPropertyType> _types;
         private BinPropertyType _propertyType;
         private BinPropertyType _primaryType;
         private BinPropertyType _secondaryType;
 
-        public NewBinPropertyViewModel(IEnumerable<BinPropertyType> restirctToTypes)
+        public NewBinPropertyViewModel(IEnumerable<StructureTemplate> structureTemplates, IEnumerable<BinPropertyType> restirctToTypes = null)
         {
-            if (restirctToTypes is null is false && restirctToTypes.Any()) this._propertyTypes = restirctToTypes;
+            this.StructureTemplates = structureTemplates;
+            
+            if (restirctToTypes is null is false && restirctToTypes.Any()) this.PropertyTypes = restirctToTypes;
+            else this.PropertyTypes = GeneratePropertyTypes();
+
+            this.Types = GeneratePropertyTypes();
         }
 
         public BinTreeProperty BuildProperty(IBinTreeParent parent)
         {
-            return BinTreeUtilities.BuildProperty(this.Name, this.MetaClass, parent, this.PropertyType, this.PrimaryType, this.SecondaryType);
+            if (this.StructureTemplate is not null)
+            {
+                BinTreeStructure structureProperty = BinTreeUtilities.BuildProperty(this.Name, this.MetaClass, parent, this.PropertyType, this.PrimaryType, this.SecondaryType) as BinTreeStructure;
+
+                foreach(PropertyTemplate propertyTemplate in this.StructureTemplate.Properties)
+                {
+                    BinTreeProperty templateProperty = BinTreeUtilities.BuildProperty(propertyTemplate.Name, propertyTemplate.MetaClass, structureProperty,
+                        propertyTemplate.Type, propertyTemplate.PrimaryType, propertyTemplate.SecondaryType);
+
+                    structureProperty.AddProperty(templateProperty);
+                }
+
+                return structureProperty;
+            }
+            else
+            {
+                return BinTreeUtilities.BuildProperty(this.Name, this.MetaClass, parent, this.PropertyType, this.PrimaryType, this.SecondaryType);
+            }
+        }
+
+        private IEnumerable<BinPropertyType> GeneratePropertyTypes()
+        {
+            return Enum.GetValues(typeof(BinPropertyType)).Cast<BinPropertyType>();
         }
     }
 }

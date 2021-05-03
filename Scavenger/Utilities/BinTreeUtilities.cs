@@ -52,7 +52,7 @@ namespace Scavenger.Utilities
             IBinTreeParent parent, BinPropertyType propertyType, BinPropertyType primaryType, BinPropertyType secondaryType)
         {
             uint nameHash = Fnv1a.HashLower(name);
-            uint metaClassHash = Fnv1a.HashLower(metaClass);
+            uint metaClassHash = metaClass is not null ? Fnv1a.HashLower(metaClass) : 0;
 
             return propertyType switch
             {

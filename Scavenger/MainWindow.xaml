@@ -1118,6 +1118,15 @@
                                                     Click="OnBinTreeTabClose">
                                                 <MaterialDesign:PackIcon Kind="Close" Width="15"/>
                                             </Button>
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                        <MenuItem.Icon>
+                                                            <MaterialDesign:PackIcon Kind="ContentPaste"/>
+                                                        </MenuItem.Icon>
+                                                    </MenuItem>
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
                                         </StackPanel>
                                     </DataTemplate>
                                 </TabControl.ItemTemplate>
@@ -1172,11 +1181,31 @@
                                                                         <MaterialDesign:PackIcon Kind="Remove"/>
                                                                     </MenuItem.Icon>
                                                                 </MenuItem>
+                                                                <Separator/>
+                                                                <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                                    <MenuItem.Icon>
+                                                                        <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                                                                    </MenuItem.Icon>
+                                                                </MenuItem>
+                                                                <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                                    <MenuItem.Icon>
+                                                                        <MaterialDesign:PackIcon Kind="ContentPaste"/>
+                                                                    </MenuItem.Icon>
+                                                                </MenuItem>
                                                             </ContextMenu>
                                                         </MaterialDesign:ColorZone.ContextMenu>
                                                     </MaterialDesign:ColorZone>
                                                 </DataTemplate>
                                             </TreeView.ItemTemplate>
+                                            <TreeView.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                                        <MenuItem.Icon>
+                                                            <MaterialDesign:PackIcon Kind="ContentPaste"/>
+                                                        </MenuItem.Icon>
+                                                    </MenuItem>
+                                                </ContextMenu>
+                                            </TreeView.ContextMenu>
                                         </TreeView>
                                     </DataTemplate>
                                 </TabControl.ContentTemplate>

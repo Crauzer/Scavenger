@@ -60,14 +60,13 @@ namespace Scavenger.MVVM.ViewModels
 
         public override BinTreeProperty BuildProperty()
         {
-            BinTreeUnorderedContainer container = this.TreeProperty as BinTreeUnorderedContainer;
             List<BinTreeProperty> properties = new List<BinTreeProperty>();
             foreach (BinTreePropertyViewModel propertyViewModel in this.Children)
             {
                 properties.Add(propertyViewModel.BuildProperty());
             }
 
-            return new BinTreeUnorderedContainer(null, this.NameHash, container.PropertiesType, properties);
+            return new BinTreeUnorderedContainer(null, this.NameHash, this.PropertiesType, properties);
         }
     }
 }

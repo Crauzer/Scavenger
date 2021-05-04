@@ -44,7 +44,7 @@ namespace Scavenger.MVVM.ViewModels
             this.KeyType = treeProperty.KeyType;
             this.ValueType = treeProperty.ValueType;
 
-            foreach(var pair in treeProperty.Map)
+            foreach (var pair in treeProperty.Map)
             {
                 this.Children.Add(new BinTreeMapEntryViewModel(this, pair));
             }
@@ -55,7 +55,7 @@ namespace Scavenger.MVVM.ViewModels
             base.SyncTreeProperty();
 
             List<KeyValuePair<BinTreeProperty, BinTreeProperty>> map = new();
-            foreach(BinTreeMapEntryViewModel entryViewModel in this.Children)
+            foreach (BinTreeMapEntryViewModel entryViewModel in this.Children)
             {
                 entryViewModel.Parent = this;
                 entryViewModel.SyncTreeProperty();
@@ -68,8 +68,7 @@ namespace Scavenger.MVVM.ViewModels
 
         public override BinTreeProperty BuildProperty()
         {
-            BinTreeMap treeMap = this.TreeProperty as BinTreeMap;
-            var map = new List<KeyValuePair<BinTreeProperty, BinTreeProperty>>();
+            List<KeyValuePair<BinTreeProperty, BinTreeProperty>> map = new();
             foreach (BinTreeMapEntryViewModel entryViewModel in this.Children)
             {
                 BinTreeProperty key = entryViewModel.KeyProperty.BuildProperty();
@@ -78,7 +77,7 @@ namespace Scavenger.MVVM.ViewModels
                 map.Add(new KeyValuePair<BinTreeProperty, BinTreeProperty>(key, value));
             }
 
-            return new BinTreeMap(null, this.NameHash, treeMap.KeyType, treeMap.ValueType, map);
+            return new BinTreeMap(null, this.NameHash, this.KeyType, this.ValueType, map);
         }
     }
 }

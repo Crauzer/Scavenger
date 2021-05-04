@@ -1,5 +1,6 @@
 ﻿using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
+using Newtonsoft.Json;
 using Scavenger.Utilities;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,9 @@ namespace Scavenger.MVVM.ViewModels
 
         private string _metaClass;
 
-        public BinTreeObject TreeObject { get; private set; }
+        [JsonIgnore] public BinTreeObject TreeObject { get; private set; }
 
+        public BinTreeObjectViewModel() : base(null, null, null) { }
         public BinTreeObjectViewModel(BinTreeViewModel tree, BinTreeObject treeObject) : base(tree, null, null)
         {
             this.BinTree = tree;
@@ -38,6 +40,11 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this.Children.Add(BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty));
             }
+        }
+
+        public void SyncTreeObject()
+        {
+            this.TreeObject = BuildObject();
         }
 
         public BinTreeObject BuildObject()

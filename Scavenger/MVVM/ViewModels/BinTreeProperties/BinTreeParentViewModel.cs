@@ -103,7 +103,7 @@ namespace Scavenger.MVVM.ViewModels
         [JsonIgnore] public BinTreeViewModel BinTree
         {
             get => this._binTree;
-            protected set => this._binTree = value;
+            set => this._binTree = value;
         }
         public ObservableCollection<BinTreePropertyViewModel> Children
         {

@@ -235,28 +235,40 @@ namespace Scavenger
         }
         private void CopyCommandOnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if(e.OriginalSource is FrameworkElement originalSource
-                && originalSource.DataContext is BinTreePropertyViewModel propertyViewModel)
+            if(e.OriginalSource is FrameworkElement originalSource)
             {
                 IDataObject dataObject = new DataObject();
 
-                dataObject.SetData(new BinTreePropertyViewModelDataWrapper(propertyViewModel));
+                if(originalSource.DataContext is BinTreeObjectViewModel objectViewModel)
+                {
+                    dataObject.SetData(new BinTreeObjectViewModelDataWrapper(objectViewModel));
+                }
+                else if (originalSource.DataContext is BinTreePropertyViewModel propertyViewModel)
+                {
+                    dataObject.SetData(new BinTreePropertyViewModelDataWrapper(propertyViewModel));
+                }
+
                 Clipboard.SetDataObject(dataObject, false);
             }
         }
         private void PasteCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             if(e.OriginalSource is FrameworkElement originalSource
-                && originalSource.DataContext is BinTreeParentViewModel
                 && Clipboard.GetDataObject() is IDataObject dataObject)
             {
                 // BAD CODE PLS HELP
                 string[] formats = dataObject.GetFormats();
-                if(formats.Any(x => x.Contains("BinTree")))
+                if (formats.Any(x => x.Contains("BinTree")))
                 {
                     object data = dataObject.GetData(formats.First());
 
-                    if (data is BinTreePropertyViewModelDataWrapper propertyViewModelWrapper)
+                    if(originalSource.DataContext is BinTreeViewModel binTreeViewModel
+                        && data is BinTreeObjectViewModelDataWrapper)
+                    {
+                        e.CanExecute = true;
+                    }
+                    else if(originalSource.DataContext is BinTreeParentViewModel
+                        && data is BinTreePropertyViewModelDataWrapper)
                     {
                         e.CanExecute = true;
                     }
@@ -266,8 +278,7 @@ namespace Scavenger
         private void PasteCommandOnExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (Clipboard.GetDataObject() is IDataObject dataObject
-                && e.OriginalSource is FrameworkElement originalSource
-                && originalSource.DataContext is BinTreeParentViewModel parentViewModel)
+                && e.OriginalSource is FrameworkElement originalSource)
             {
                 // BAD CODE PLS HELP
                 string[] formats = dataObject.GetFormats();
@@ -275,12 +286,21 @@ namespace Scavenger
                 {
                     object data = dataObject.GetData(formats.First());
 
-                    if (data is BinTreePropertyViewModelDataWrapper propertyViewModelWrapper)
+                    if (originalSource.DataContext is BinTreeParentViewModel parentViewModel 
+                        && data is BinTreePropertyViewModelDataWrapper propertyViewModelWrapper)
                     {
                         propertyViewModelWrapper.Property.Parent = parentViewModel;
                         propertyViewModelWrapper.Property.SyncTreeProperty();
 
                         parentViewModel.Children.Add(propertyViewModelWrapper.Property);
+                    }
+                    else if(originalSource.DataContext is BinTreeViewModel binTreeViewModel
+                        && data is BinTreeObjectViewModelDataWrapper objectViewModel)
+                    {
+                        objectViewModel.Object.BinTree = binTreeViewModel;
+                        objectViewModel.Object.SyncTreeObject();
+
+                        binTreeViewModel.Objects.Add(objectViewModel.Object);
                     }
                 }
             }

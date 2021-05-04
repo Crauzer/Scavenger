@@ -516,38 +516,45 @@
             </MaterialDesign:ColorZone>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeColorTemplate">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,5">
-                <MaterialDesign:PackIcon Kind="Palette" Margin="0,8,15,0"/>
-                <TextBox Text="{Binding Name}" 
+            <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Border Margin="5,0,10,0" VerticalAlignment="Center">
+                        <MaterialDesign:PackIcon Kind="Palette"/>
+                    </Border>
+                    <TextBox Text="{Binding Name}" 
                          VerticalAlignment="Center" Width="250"
                          MaterialDesign:HintAssist.HelperText="Name"
                          Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"/>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
+                    <MaterialDesign:Chip>
+                        <Border Height="25">
+                            <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
+                        </Border>
+                    </MaterialDesign:Chip>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
+                    <WpfToolkit:ColorCanvas R="{Binding R, UpdateSourceTrigger=PropertyChanged}"
+                                        G="{Binding G, UpdateSourceTrigger=PropertyChanged}"
+                                        B="{Binding B, UpdateSourceTrigger=PropertyChanged}"
+                                        A="{Binding A, UpdateSourceTrigger=PropertyChanged}"
+                                        Margin="10,0,0,0"
+                                        Background="{DynamicResource MaterialDesignPaper}"
+                                        BorderBrush="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                                        Foreground="{DynamicResource MaterialDesignBodyLight}"/>
+                    <StackPanel.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Delete Color" Click="OnBinTreePropertyDeleteField">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="Remove"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </StackPanel.ContextMenu>
                 </StackPanel>
-                <MaterialDesign:Chip>
-                    <Border Height="25">
-                        <TextBlock Text="{Binding TreeProperty.Type}" VerticalAlignment="Center"/>
-                    </Border>
-                </MaterialDesign:Chip>
-                <StackPanel Orientation="Horizontal" Margin="10,0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                </StackPanel>
-                <WpfToolkit:ColorCanvas R="{Binding R, UpdateSourceTrigger=PropertyChanged}"
-                                                G="{Binding G, UpdateSourceTrigger=PropertyChanged}"
-                                                B="{Binding B, UpdateSourceTrigger=PropertyChanged}"
-                                                A="{Binding A, UpdateSourceTrigger=PropertyChanged}"
-                                                Margin="10,0,0,0"/>
-                <StackPanel.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Delete Color" Click="OnBinTreePropertyDeleteField">
-                            <MenuItem.Icon>
-                                <MaterialDesign:PackIcon Kind="Remove"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </ContextMenu>
-                </StackPanel.ContextMenu>
-            </StackPanel>
+            </MaterialDesign:ColorZone>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeStructureTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth2"

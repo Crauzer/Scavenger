@@ -3,6 +3,7 @@ using LeagueToolkit.Helpers;
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
 using MaterialDesignExtensions.Controls;
+using MaterialDesignThemes.Wpf;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Scavenger.MVVM.ModelViews;
 using Scavenger.MVVM.ViewModels;
@@ -184,16 +185,46 @@ namespace Scavenger
 
         private void OnBinTreeContainerDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.Source is TreeViewItem treeViemItem)
+            if (e.Source is ColorZone colorZone
+                && colorZone.Content is TreeViewItem treeViewItem
+                && e.OriginalSource is FrameworkElement originalSource
+                && e.OriginalSource is not TreeViewItem
+                && (originalSource.DataContext is BinTreeContainerViewModel || originalSource.DataContext is BinTreeUnorderedContainerViewModel))
             {
-                treeViemItem.IsExpanded = false;
+                treeViewItem.IsExpanded = false;
             }
         }
         private void OnBinTreeObjectDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.Source is TreeViewItem treeViemItem)
+            if (e.Source is ColorZone colorZone
+                && colorZone.Content is TreeViewItem treeViewItem
+                && e.OriginalSource is FrameworkElement originalSource
+                && e.OriginalSource is not TreeViewItem
+                && originalSource.DataContext is BinTreeObjectViewModel)
             {
-                treeViemItem.IsExpanded = false;
+                treeViewItem.IsExpanded = false;
+            }
+        }
+        private void OnBinTreeStructureDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Source is ColorZone colorZone
+                && colorZone.Content is TreeViewItem treeViewItem
+                && e.OriginalSource is FrameworkElement originalSource
+                && e.OriginalSource is not TreeViewItem
+                && (originalSource.DataContext is BinTreeStructureViewModel || originalSource.DataContext is BinTreeEmbeddedViewModel))
+            {
+                treeViewItem.IsExpanded = false;
+            }
+        }
+        private void OnBinTreeMapDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Source is ColorZone colorZone
+                && colorZone.Content is TreeViewItem treeViewItem
+                && e.OriginalSource is FrameworkElement originalSource
+                && e.OriginalSource is not TreeViewItem
+                && originalSource.DataContext is BinTreeMapViewModel)
+            {
+                treeViewItem.IsExpanded = false;
             }
         }
     }

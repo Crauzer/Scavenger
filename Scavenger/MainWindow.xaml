@@ -550,7 +550,8 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeStructureTemplate">
-            <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                      MouseDoubleClick="OnBinTreeStructureDoubleClick">
                 <TreeViewItem ItemsSource="{Binding Children, UpdateSourceTrigger=PropertyChanged}"
                               ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"
                               Margin="5">
@@ -599,10 +600,10 @@
             </MaterialDesign:ColorZone>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeContainerTemplate">
-            <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                      MouseDoubleClick="OnBinTreeContainerDoubleClick">
                 <TreeViewItem ItemsSource="{Binding Children}" 
-                              ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"
-                              MouseDoubleClick="OnBinTreeContainerDoubleClick">
+                              ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
                     <TreeViewItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Border VerticalAlignment="Center" Margin="0,0,15,0">
@@ -638,7 +639,8 @@
             </MaterialDesign:ColorZone>
         </DataTemplate>
         <DataTemplate x:Key="BinTreeMapTemplate">
-            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                      MouseDoubleClick="OnBinTreeMapDoubleClick">
                 <TreeViewItem ItemsSource="{Binding Children, UpdateSourceTrigger=PropertyChanged}"
                               ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"
                               VirtualizingStackPanel.IsVirtualizing="True">
@@ -929,10 +931,10 @@
                                                   MaterialDesign:RippleAssist.IsDisabled="True">
                                             <TreeView.ItemTemplate>
                                                 <DataTemplate>
-                                                    <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth4">
+                                                    <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                                                              MouseDoubleClick="OnBinTreeObjectDoubleClick">
                                                         <TreeViewItem ItemsSource="{Binding Children}" 
-                                                                      ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}"
-                                                                      MouseDoubleClick="OnBinTreeObjectDoubleClick">
+                                                                      ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
                                                             <TreeViewItem.Header>
                                                                 <StackPanel Orientation="Vertical">
                                                                     <StackPanel Orientation="Horizontal">

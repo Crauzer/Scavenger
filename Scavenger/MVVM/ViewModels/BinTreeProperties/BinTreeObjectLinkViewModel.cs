@@ -14,6 +14,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._value = value;
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
 

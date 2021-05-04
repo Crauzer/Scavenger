@@ -110,7 +110,7 @@ namespace Scavenger.MVVM.ViewModels
             
             Task<BinTreeViewModel> CreateBinTreeViewModel()
             {
-                return Task.FromResult(new BinTreeViewModel(binPath, binTree));
+                return Task.FromResult(new BinTreeViewModel(binPath, binTree, this._structureTemplates));
             }
         }
 

@@ -8,6 +8,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using Scavenger.MVVM.ModelViews;
 using Scavenger.MVVM.ViewModels;
 using Scavenger.Utilities;
+using Scavenger.Utilities.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -225,6 +226,63 @@ namespace Scavenger
                 && originalSource.DataContext is BinTreeMapViewModel)
             {
                 treeViewItem.IsExpanded = false;
+            }
+        }
+
+        private void CopyCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        private void CopyCommandOnExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if(e.OriginalSource is FrameworkElement originalSource
+                && originalSource.DataContext is BinTreePropertyViewModel propertyViewModel)
+            {
+                IDataObject dataObject = new DataObject();
+
+                dataObject.SetData(new BinTreePropertyViewModelDataWrapper(propertyViewModel));
+                Clipboard.SetDataObject(dataObject, false);
+            }
+        }
+        private void PasteCommandCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if(e.OriginalSource is FrameworkElement originalSource
+                && originalSource.DataContext is BinTreeParentViewModel
+                && Clipboard.GetDataObject() is IDataObject dataObject)
+            {
+                // BAD CODE PLS HELP
+                string[] formats = dataObject.GetFormats();
+                if(formats.Any(x => x.Contains("BinTree")))
+                {
+                    object data = dataObject.GetData(formats.First());
+
+                    if (data is BinTreePropertyViewModelDataWrapper propertyViewModelWrapper)
+                    {
+                        e.CanExecute = true;
+                    }
+                }
+            }
+        }
+        private void PasteCommandOnExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (Clipboard.GetDataObject() is IDataObject dataObject
+                && e.OriginalSource is FrameworkElement originalSource
+                && originalSource.DataContext is BinTreeParentViewModel parentViewModel)
+            {
+                // BAD CODE PLS HELP
+                string[] formats = dataObject.GetFormats();
+                if (formats.Any(x => x.Contains("BinTree")))
+                {
+                    object data = dataObject.GetData(formats.First());
+
+                    if (data is BinTreePropertyViewModelDataWrapper propertyViewModelWrapper)
+                    {
+                        propertyViewModelWrapper.Property.Parent = parentViewModel;
+                        propertyViewModelWrapper.Property.SyncTreeProperty();
+
+                        parentViewModel.Children.Add(propertyViewModelWrapper.Property);
+                    }
+                }
             }
         }
     }

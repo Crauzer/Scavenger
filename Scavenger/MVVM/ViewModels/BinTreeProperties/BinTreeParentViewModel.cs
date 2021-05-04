@@ -100,7 +100,11 @@ namespace Scavenger.MVVM.ViewModels
                 }
             }
         }
-        [JsonIgnore] public BinTreeViewModel BinTree => this._binTree;
+        [JsonIgnore] public BinTreeViewModel BinTree
+        {
+            get => this._binTree;
+            protected set => this._binTree = value;
+        }
         public ObservableCollection<BinTreePropertyViewModel> Children
         {
             get => this._children;
@@ -119,6 +123,7 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeParentViewModel(BinTreeViewModel tree, BinTreeParentViewModel parent, BinTreeProperty treeProperty) : base(parent, treeProperty)
         {
             this._binTree = tree;
+            this._children.CollectionChanged += OnChildrenCollectionChanged;
         }
 
         public void RemoveField(BinTreePropertyViewModel propertyViewModel)
@@ -152,6 +157,19 @@ namespace Scavenger.MVVM.ViewModels
                         break;
                     }
                 }
+            }
+        }
+
+        private void OnChildrenCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            SyncTreeProperty();
+        }
+
+        public override void SyncTreeProperty()
+        {
+            if(this is not BinTreeObjectViewModel)
+            {
+                this._binTree = this.Parent?.BinTree;
             }
         }
     }

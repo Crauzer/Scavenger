@@ -87,7 +87,7 @@ namespace Scavenger.Utilities
                 _ => new BinTreeNone(parent, nameHash),
             };
         }
-    
+
         public static bool IsAsset(BinTreeStringViewModel treeString)
         {
             string extension = Path.GetExtension(treeString.Value);
@@ -96,7 +96,8 @@ namespace Scavenger.Utilities
         public static bool IsPreviewableAsset(BinTreeStringViewModel treeString)
         {
             string extension = Path.GetExtension(treeString.Value);
-            if (string.IsNullOrEmpty(extension) is false)
+            if (string.IsNullOrEmpty(extension) is false
+                && treeString.Parent is not null)
             {
                 string binPath = treeString.Parent.BinTree.BinPath;
                 

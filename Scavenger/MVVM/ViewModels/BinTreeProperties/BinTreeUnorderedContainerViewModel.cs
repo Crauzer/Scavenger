@@ -12,7 +12,19 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeUnorderedContainerViewModel : BinTreeParentViewModel
     {
-        [JsonIgnore] public string Metadata => $"{this.TreeProperty.Type} : {(this.TreeProperty as BinTreeUnorderedContainer).PropertiesType}";
+        [JsonIgnore] public string Metadata => $"{this.TreeProperty.Type} : {this.PropertiesType}";
+
+        public BinPropertyType PropertiesType
+        {
+            get => this._propertiesType;
+            set
+            {
+                this._propertiesType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private BinPropertyType _propertiesType;
 
         public BinTreeUnorderedContainerViewModel() : base(null, null, new BinTreeUnorderedContainer(null, 0, BinPropertyType.None, Enumerable.Empty<BinTreeProperty>())) { }
         public BinTreeUnorderedContainerViewModel(BinTreeParentViewModel parent, BinTreeUnorderedContainer treeProperty) : base(parent.BinTree, parent, treeProperty)
@@ -28,6 +40,22 @@ namespace Scavenger.MVVM.ViewModels
 
                 itemIndex++;
             }
+        }
+
+        public override void SyncTreeProperty()
+        {
+            base.SyncTreeProperty();
+
+            List<BinTreeProperty> properties = new List<BinTreeProperty>();
+            foreach (BinTreePropertyViewModel propertyViewModel in this.Children)
+            {
+                propertyViewModel.Parent = this;
+                propertyViewModel.SyncTreeProperty();
+
+                properties.Add(propertyViewModel.BuildProperty());
+            }
+
+            this.TreeProperty = new BinTreeUnorderedContainer((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, this.PropertiesType, properties);
         }
 
         public override BinTreeProperty BuildProperty()

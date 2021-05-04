@@ -16,6 +16,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._value = value;
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
         public ulong MaxValue => ulong.MaxValue;
@@ -27,6 +28,11 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeUInt64ViewModel(BinTreeParentViewModel parent, BinTreeUInt64 treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;
+        }
+
+        public override void SyncTreeProperty()
+        {
+            this.TreeProperty = new BinTreeUInt64((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, this.Value);
         }
 
         public override BinTreeProperty BuildProperty()

@@ -29,6 +29,20 @@ namespace Scavenger.Utilities
                 return null;
             }
         }
+        public static async Task<NewBinTreeObjectViewModel> ShowNewBinTreeObjectDialog(ICollection<StructureTemplate> structureTemplates)
+        {
+            NewBinTreeObjectDialog dialog = new (structureTemplates);
+
+            object result = await DialogHost.Show(dialog, nameof(RootDialog));
+            if (result is true)
+            {
+                return dialog.DataContext as NewBinTreeObjectViewModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public static async Task ShowMessgeDialog(string message)
         {

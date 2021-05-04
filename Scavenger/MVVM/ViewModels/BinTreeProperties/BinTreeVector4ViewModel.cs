@@ -32,6 +32,7 @@ namespace Scavenger.MVVM.ViewModels
                 this.W = value.A / 255f;
 
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
         public float X
@@ -93,6 +94,11 @@ namespace Scavenger.MVVM.ViewModels
             this.Y = treeProperty.Value.Y;
             this.Z = treeProperty.Value.Z;
             this.W = treeProperty.Value.W;
+        }
+
+        public override void SyncTreeProperty()
+        {
+            this.TreeProperty = new BinTreeVector4((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, new Vector4(this.X, this.Y, this.Z, this.W));
         }
 
         public override BinTreeProperty BuildProperty()

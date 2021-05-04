@@ -17,6 +17,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._x = value;
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
         public float Y
@@ -26,6 +27,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._y = value;
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
         public float Z
@@ -35,6 +37,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._z = value;
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
 
@@ -48,6 +51,11 @@ namespace Scavenger.MVVM.ViewModels
             this.X = treeProperty.Value.X;
             this.Y = treeProperty.Value.Y;
             this.Z = treeProperty.Value.Z;
+        }
+
+        public override void SyncTreeProperty()
+        {
+            this.TreeProperty = new BinTreeVector3((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, new Vector3(this.X, this.Y, this.Z));
         }
 
         public override BinTreeProperty BuildProperty()

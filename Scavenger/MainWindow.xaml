@@ -20,6 +20,10 @@
         Icon="Resources/icon.ico"
         mc:Ignorable="d"
         Title="Scavenger" Height="720" Width="1280">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Copy" CanExecute="CopyCommandCanExecute" Executed="CopyCommandOnExecuted"/>
+        <CommandBinding Command="ApplicationCommands.Paste" CanExecute="PasteCommandCanExecute" Executed="PasteCommandOnExecuted"/>
+    </Window.CommandBindings>
     <Window.Resources>
         <SolidColorBrush x:Key="DarkBorderBrush" Color="#2f2f2f"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
@@ -79,6 +83,17 @@
                                 <MaterialDesign:PackIcon Kind="Remove"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </TreeViewItem.ContextMenu>
             </TreeViewItem>
@@ -115,6 +130,17 @@
                         <MenuItem Header="Delete Bool" Click="OnBinTreePropertyDeleteField">
                             <MenuItem.Icon>
                                 <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -158,6 +184,17 @@
                         <MenuItem Header="Delete Number" Click="OnBinTreePropertyDeleteField">
                             <MenuItem.Icon>
                                 <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -204,6 +241,17 @@
                         <MenuItem Header="Delete Vector2" Click="OnBinTreePropertyDeleteField">
                             <MenuItem.Icon>
                                 <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -256,6 +304,17 @@
                         <MenuItem Header="Delete Vector3" Click="OnBinTreePropertyDeleteField">
                             <MenuItem.Icon>
                                 <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -325,6 +384,17 @@
                         <MenuItem Header="Delete Vector4" Click="OnBinTreePropertyDeleteField">
                             <MenuItem.Icon>
                                 <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -397,6 +467,17 @@
                                 <MaterialDesign:PackIcon Kind="Remove"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -433,6 +514,17 @@
                         <MenuItem Header="Delete Text" Click="OnBinTreePropertyDeleteField">
                             <MenuItem.Icon>
                                 <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -473,6 +565,17 @@
                                 <MaterialDesign:PackIcon Kind="Remove"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -509,6 +612,17 @@
                         <MenuItem Header="Delete Text" Click="OnBinTreePropertyDeleteField">
                             <MenuItem.Icon>
                                 <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -549,6 +663,17 @@
                             <MenuItem Header="Delete Color" Click="OnBinTreePropertyDeleteField">
                                 <MenuItem.Icon>
                                     <MaterialDesign:PackIcon Kind="Remove"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator/>
+                            <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="ContentPaste"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
@@ -602,6 +727,17 @@
                                 <MaterialDesign:PackIcon Kind="FileExport"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -639,6 +775,17 @@
                         <MenuItem Header="Delete Container" Click="OnBinTreePropertyDeleteField">
                             <MenuItem.Icon>
                                 <MaterialDesign:PackIcon Kind="Remove"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -688,6 +835,17 @@
                                 <MaterialDesign:PackIcon Kind="Remove"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -735,6 +893,17 @@
                             <MenuItem Header="Delete Optional" Click="OnBinTreePropertyDeleteField">
                                 <MenuItem.Icon>
                                     <MaterialDesign:PackIcon Kind="Remove"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator/>
+                            <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="ContentPaste"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
@@ -883,6 +1052,17 @@
                                 <MaterialDesign:PackIcon Kind="Remove"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentCopy"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Paste" Command="ApplicationCommands.Paste" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+                            <MenuItem.Icon>
+                                <MaterialDesign:PackIcon Kind="ContentPaste"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </ContextMenu>
                 </MaterialDesign:ColorZone.ContextMenu>
             </MaterialDesign:ColorZone>
@@ -924,6 +1104,16 @@
                                             <Border VerticalAlignment="Center">
                                                 <TextBlock Text="{Binding BinName, UpdateSourceTrigger=PropertyChanged}"/>
                                             </Border>
+                                            <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                                    Command="{Binding AddObjectCommand}"
+                                                    Margin="10,0,0,0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Border VerticalAlignment="Center">
+                                                        <MaterialDesign:PackIcon Kind="Add"/>
+                                                    </Border>
+                                                    <TextBlock Text="Add Object" Margin="5,0,0,0"/>
+                                                </StackPanel>
+                                            </Button>
                                             <Button Style="{StaticResource MaterialDesignIconButton}" Width="25" Height="25" Margin="5,0,0,0"
                                                     Click="OnBinTreeTabClose">
                                                 <MaterialDesign:PackIcon Kind="Close" Width="15"/>

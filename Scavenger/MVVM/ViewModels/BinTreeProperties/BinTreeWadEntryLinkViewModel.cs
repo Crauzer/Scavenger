@@ -16,6 +16,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._value = value;
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
 
@@ -25,6 +26,11 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeWadEntryLinkViewModel(BinTreeParentViewModel parent, BinTreeWadEntryLink treeProperty) : base(parent, treeProperty)
         {
             this.Value = Hashtables.GetWadEntry(treeProperty.Value);
+        }
+
+        public override void SyncTreeProperty()
+        {
+            this.TreeProperty = new BinTreeWadEntryLink((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, XXHash.XXH64(Encoding.UTF8.GetBytes(this.Value.ToLower())));
         }
 
         public override BinTreeProperty BuildProperty()

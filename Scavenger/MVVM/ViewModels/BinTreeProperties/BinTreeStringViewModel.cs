@@ -42,6 +42,8 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._shouldPreviewAsset = value;
                 NotifyPropertyChanged();
+
+                PreviewAsset();
             }
         }
         public string Value
@@ -55,6 +57,7 @@ namespace Scavenger.MVVM.ViewModels
                 PreviewAsset();
 
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
 
@@ -66,17 +69,16 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeStringViewModel() { }
         public BinTreeStringViewModel(BinTreeParentViewModel parent, BinTreeString treeProperty) : base(parent, treeProperty)
         {
-            this.Value = treeProperty.Value;
-            this.IsAsset = BinTreeUtilities.IsAsset(this) && BinTreeUtilities.IsPreviewableAsset(this);
-
-            PreviewAsset();
+            this._value = treeProperty.Value;
+            this._isAsset = BinTreeUtilities.IsAsset(this) && BinTreeUtilities.IsPreviewableAsset(this);
         }
 
         private void PreviewAsset()
         {
             // Check if the string is an asset
             string extension = Path.GetExtension(this.Value);
-            if (string.IsNullOrEmpty(extension) is false)
+            if (string.IsNullOrEmpty(extension) is false
+                && this.Parent is not null)
             {
                 string binPath = this.Parent.BinTree.BinPath;
                 int indexOfData = binPath.LastIndexOf("\\data\\");
@@ -126,6 +128,11 @@ namespace Scavenger.MVVM.ViewModels
             }
 
             
+        }
+
+        public override void SyncTreeProperty()
+        {
+            this.TreeProperty = new BinTreeString((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, this.Value);
         }
 
         public override BinTreeProperty BuildProperty()

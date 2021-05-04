@@ -16,6 +16,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._value = value;
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
         public float MaxValue => float.MaxValue;
@@ -27,6 +28,11 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeFloatViewModel(BinTreeParentViewModel parent, BinTreeFloat treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;
+        }
+
+        public override void SyncTreeProperty()
+        {
+            this.TreeProperty = new BinTreeFloat((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, this.Value);
         }
 
         public override BinTreeProperty BuildProperty()

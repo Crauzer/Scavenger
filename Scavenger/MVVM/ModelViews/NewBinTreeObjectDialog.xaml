@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Scavenger.MVVM.ModelViews.NewBinTreeObjectDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Scavenger.MVVM.ModelViews"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             mc:Ignorable="d" 
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="20"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{MaterialDesign:MaterialDesignFont}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Margin="20">
+            <ComboBox SelectedValue="{Binding StructureTemplate, UpdateSourceTrigger=PropertyChanged}"
+                      VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="300"
+                      ItemsSource="{Binding StructureTemplates, UpdateSourceTrigger=PropertyChanged}"
+                      MaterialDesign:HintAssist.HelperText="Structure Template"
+                      Visibility="{Binding IsStructureTemplateSelectable, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding TemplateName}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="15"
+                     MaterialDesign:HintAssist.HelperText="Name"/>
+            <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
+                     Margin="15"
+                     MaterialDesign:HintAssist.HelperText="Meta Class (Structure/Embedded)"/>
+            <DockPanel Margin="15">
+                <Button Content="Ok" DockPanel.Dock="Left" Width="100" Margin="10"
+                        Command="{x:Static MaterialDesign:DialogHost.CloseDialogCommand}">
+                    <Button.CommandParameter>
+                        <system:Boolean>True</system:Boolean>
+                    </Button.CommandParameter>
+                </Button>
+                <Button Content="Cancel" DockPanel.Dock="Right" Width="100" Margin="10"
+                        Command="{x:Static MaterialDesign:DialogHost.CloseDialogCommand}">
+                    <Button.CommandParameter>
+                        <system:Boolean>False</system:Boolean>
+                    </Button.CommandParameter>
+                </Button>
+            </DockPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

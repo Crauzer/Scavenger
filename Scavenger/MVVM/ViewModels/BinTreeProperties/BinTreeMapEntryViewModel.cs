@@ -15,6 +15,8 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._keyProperty = value;
                 NotifyPropertyChanged();
+
+                this._keyProperty.SyncTreeProperty();
             }
         }
         public BinTreePropertyViewModel ValueProperty
@@ -24,6 +26,8 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._valueProperty = value;
                 NotifyPropertyChanged();
+
+                this._valueProperty.SyncTreeProperty();
             }
         }
 
@@ -38,6 +42,15 @@ namespace Scavenger.MVVM.ViewModels
 
             this.KeyProperty.ShowName = false;
             this.ValueProperty.ShowName = false;
+        }
+
+        public override void SyncTreeProperty()
+        {
+            this.KeyProperty.Parent = this.Parent;
+            this.KeyProperty.SyncTreeProperty();
+
+            this.ValueProperty.Parent = this.Parent;
+            this.ValueProperty.SyncTreeProperty();
         }
     }
 }

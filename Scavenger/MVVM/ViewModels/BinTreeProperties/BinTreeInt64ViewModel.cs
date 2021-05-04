@@ -16,6 +16,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._value = value;
                 NotifyPropertyChanged();
+                SyncTreeProperty();
             }
         }
         public long MaxValue => long.MaxValue;
@@ -27,6 +28,11 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeInt64ViewModel(BinTreeParentViewModel parent, BinTreeInt64 treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;
+        }
+
+        public override void SyncTreeProperty()
+        {
+            this.TreeProperty = new BinTreeInt64((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, this.Value);
         }
 
         public override BinTreeProperty BuildProperty()

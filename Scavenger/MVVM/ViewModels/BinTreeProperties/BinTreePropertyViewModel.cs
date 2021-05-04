@@ -63,8 +63,8 @@ namespace Scavenger.MVVM.ViewModels
         [JsonIgnore] private string _name;
         [JsonIgnore] private uint _nameHash;
 
-        [JsonIgnore] public BinTreeParentViewModel Parent { get; private set; }
-        [JsonIgnore] public BinTreeProperty TreeProperty { get; private set; }
+        [JsonIgnore] public BinTreeParentViewModel Parent { get; set; }
+        [JsonIgnore] public BinTreeProperty TreeProperty { get; set; }
 
         public BinTreePropertyViewModel() { }
         public BinTreePropertyViewModel(BinTreeParentViewModel parent, BinTreeProperty treeProperty, bool showName = true)
@@ -79,5 +79,6 @@ namespace Scavenger.MVVM.ViewModels
         {
             return new BinTreeNone(null, this._nameHash);
         }
+        public virtual void SyncTreeProperty() { }
     }
 }

@@ -7,6 +7,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Data;
 using System.IO;
+using System.Windows.Input;
+using Scavenger.MVVM.Commands;
+using Scavenger.Utilities;
+using Scavenger.IO.Templates;
 
 namespace Scavenger.MVVM.ViewModels
 {
@@ -65,16 +69,29 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        public ObservableCollection<StructureTemplate> StructureTemplates
+        {
+            get => this._structureTemplates;
+            set
+            {
+                this._structureTemplates = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private string _binPath;
         private BinTree _tree;
         private string _objectFilter;
         private ObservableCollection<BinTreeObjectViewModel> _objects = new ObservableCollection<BinTreeObjectViewModel>();
+        private ObservableCollection<StructureTemplate> _structureTemplates;
 
-        public BinTreeViewModel(string binPath, BinTree binTree)
+        public ICommand AddObjectCommand => new RelayCommand(OnAddObject);
+
+        public BinTreeViewModel(string binPath, BinTree binTree, ObservableCollection<StructureTemplate> structureTemplates)
         {
             this._binPath = binPath;
             this._tree = binTree;
+            this._structureTemplates = structureTemplates;
 
             GenerateObjects();
         }
@@ -87,6 +104,15 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
     
+        private async void OnAddObject(object o)
+        {
+            NewBinTreeObjectViewModel newObjectViewModel = await DialogHelper.ShowNewBinTreeObjectDialog(this.StructureTemplates);
+            if(newObjectViewModel is not null)
+            {
+                this.Objects.Add(new BinTreeObjectViewModel(this, newObjectViewModel.BuildObject()));
+            }
+        }
+
         public BinTree BuildBinTree()
         {
             BinTree binTree = new BinTree();

@@ -25,6 +25,11 @@ namespace Scavenger.MVVM.ViewModels
             this.Value = Hashtables.GetObject(treeProperty.Value);
         }
 
+        public override void SyncTreeProperty()
+        {
+            this.TreeProperty = new BinTreeObjectLink((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, Fnv1a.HashLower(this.Value));
+        }
+
         public override BinTreeProperty BuildProperty()
         {
             return new BinTreeObjectLink(null, this.NameHash, Fnv1a.HashLower(this.Value));

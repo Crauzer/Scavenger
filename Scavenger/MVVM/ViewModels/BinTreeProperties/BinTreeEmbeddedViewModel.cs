@@ -23,7 +23,7 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-        private string _metaClass;
+        private string _metaClass = string.Empty;
 
         public BinTreeEmbeddedViewModel() : base(null, null, new BinTreeEmbedded(null, 0, 0, Enumerable.Empty<BinTreeProperty>()))
         {
@@ -39,11 +39,27 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
+        public override void SyncTreeProperty()
+        {
+            base.SyncTreeProperty();
+
+            List<BinTreeProperty> properties = new();
+            foreach (BinTreePropertyViewModel propertyViewModel in this.Children)
+            {
+                propertyViewModel.Parent = this;
+                propertyViewModel.SyncTreeProperty();
+
+                properties.Add(propertyViewModel.BuildProperty());
+            }
+
+            this.TreeProperty = new BinTreeEmbedded((IBinTreeParent)this.Parent?.TreeProperty, this.NameHash, Fnv1a.HashLower(this.MetaClass), properties);
+        }
+
         public override BinTreeProperty BuildProperty()
         {
             uint metaClassHash = Fnv1a.HashLower(this.MetaClass);
 
-            List<BinTreeProperty> properties = new List<BinTreeProperty>();
+            List<BinTreeProperty> properties = new();
             foreach (BinTreePropertyViewModel propertyViewModel in this.Children)
             {
                 properties.Add(propertyViewModel.BuildProperty());

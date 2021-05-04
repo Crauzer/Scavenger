@@ -123,7 +123,7 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeParentViewModel(BinTreeViewModel tree, BinTreeParentViewModel parent, BinTreeProperty treeProperty) : base(parent, treeProperty)
         {
             this._binTree = tree;
-            this._children.CollectionChanged += OnChildrenCollectionChanged;
+            //this._children.CollectionChanged += OnChildrenCollectionChanged;
         }
 
         public void RemoveField(BinTreePropertyViewModel propertyViewModel)

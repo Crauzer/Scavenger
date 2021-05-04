@@ -1,6 +1,7 @@
 ﻿using LeagueToolkit.Helpers.Hashing;
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
+using Newtonsoft.Json;
 using Scavenger.Utilities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeStructureViewModel : BinTreeParentViewModel
     {
-        public string Metadata => $"{this.TreeProperty.Type}<{this.MetaClass}>";
+        [JsonIgnore] public string Metadata => $"{this.TreeProperty.Type}<{this.MetaClass}>";
         public string MetaClass
         {
             get => this._metaClass;
@@ -24,6 +25,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private string _metaClass;
 
+        public BinTreeStructureViewModel() : base(null, null, new BinTreeStructure(null, 0, 0, Enumerable.Empty<BinTreeProperty>())) { }
         public BinTreeStructureViewModel(BinTreeParentViewModel parent, BinTreeStructure treeProperty) : base(parent.BinTree, parent, treeProperty)
         {
             BinTreeStructure structure = (this.TreeProperty as BinTreeStructure);

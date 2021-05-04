@@ -1,18 +1,25 @@
 ﻿using LeagueToolkit.Helpers.Hashing;
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
+using Newtonsoft.Json;
+using Scavenger.MVVM.Commands;
 using Scavenger.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Numerics;
 using System.Text;
+using System.Windows;
+using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreePropertyViewModel : PropertyNotifier
     {
+        [JsonIgnore]
         public virtual string Header { get; set; }
+
         public string Name
         {
             get => this._name;
@@ -52,13 +59,14 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-        private bool _showName;
-        private string _name;
-        private uint _nameHash;
+        [JsonIgnore] private bool _showName;
+        [JsonIgnore] private string _name;
+        [JsonIgnore] private uint _nameHash;
 
-        public BinTreeParentViewModel Parent { get; private set; }
-        public BinTreeProperty TreeProperty { get; private set; }
+        [JsonIgnore] public BinTreeParentViewModel Parent { get; private set; }
+        [JsonIgnore] public BinTreeProperty TreeProperty { get; private set; }
 
+        public BinTreePropertyViewModel() { }
         public BinTreePropertyViewModel(BinTreeParentViewModel parent, BinTreeProperty treeProperty, bool showName = true)
         {
             this.Parent = parent;

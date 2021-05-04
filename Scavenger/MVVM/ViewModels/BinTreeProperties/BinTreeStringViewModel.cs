@@ -5,17 +5,19 @@ using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
 using LeagueToolkit.IO.SimpleSkinFile;
 using LeagueToolkit.IO.StaticObjectFile;
+using Newtonsoft.Json;
 using Scavenger.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows;
 
 namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeStringViewModel : BinTreePropertyViewModel
     {
-        public PreviewViewModel Preview
+        [JsonIgnore] public PreviewViewModel Preview
         {
             get => this._preview;
             set
@@ -61,6 +63,7 @@ namespace Scavenger.MVVM.ViewModels
         private bool _shouldPreviewAsset;
         private string _value;
 
+        public BinTreeStringViewModel() { }
         public BinTreeStringViewModel(BinTreeParentViewModel parent, BinTreeString treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;

@@ -1,11 +1,13 @@
 ﻿using LeagueToolkit.Helpers.Hashing;
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
+using Newtonsoft.Json;
 using Scavenger.MVVM.Commands;
 using Scavenger.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
@@ -13,8 +15,12 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeContainerViewModel : BinTreeParentViewModel
     {
-        public string Metadata => $"{this.TreeProperty.Type}<{(this.TreeProperty as BinTreeContainer).PropertiesType}>";
+        [JsonIgnore] public string Metadata => $"{this.TreeProperty.Type}<{(this.TreeProperty as BinTreeContainer).PropertiesType}>";
 
+        public BinTreeContainerViewModel() : base(null, null, new BinTreeContainer(null, 0, BinPropertyType.None, Enumerable.Empty<BinTreeProperty>()))
+        {
+
+        }
         public BinTreeContainerViewModel(BinTreeParentViewModel parent, BinTreeContainer treeProperty) : base(parent.BinTree, parent, treeProperty)
         {
             int itemIndex = 0;

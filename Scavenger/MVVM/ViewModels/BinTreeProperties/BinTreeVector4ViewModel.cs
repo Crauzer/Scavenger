@@ -78,6 +78,7 @@ namespace Scavenger.MVVM.ViewModels
         private float _z;
         private float _w;
 
+        public BinTreeVector4ViewModel() { }
         public BinTreeVector4ViewModel(BinTreeParentViewModel parent, BinTreeVector4 treeProperty) : base(parent, treeProperty)
         {
             this.SelectedColor = new MediaColor() 

@@ -23,6 +23,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private ushort _value;
 
+        public BinTreeUInt16ViewModel() { }
         public BinTreeUInt16ViewModel(BinTreeParentViewModel parent, BinTreeUInt16 treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;

@@ -29,11 +29,10 @@ namespace Scavenger.MVVM.ViewModels
 
         private BinTreePropertyViewModel _keyProperty;
         private BinTreePropertyViewModel _valueProperty;
-        private KeyValuePair<BinTreeProperty, BinTreeProperty> _pair;
 
+        public BinTreeMapEntryViewModel() { }
         public BinTreeMapEntryViewModel(BinTreeParentViewModel parent, KeyValuePair<BinTreeProperty, BinTreeProperty> pair) : base(parent, null)
         {
-            this._pair = pair;
             this.KeyProperty = BinTreeUtilities.ConstructTreePropertyViewModel(parent, pair.Key);
             this.ValueProperty = BinTreeUtilities.ConstructTreePropertyViewModel(parent, pair.Value);
 

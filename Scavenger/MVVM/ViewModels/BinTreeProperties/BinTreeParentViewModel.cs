@@ -1,4 +1,5 @@
 ﻿using LeagueToolkit.IO.PropertyBin;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeParentViewModel : BinTreePropertyViewModel
     {
-        public string PropertyFilter
+        [JsonIgnore] public string PropertyFilter
         {
             get => this._propertyFilter;
             set
@@ -51,7 +52,7 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
-        public string TextValueFilter
+        [JsonIgnore] public string TextValueFilter
         {
             get => this._textValueFilter;
             set
@@ -99,7 +100,7 @@ namespace Scavenger.MVVM.ViewModels
                 }
             }
         }
-        public BinTreeViewModel BinTree => this._binTree;
+        [JsonIgnore] public BinTreeViewModel BinTree => this._binTree;
         public ObservableCollection<BinTreePropertyViewModel> Children
         {
             get => this._children;

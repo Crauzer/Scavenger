@@ -18,11 +18,13 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        
         public sbyte MaxValue => sbyte.MaxValue;
         public sbyte MinValue => sbyte.MinValue;
 
         private sbyte _value;
 
+        public BinTreeSByteViewModel() { }
         public BinTreeSByteViewModel(BinTreeParentViewModel parent, BinTreeSByte treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;

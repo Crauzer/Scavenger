@@ -178,6 +178,7 @@ namespace Scavenger.MVVM.ViewModels
         private float _m43;
         private float _m44;
 
+        public BinTreeMatrix44ViewModel() { }
         public BinTreeMatrix44ViewModel(BinTreeParentViewModel parent, BinTreeMatrix44 treeProperty) : base(parent, treeProperty)
         {
             this.M11 = treeProperty.Value.M11;

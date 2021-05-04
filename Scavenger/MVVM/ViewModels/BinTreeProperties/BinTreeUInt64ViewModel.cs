@@ -23,6 +23,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private ulong _value;
 
+        public BinTreeUInt64ViewModel() { }
         public BinTreeUInt64ViewModel(BinTreeParentViewModel parent, BinTreeUInt64 treeProperty) : base(parent, treeProperty)
         {
             this.Value = treeProperty.Value;

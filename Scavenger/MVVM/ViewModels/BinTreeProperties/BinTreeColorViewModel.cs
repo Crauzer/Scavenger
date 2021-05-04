@@ -11,20 +11,6 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeColorViewModel : BinTreePropertyViewModel
     {
-        public MediaColor SelectedColor
-        {
-            get => this._selectedColor;
-            set
-            {
-                this._selectedColor = value;
-                this.R = value.R / 255f;
-                this.G = value.G / 255f;
-                this.B = value.B / 255f;
-                this.A = value.A / 255f;
-
-                NotifyPropertyChanged();
-            }
-        }
         public float R
         {
             get => this._r;
@@ -62,12 +48,12 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-        private MediaColor _selectedColor;
         private float _r;
         private float _g;
         private float _b;
         private float _a;
 
+        public BinTreeColorViewModel() { }
         public BinTreeColorViewModel(BinTreeParentViewModel parent, BinTreeColor treeProperty) : base(parent, treeProperty)
         {
             this.SelectedColor = new MediaColor()

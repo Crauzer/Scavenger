@@ -19,6 +19,7 @@ namespace Scavenger.MVVM.ViewModels
 
         private string _value;
 
+        public BinTreeObjectLinkViewModel() { }
         public BinTreeObjectLinkViewModel(BinTreeParentViewModel parent, BinTreeObjectLink treeProperty) : base(parent, treeProperty)
         {
             this.Value = Hashtables.GetObject(treeProperty.Value);

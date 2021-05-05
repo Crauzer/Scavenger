@@ -11,6 +11,8 @@ using System.Windows.Input;
 using Scavenger.MVVM.Commands;
 using Scavenger.Utilities;
 using Scavenger.IO.Templates;
+using System.Reflection;
+using LeagueToolkit.Meta.Classes;
 
 namespace Scavenger.MVVM.ViewModels
 {
@@ -94,6 +96,7 @@ namespace Scavenger.MVVM.ViewModels
             this._structureTemplates = structureTemplates;
 
             GenerateObjects();
+            Lint();
         }
 
         private void GenerateObjects()
@@ -104,6 +107,16 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
     
+        private void Lint()
+        {
+            Assembly metaAssembly = Assembly.GetAssembly(typeof(ValueVector3));
+
+            foreach (BinTreeObjectViewModel treeObject in this.Objects)
+            {
+                treeObject.Lint(metaAssembly, null);
+            }
+        }
+
         private async void OnAddObject(object o)
         {
             NewBinTreeObjectViewModel newObjectViewModel = await DialogHelper.ShowNewBinTreeObjectDialog(this.StructureTemplates);
@@ -126,5 +139,12 @@ namespace Scavenger.MVVM.ViewModels
 
             return binTree;
         }
+    }
+
+    public enum LintStatus
+    {
+        None,
+        Warning,
+        Valid
     }
 }

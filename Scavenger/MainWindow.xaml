@@ -101,6 +101,25 @@
         <DataTemplate x:Key="BinTreeBoolTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="CheckboxMarkedOutline"/>
                     </Border>
@@ -150,6 +169,25 @@
         <DataTemplate x:Key="BinTreeNumberTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="10">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="Counter"/>
                     </Border>
@@ -204,6 +242,25 @@
         <DataTemplate x:Key="BinTreeVector2Template">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="10">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="VectorPolyline"/>
                     </Border>
@@ -261,6 +318,25 @@
         <DataTemplate x:Key="BinTreeVector3Template">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="10">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="VectorPolyline"/>
                     </Border>
@@ -324,6 +400,25 @@
         <DataTemplate x:Key="BinTreeVector4Template">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="10">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="VectorPolyline"/>
                     </Border>
@@ -404,6 +499,25 @@
         <DataTemplate x:Key="BinTreeStringTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="Link"/>
                     </Border>
@@ -485,6 +599,25 @@
         <DataTemplate x:Key="BinTreeObjectLinkTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="Link"/>
                     </Border>
@@ -534,6 +667,25 @@
         <DataTemplate x:Key="BinTreeWadEntryLinkTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="Link"/>
                     </Border>
@@ -583,6 +735,25 @@
         <DataTemplate x:Key="BinTreeHashTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="Link"/>
                     </Border>
@@ -632,6 +803,25 @@
         <DataTemplate x:Key="BinTreeColorTemplate">
             <MaterialDesign:ColorZone Mode="Dark" MaterialDesign:ShadowAssist.ShadowDepth="Depth1">
                 <StackPanel Orientation="Horizontal" Margin="10">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border Margin="5,0,10,0" VerticalAlignment="Center">
                         <MaterialDesign:PackIcon Kind="Palette"/>
                     </Border>
@@ -689,6 +879,25 @@
                               Margin="5">
                     <TreeViewItem.Header>
                         <StackPanel Orientation="Horizontal">
+                            <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                                <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <MaterialDesign:PackIcon.Style>
+                                        <Style TargetType="MaterialDesign:PackIcon">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                                    <Setter Property="Kind" Value="AlertCircle"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                                    <Setter Property="Kind" Value="Check"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </MaterialDesign:PackIcon.Style>
+                                </MaterialDesign:PackIcon>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" Margin="10,0">
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                            </StackPanel>
                             <Border VerticalAlignment="Center">
                                 <MaterialDesign:PackIcon Kind="FormatListText" Margin="0,0,15,0"/>
                             </Border>
@@ -749,6 +958,25 @@
                               ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
                     <TreeViewItem.Header>
                         <StackPanel Orientation="Horizontal">
+                            <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                                <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <MaterialDesign:PackIcon.Style>
+                                        <Style TargetType="MaterialDesign:PackIcon">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                                    <Setter Property="Kind" Value="AlertCircle"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                                    <Setter Property="Kind" Value="Check"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </MaterialDesign:PackIcon.Style>
+                                </MaterialDesign:PackIcon>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" Margin="10,0">
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                            </StackPanel>
                             <Border VerticalAlignment="Center" Margin="0,0,15,0">
                                 <MaterialDesign:PackIcon Kind="FormatListNumbered"/>
                             </Border>
@@ -800,6 +1028,25 @@
                               VirtualizingStackPanel.IsVirtualizing="True">
                     <TreeViewItem.Header>
                         <StackPanel Orientation="Horizontal">
+                            <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                                <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <MaterialDesign:PackIcon.Style>
+                                        <Style TargetType="MaterialDesign:PackIcon">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                                    <Setter Property="Kind" Value="AlertCircle"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                                    <Setter Property="Kind" Value="Check"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </MaterialDesign:PackIcon.Style>
+                                </MaterialDesign:PackIcon>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" Margin="10,0">
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                            </StackPanel>
                             <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                                      Style="{StaticResource MaterialDesignFilledTextBox}"
                                      MinWidth="250"
@@ -869,6 +1116,25 @@
                 <TreeViewItem ItemsSource="{Binding Children}" ItemTemplateSelector="{StaticResource BinPropertyTemplateSelector}">
                     <TreeViewItem.Header>
                         <StackPanel Orientation="Horizontal">
+                            <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                                <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <MaterialDesign:PackIcon.Style>
+                                        <Style TargetType="MaterialDesign:PackIcon">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                                    <Setter Property="Kind" Value="AlertCircle"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                                    <Setter Property="Kind" Value="Check"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </MaterialDesign:PackIcon.Style>
+                                </MaterialDesign:PackIcon>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" Margin="10,0">
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                            </StackPanel>
                             <Border VerticalAlignment="Center">
                                 <MaterialDesign:PackIcon Kind="CheckboxMultipleBlankOutline"/>
                             </Border>
@@ -914,6 +1180,25 @@
         <DataTemplate x:Key="BinTreeMatrix44Template">
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2">
                 <StackPanel Orientation="Horizontal" Margin="10">
+                    <Border VerticalAlignment="Center" Margin="10,0,0,0">
+                        <MaterialDesign:PackIcon Visibility="{Binding ShowName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <MaterialDesign:PackIcon.Style>
+                                <Style TargetType="MaterialDesign:PackIcon">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
+                                            <Setter Property="Kind" Value="AlertCircle"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
+                                            <Setter Property="Kind" Value="Check"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MaterialDesign:PackIcon.Style>
+                        </MaterialDesign:PackIcon>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                    </StackPanel>
                     <Border VerticalAlignment="Center" Margin="5,0,10,0">
                         <MaterialDesign:PackIcon Kind="Matrix"/>
                     </Border>

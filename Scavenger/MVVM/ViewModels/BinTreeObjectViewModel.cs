@@ -46,7 +46,6 @@ namespace Scavenger.MVVM.ViewModels
         {
             this.TreeObject = BuildObject();
         }
-
         public BinTreeObject BuildObject()
         {
             List<BinTreeProperty> properties = new List<BinTreeProperty>();

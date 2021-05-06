@@ -29,16 +29,14 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeUnorderedContainerViewModel() : base(null, null, new BinTreeUnorderedContainer(null, 0, BinPropertyType.None, Enumerable.Empty<BinTreeProperty>())) { }
         public BinTreeUnorderedContainerViewModel(BinTreeParentViewModel parent, BinTreeUnorderedContainer treeProperty) : base(parent.BinTree, parent, treeProperty)
         {
-            int itemIndex = 0;
+            this.PropertiesType = treeProperty.PropertiesType;
+
             foreach (BinTreeProperty genericProperty in treeProperty.Properties)
             {
                 BinTreePropertyViewModel propertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty);
-                propertyViewModel.Name = itemIndex.ToString();
                 propertyViewModel.ShowName = false;
 
                 this.Children.Add(propertyViewModel);
-
-                itemIndex++;
             }
 
             this.Children.CollectionChanged += OnChildrenCollectionChanged;

@@ -37,7 +37,7 @@ namespace Scavenger.MVVM.ViewModels
                             }
                             else
                             {
-                                bool thisNameMatches = Regex.IsMatch(this.Name, value) is false;
+                                bool thisNameMatches = Regex.IsMatch(this.Name, value);
                                 if (parent.Find(x => Regex.IsMatch(x.Name, value)) == null
                                 && thisNameMatches is false)
                                 {

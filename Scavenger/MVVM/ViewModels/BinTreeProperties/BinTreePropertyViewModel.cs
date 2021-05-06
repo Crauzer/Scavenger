@@ -144,6 +144,25 @@ namespace Scavenger.MVVM.ViewModels
 
                     break;
                 }
+                case BinTreeMapViewModel map:
+                {
+                    map.LintChildren(metaAssembly, null);
+
+                    break;
+                }
+                case BinTreeMapEntryViewModel mapEntry:
+                {
+                    mapEntry.KeyProperty.Lint(metaAssembly, null);
+                    mapEntry.ValueProperty.Lint(metaAssembly, null);
+
+                    if(mapEntry.KeyProperty.LintStatus == LintStatus.Warning 
+                        || mapEntry.ValueProperty.LintStatus == LintStatus.Warning)
+                    {
+                        mapEntry.LintStatus = LintStatus.Warning;
+                    }
+
+                    break;
+                }
                 case BinTreePropertyViewModel:
                 {
                     if(parentMetaClassType is null)

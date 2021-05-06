@@ -18,21 +18,23 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class MainWindowViewModel : PropertyNotifier
     {
-        public ObservableCollection<BinTreeViewModel> BinTrees
-        {
-            get => this._binTrees;
-            set
-            {
-                this._binTrees = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public bool IsBinTreeSelected => this.SelectedBinTree is not null;
         public BinTreeViewModel SelectedBinTree
         {
             get => this._selectedBinTree;
             set
             {
                 this._selectedBinTree = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(this.IsBinTreeSelected));
+            }
+        }
+        public ObservableCollection<BinTreeViewModel> BinTrees
+        {
+            get => this._binTrees;
+            set
+            {
+                this._binTrees = value;
                 NotifyPropertyChanged();
             }
         }
@@ -64,9 +66,9 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
+        private BinTreeViewModel _selectedBinTree;
         private ObservableCollection<BinTreeViewModel> _binTrees = new();
         private ObservableCollection<StructureTemplate> _structureTemplates = new();
-        private BinTreeViewModel _selectedBinTree;
         private bool _isGloballyEnabled = true;
         private InfobarViewModel _infobar = new();
 
@@ -103,9 +105,7 @@ namespace Scavenger.MVVM.ViewModels
             this.BinTrees.Add(binTreeViewModel);
             this.SelectedBinTree = binTreeViewModel;
 
-            this.Infobar.Message = "";
-            this.Infobar.IsProgressIndefinite = false;
-            this.Infobar.Progress = 100;
+            this.Infobar.Reset();
             this.IsGloballyEnabled = true;
             
             Task<BinTreeViewModel> CreateBinTreeViewModel()
@@ -134,9 +134,7 @@ namespace Scavenger.MVVM.ViewModels
             await SyncHashtable(Hashtables.TYPES_FILE, "TypesHashtableChecksum", binTypesContent);
             await SyncHashtable(Hashtables.WAD_ENTRIES_FILE, "WadEntriesHashtableChecksum", wadEntriesContent);
 
-            this.Infobar.Message = "";
-            this.Infobar.IsProgressIndefinite = false;
-            this.Infobar.Progress = 100;
+            this.Infobar.Reset();
             this.IsGloballyEnabled = true;
 
             async Task SyncHashtable(string filePath, string configChecksumPath, RepositoryContent repositoryContent)

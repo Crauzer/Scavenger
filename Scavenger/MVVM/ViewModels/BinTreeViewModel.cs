@@ -88,8 +88,6 @@ namespace Scavenger.MVVM.ViewModels
         private ObservableCollection<BinTreeObjectViewModel> _objects = new ObservableCollection<BinTreeObjectViewModel>();
         private ObservableCollection<StructureTemplate> _structureTemplates;
 
-        private object _objectsLock = new object();
-
         public ICommand AddObjectCommand => new RelayCommand(OnAddObject);
 
         public BinTreeViewModel(string binPath, BinTree binTree, ObservableCollection<StructureTemplate> structureTemplates)
@@ -104,15 +102,10 @@ namespace Scavenger.MVVM.ViewModels
 
         private void GenerateObjects()
         {
-            Parallel.ForEach(this._tree.Objects, treeObject =>
+            foreach(BinTreeObject treeObject in this._tree.Objects)
             {
-                BinTreeObjectViewModel objectViewModel = new BinTreeObjectViewModel(this, treeObject);
-
-                lock (this._objectsLock)
-                {
-                    this.Objects.Add(objectViewModel);
-                }
-            });
+                this.Objects.Add(new BinTreeObjectViewModel(this, treeObject));
+            }
         }
     
         public void Lint()

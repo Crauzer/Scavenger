@@ -156,21 +156,15 @@ namespace Scavenger.MVVM.ViewModels
         protected void OnChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             Assembly metaAssembly = Assembly.GetAssembly(typeof(ValueVector3));
-            TypeInfo metaClassType = FindMetaClassType(metaAssembly);
+            TypeInfo parentMetaClassType = this.Parent?.FindMetaClassType(metaAssembly);
 
             if (e.Action is NotifyCollectionChangedAction.Add)
             {
-                IEnumerable<BinTreePropertyViewModel> newProperties = e.NewItems.Cast<BinTreePropertyViewModel>();
-                foreach (BinTreePropertyViewModel newProperty in newProperties)
-                {
-                    newProperty.Lint(metaAssembly, metaClassType);
-
-                    if (newProperty.LintStatus == LintStatus.Warning) this.LintStatus = LintStatus.Warning;
-                }
+                Lint(metaAssembly, parentMetaClassType);
             }
             else if (e.Action is NotifyCollectionChangedAction.Remove)
             {
-                Lint(metaAssembly, metaClassType);
+                Lint(metaAssembly, parentMetaClassType);
             }
         }
 

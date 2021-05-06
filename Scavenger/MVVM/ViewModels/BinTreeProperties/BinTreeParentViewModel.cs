@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Data;
 
@@ -156,6 +157,16 @@ namespace Scavenger.MVVM.ViewModels
                         break;
                     }
                 }
+            }
+        }
+
+        public void LintChildren(Assembly metaAssembly, TypeInfo parentMetaClassType)
+        {
+            foreach (BinTreePropertyViewModel property in this.Children)
+            {
+                property.Lint(metaAssembly, parentMetaClassType);
+
+                if (property.LintStatus == LintStatus.Warning) this.LintStatus = LintStatus.Warning;
             }
         }
 

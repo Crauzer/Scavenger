@@ -33,8 +33,8 @@ namespace Scavenger.MVVM.ViewModels
         {
             this.BinTree = tree;
             this.TreeObject = treeObject;
-            this.Name = Hashtables.GetObject(treeObject.PathHash);
-            this.MetaClass = Hashtables.GetType(treeObject.MetaClassHash);
+            this._name = Hashtables.GetObject(treeObject.PathHash);
+            this._metaClass = Hashtables.GetType(treeObject.MetaClassHash);
 
             foreach(BinTreeProperty genericProperty in treeObject.Properties)
             {

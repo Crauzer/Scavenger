@@ -37,16 +37,12 @@ namespace Scavenger.MVVM.ViewModels
         {
             this.PropertiesType = treeProperty.PropertiesType;
 
-            int itemIndex = 0;
             foreach (BinTreeProperty genericProperty in treeProperty.Properties)
             {
                 BinTreePropertyViewModel propertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty);
-                propertyViewModel.Name = itemIndex.ToString();
                 propertyViewModel.ShowName = false;
 
                 this.Children.Add(propertyViewModel);
-
-                itemIndex++;
             }
 
             this.Children.CollectionChanged += OnChildrenCollectionChanged;

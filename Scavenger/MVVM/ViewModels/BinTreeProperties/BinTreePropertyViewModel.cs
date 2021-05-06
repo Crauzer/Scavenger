@@ -44,6 +44,11 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(this.Header));
                 NotifyPropertyChanged(nameof(this.NameHash));
+
+                Assembly metaAssembly = Assembly.GetAssembly(typeof(ValueVector3));
+                TypeInfo parentParentMetaClassType = this.Parent?.Parent?.FindMetaClassType(metaAssembly);
+
+                this.Parent?.Lint(metaAssembly, parentParentMetaClassType);
             }
         }
         public uint NameHash
@@ -72,10 +77,10 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
 
-        private LintStatus _lintStatus = LintStatus.None;
-        private bool _showName;
-        private string _name;
-        private uint _nameHash;
+        protected LintStatus _lintStatus = LintStatus.None;
+        protected bool _showName;
+        protected string _name;
+        protected uint _nameHash;
 
         [JsonIgnore] public BinTreeParentViewModel Parent { get; set; }
         [JsonIgnore] public BinTreeProperty TreeProperty { get; set; }
@@ -226,7 +231,7 @@ namespace Scavenger.MVVM.ViewModels
 
             return FindMetaClassType(metaAssembly, metaClassHash);
         }
-        private TypeInfo FindMetaClassType(Assembly metaAssembly, uint metaClassHash)
+        protected TypeInfo FindMetaClassType(Assembly metaAssembly, uint metaClassHash)
         {
             foreach (TypeInfo typeInfo in metaAssembly.DefinedTypes)
             {

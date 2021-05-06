@@ -96,17 +96,10 @@ namespace Scavenger.MVVM.ViewModels
 
         public async Task LoadBinTree(string binPath, BinTree binTree)
         {
-            this.Infobar.Message = "Loading BIN Tree...";
-            this.Infobar.IsProgressIndefinite = true;
-            this.IsGloballyEnabled = false;
-
             BinTreeViewModel binTreeViewModel = await CreateBinTreeViewModel();
 
             this.BinTrees.Add(binTreeViewModel);
             this.SelectedBinTree = binTreeViewModel;
-
-            this.Infobar.Reset();
-            this.IsGloballyEnabled = true;
             
             Task<BinTreeViewModel> CreateBinTreeViewModel()
             {

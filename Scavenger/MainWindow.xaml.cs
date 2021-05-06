@@ -80,9 +80,6 @@ namespace Scavenger
                 catch(Exception exception)
                 {
                     await DialogHelper.ShowMessgeDialog($"Failed to load BIN Tree\n{exception}");
-
-                    this.ViewModel.Infobar.Reset();
-                    this.ViewModel.IsGloballyEnabled = true;
                 }
             }
         }

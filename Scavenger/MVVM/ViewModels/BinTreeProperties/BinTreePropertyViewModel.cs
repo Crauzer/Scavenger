@@ -91,37 +91,24 @@ namespace Scavenger.MVVM.ViewModels
 
         public void Lint(Assembly metaAssembly, TypeInfo parentMetaClassType)
         {
+            this.LintStatus = VerifyProperty(metaAssembly, parentMetaClassType);
+
             switch (this)
             {
                 case BinTreeObjectViewModel treeObject:
                 {
-                    if (FindMetaClassType(Fnv1a.HashLower(treeObject.MetaClass)) is TypeInfo treeObjectMetaClassType)
+                    if (FindMetaClassType(metaAssembly, Fnv1a.HashLower(treeObject.MetaClass)) is TypeInfo treeObjectMetaClassType)
                     {
-                        this.LintStatus = LintStatus.Valid;
-
-                        foreach (BinTreePropertyViewModel property in treeObject.Children)
-                        {
-                            property.Lint(metaAssembly, treeObjectMetaClassType);
-
-                            if (property.LintStatus == LintStatus.Warning) this.LintStatus = LintStatus.Warning;
-                        }
+                        treeObject.LintChildren(metaAssembly, treeObjectMetaClassType);
                     }
 
                     return;
                 }
                 case BinTreeStructureViewModel structure:
                 {
-                    if (FindPropertyInfo(parentMetaClassType) is not null
-                        && FindMetaClassType(Fnv1a.HashLower(structure.MetaClass)) is TypeInfo structureMetaClassType)
+                    if (FindMetaClassType(metaAssembly, Fnv1a.HashLower(structure.MetaClass)) is TypeInfo structureMetaClassType)
                     {
-                        this.LintStatus = LintStatus.Valid;
-
-                        foreach (BinTreePropertyViewModel property in structure.Children)
-                        {
-                            property.Lint(metaAssembly, structureMetaClassType);
-
-                            if (property.LintStatus == LintStatus.Warning) this.LintStatus = LintStatus.Warning;
-                        }
+                        structure.LintChildren(metaAssembly, structureMetaClassType);
                     }
                     else this.LintStatus = LintStatus.Warning;
 
@@ -129,27 +116,42 @@ namespace Scavenger.MVVM.ViewModels
                 }
                 case BinTreeEmbeddedViewModel embedded:
                 {
-                    if (embedded.Name == "loadscreen") { 
-                    }
-
-                    if (FindPropertyInfo(parentMetaClassType) is not null
-                        && FindMetaClassType(Fnv1a.HashLower(embedded.MetaClass)) is TypeInfo embeddedMetaClassType)
+                    if (FindMetaClassType(metaAssembly, Fnv1a.HashLower(embedded.MetaClass)) is TypeInfo embeddedMetaClassType)
                     {
-                        this.LintStatus = LintStatus.Valid;
-
-                        foreach (BinTreePropertyViewModel property in embedded.Children)
-                        {
-                            property.Lint(metaAssembly, embeddedMetaClassType);
-
-                            if (property.LintStatus == LintStatus.Warning) this.LintStatus = LintStatus.Warning;
-                        }
+                        embedded.LintChildren(metaAssembly, embeddedMetaClassType);
                     }
                     else this.LintStatus = LintStatus.Warning;
 
                     return;
                 }
+                case BinTreeContainerViewModel container:
+                {
+                    if (FindPropertyInfo(parentMetaClassType) is not null)
+                    {
+                        container.LintChildren(metaAssembly, null);
+                    }
+                    else this.LintStatus = LintStatus.Warning;
+
+                    break;
+                }
+                case BinTreeUnorderedContainerViewModel unorderedContainer:
+                {
+                    if (FindPropertyInfo(parentMetaClassType) is not null)
+                    {
+                        unorderedContainer.LintChildren(metaAssembly, null);
+                    }
+                    else this.LintStatus = LintStatus.Warning;
+
+                    break;
+                }
                 case BinTreePropertyViewModel:
                 {
+                    if(parentMetaClassType is null)
+                    {
+                        this.LintStatus = LintStatus.Valid;
+                        return;
+                    }
+
                     foreach (PropertyInfo propertyInfo in parentMetaClassType.GetProperties())
                     {
                         MetaPropertyAttribute metaPropertyAttribute = propertyInfo.GetCustomAttribute(typeof(MetaPropertyAttribute)) as MetaPropertyAttribute;
@@ -164,38 +166,50 @@ namespace Scavenger.MVVM.ViewModels
                     break;
                 }
             }
-
-            this.LintStatus = LintStatus.Warning;
-
-            PropertyInfo FindPropertyInfo(TypeInfo parentMetaClassType)
+        }
+        private LintStatus VerifyProperty(Assembly metaAssembly, TypeInfo parentMetaClassType)
+        {
+            if(parentMetaClassType is null)
             {
-                foreach (PropertyInfo propertyInfo in parentMetaClassType.GetProperties())
+                return LintStatus.Valid;
+            }
+            else if(FindPropertyInfo(parentMetaClassType) is not null)
+            {
+                return LintStatus.Valid;
+            }
+            else
+            {
+                return LintStatus.Warning;
+            }
+        }
+        private PropertyInfo FindPropertyInfo(TypeInfo parentMetaClassType)
+        {
+            foreach (PropertyInfo propertyInfo in parentMetaClassType.GetProperties())
+            {
+                MetaPropertyAttribute metaPropertyAttribute = propertyInfo.GetCustomAttribute(typeof(MetaPropertyAttribute)) as MetaPropertyAttribute;
+                if (metaPropertyAttribute.NameHash == this.NameHash)
                 {
-                    MetaPropertyAttribute metaPropertyAttribute = propertyInfo.GetCustomAttribute(typeof(MetaPropertyAttribute)) as MetaPropertyAttribute;
-                    if (metaPropertyAttribute.NameHash == this.NameHash)
+                    return propertyInfo;
+                }
+            }
+
+            return null;
+        }
+        private TypeInfo FindMetaClassType(Assembly metaAssembly, uint metaClassHash)
+        {
+            foreach (TypeInfo typeInfo in metaAssembly.DefinedTypes)
+            {
+                if (typeInfo.GetInterface(nameof(IMetaClass)) is not null)
+                {
+                    MetaClassAttribute metaPropertyAttribute = typeInfo.GetCustomAttribute(typeof(MetaClassAttribute)) as MetaClassAttribute;
+                    if (metaPropertyAttribute.NameHash == metaClassHash)
                     {
-                        return propertyInfo;
+                        return typeInfo;
                     }
                 }
-
-                return null;
             }
-            TypeInfo FindMetaClassType(uint metaClassHash)
-            {
-                foreach (TypeInfo typeInfo in metaAssembly.DefinedTypes)
-                {
-                    if (typeInfo.GetInterface(nameof(IMetaClass)) is not null)
-                    {
-                        MetaClassAttribute metaPropertyAttribute = typeInfo.GetCustomAttribute(typeof(MetaClassAttribute)) as MetaClassAttribute;
-                        if (metaPropertyAttribute.NameHash == metaClassHash)
-                        {
-                            return typeInfo;
-                        }
-                    }
-                }
 
-                return null;
-            }
+            return null;
         }
 
         public virtual BinTreeProperty BuildProperty()

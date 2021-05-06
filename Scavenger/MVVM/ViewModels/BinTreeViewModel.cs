@@ -13,6 +13,7 @@ using Scavenger.Utilities;
 using Scavenger.IO.Templates;
 using System.Reflection;
 using LeagueToolkit.Meta.Classes;
+using System.Threading.Tasks;
 
 namespace Scavenger.MVVM.ViewModels
 {
@@ -87,6 +88,8 @@ namespace Scavenger.MVVM.ViewModels
         private ObservableCollection<BinTreeObjectViewModel> _objects = new ObservableCollection<BinTreeObjectViewModel>();
         private ObservableCollection<StructureTemplate> _structureTemplates;
 
+        private object _objectsLock = new object();
+
         public ICommand AddObjectCommand => new RelayCommand(OnAddObject);
 
         public BinTreeViewModel(string binPath, BinTree binTree, ObservableCollection<StructureTemplate> structureTemplates)
@@ -101,20 +104,25 @@ namespace Scavenger.MVVM.ViewModels
 
         private void GenerateObjects()
         {
-            foreach(BinTreeObject treeObject in this._tree.Objects)
+            Parallel.ForEach(this._tree.Objects, treeObject =>
             {
-                this.Objects.Add(new BinTreeObjectViewModel(this, treeObject));
-            }
+                BinTreeObjectViewModel objectViewModel = new BinTreeObjectViewModel(this, treeObject);
+
+                lock (this._objectsLock)
+                {
+                    this.Objects.Add(objectViewModel);
+                }
+            });
         }
     
         public void Lint()
         {
             Assembly metaAssembly = Assembly.GetAssembly(typeof(ValueVector3));
 
-            foreach (BinTreeObjectViewModel treeObject in this.Objects)
+            Parallel.ForEach(this.Objects, treeObject =>
             {
                 treeObject.Lint(metaAssembly, null);
-            }
+            });
         }
 
         private async void OnAddObject(object o)

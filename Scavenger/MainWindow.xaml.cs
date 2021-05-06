@@ -54,7 +54,13 @@ namespace Scavenger
             {
                 await this.ViewModel.UpdateHashtables();
             }
-            catch (Exception exception) { await DialogHelper.ShowMessgeDialog($"Failed to update Hashtables\n{exception}"); }
+            catch (Exception exception) 
+            { 
+                await DialogHelper.ShowMessgeDialog($"Failed to update Hashtables\n{exception}");
+
+                this.ViewModel.Infobar.Reset();
+                this.ViewModel.IsGloballyEnabled = true;
+            }
 
             Hashtables.Load();
         }
@@ -74,6 +80,9 @@ namespace Scavenger
                 catch(Exception exception)
                 {
                     await DialogHelper.ShowMessgeDialog($"Failed to load BIN Tree\n{exception}");
+
+                    this.ViewModel.Infobar.Reset();
+                    this.ViewModel.IsGloballyEnabled = true;
                 }
             }
         }
@@ -92,6 +101,9 @@ namespace Scavenger
                 catch(Exception exception)
                 {
                     await DialogHelper.ShowMessgeDialog($"Failed to save BIN Tree\n{exception}");
+
+                    this.ViewModel.Infobar.Reset();
+                    this.ViewModel.IsGloballyEnabled = true;
                 }
             }
         }

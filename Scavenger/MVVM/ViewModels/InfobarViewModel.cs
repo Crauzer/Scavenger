@@ -33,5 +33,12 @@
         private string _message;
         private double _progress;
         private bool _isProgressIndefinite;
+
+        public void Reset()
+        {
+            this.Message = "";
+            this.Progress = 100;
+            this.IsProgressIndefinite = false;
+        }
     }
 }

@@ -17,3 +17,9 @@
     Tool for editing BIN files from League of Legends
   </p>
 </p>
+
+# Introduction Video
+[![](https://user-images.githubusercontent.com/18646077/117344255-7888cc00-aea5-11eb-835d-e47a47b82915.png)](https://www.youtube.com/watch?v=mARgAPa-87o)
+
+
+

@@ -52,6 +52,7 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
         public string Name
         {
             get => this._name;
@@ -70,6 +71,16 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
+        public bool IsMetaClassRequired
+        {
+            get => this._isMetaClassRequired;
+            set
+            {
+                this._isMetaClassRequired = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public BinPropertyType PropertyType
         {
             get => this._propertyType;
@@ -77,6 +88,26 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._propertyType = value;
                 NotifyPropertyChanged();
+
+                this.IsMetaClassRequired = value switch
+                {
+                    BinPropertyType.Structure => true,
+                    BinPropertyType.Embedded => true,
+                    _ => false,
+                };
+                this.IsPrimaryTypeRequired = value switch
+                {
+                    BinPropertyType.Container => true,
+                    BinPropertyType.UnorderedContainer => true,
+                    BinPropertyType.Optional => true,
+                    BinPropertyType.Map => true,
+                    _ => false,
+                };
+                this.IsSecondaryTypeRequired = value switch
+                {
+                    BinPropertyType.Map => true,
+                    _ => false,
+                };
             }
         }
         public BinPropertyType PrimaryType
@@ -94,6 +125,25 @@ namespace Scavenger.MVVM.ViewModels
             set
             {
                 this._secondaryType = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool IsPrimaryTypeRequired
+        {
+            get => this._isPrimaryTypeRequired;
+            set
+            {
+                this._isPrimaryTypeRequired = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public bool IsSecondaryTypeRequired
+        {
+            get => this._isSecondaryTypeRequired;
+            set
+            {
+                this._isSecondaryTypeRequired = value;
                 NotifyPropertyChanged();
             }
         }
@@ -120,13 +170,20 @@ namespace Scavenger.MVVM.ViewModels
 
         private bool _IsStructureTemplateSelectable = true;
         private StructureTemplate _structureTemplate;
+        
         private string _name = string.Empty;
         private string _metaClass = string.Empty;
+        private bool _isMetaClassRequired;
+
         private IEnumerable<BinPropertyType> _propertyTypes;
         private IEnumerable<BinPropertyType> _types;
+        
         private BinPropertyType _propertyType;
         private BinPropertyType _primaryType;
         private BinPropertyType _secondaryType;
+
+        private bool _isPrimaryTypeRequired;
+        private bool _isSecondaryTypeRequired;
 
         public NewBinPropertyViewModel(ICollection<StructureTemplate> structureTemplates, ICollection<BinPropertyType> restirctToTypes = null)
         {

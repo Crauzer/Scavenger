@@ -25,7 +25,9 @@
                       VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="300"
                       ItemsSource="{Binding StructureTemplates, UpdateSourceTrigger=PropertyChanged}"
                       MaterialDesign:HintAssist.HelperText="Structure Template"
-                      Visibility="{Binding IsStructureTemplateSelectable, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}">
+                      Visibility="{Binding IsStructureTemplateSelectable, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"
+                      Style="{StaticResource MaterialDesignFilledComboBox}"
+                      Margin="15">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding TemplateName}"/>
@@ -37,7 +39,8 @@
                      MaterialDesign:HintAssist.HelperText="Name"/>
             <TextBox Text="{Binding MetaClass, UpdateSourceTrigger=PropertyChanged}"
                      Margin="15"
-                     MaterialDesign:HintAssist.HelperText="Meta Class (Structure/Embedded)"/>
+                     MaterialDesign:HintAssist.HelperText="Meta Class (Structure/Embedded)"
+                     Visibility="{Binding IsMetaClassRequired, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <ComboBox Margin="15"
                       VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"
                       SelectedValue="{Binding PropertyType, UpdateSourceTrigger=PropertyChanged}"
@@ -47,12 +50,14 @@
                       VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"
                       SelectedValue="{Binding PrimaryType, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Types, UpdateSourceTrigger=PropertyChanged}"
-                      MaterialDesign:HintAssist.HelperText="Primary/Key Type"/>
+                      MaterialDesign:HintAssist.HelperText="Primary/Key Type"
+                      Visibility="{Binding IsPrimaryTypeRequired, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <ComboBox Margin="15"
                       VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"
                       SelectedValue="{Binding SecondaryType, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Types, UpdateSourceTrigger=PropertyChanged}"
-                      MaterialDesign:HintAssist.HelperText="Secondary/Value Type"/>
+                      MaterialDesign:HintAssist.HelperText="Secondary/Value Type"
+                      Visibility="{Binding IsSecondaryTypeRequired, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <DockPanel Margin="15">
                 <Button Content="Ok" DockPanel.Dock="Left" Width="100" Margin="10"
                         Command="{x:Static MaterialDesign:DialogHost.CloseDialogCommand}">

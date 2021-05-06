@@ -124,7 +124,7 @@ namespace Scavenger
             if (e.Source is FrameworkElement frameworkElement &&
                 frameworkElement.DataContext is BinTreeObjectViewModel objectViewModel)
             {
-                NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(null);
+                NewBinPropertyViewModel dialogViewModel = await DialogHelper.ShowNewBinPropertyDialog(this.ViewModel.StructureTemplates);
                 if (dialogViewModel is not null)
                 {
                     BinTreeProperty newProperty = dialogViewModel.BuildProperty(objectViewModel.TreeObject);

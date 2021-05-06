@@ -23,34 +23,47 @@ namespace Scavenger.MVVM.ViewModels
                 this._propertyFilter = value;
 
                 ICollectionView view = CollectionViewSource.GetDefaultView(this.Children);
-                view.Filter = child =>
+                if (string.IsNullOrEmpty(value))
                 {
-                    try
+                    view.Filter = x => true;
+                }
+                else
+                {
+                    view.Filter = child =>
                     {
-                        if (child is BinTreeParentViewModel parent)
+                        try
                         {
-                            if(parent.Find(x => Regex.IsMatch(x.Name, value)) == null)
+                            if (child is BinTreeParentViewModel parent)
                             {
-                                return false;
+                                bool thisNameMatches = Regex.IsMatch(this.Name, value) is false;
+                                if (parent.Find(x => Regex.IsMatch(x.Name, value)) == null
+                                && thisNameMatches is false)
+                                {
+                                    return false;
+                                }
+                                else if (thisNameMatches)
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    parent.PropertyFilter = value;
+                                    return true;
+                                }
                             }
-                            else
+                            else if (child is BinTreePropertyViewModel property)
                             {
-                                parent.PropertyFilter = value;
-                                return true;
+                                return Regex.IsMatch(property.Name, value);
                             }
                         }
-                        else if (child is BinTreePropertyViewModel property)
+                        catch (Exception)
                         {
-                            return Regex.IsMatch(property.Name, value);
+                            return false;
                         }
-                    }
-                    catch(Exception)
-                    {
-                        return false;
-                    }
 
-                    return false;
-                };
+                        return false;
+                    };
+                }
 
                 NotifyPropertyChanged();
             }
@@ -63,30 +76,37 @@ namespace Scavenger.MVVM.ViewModels
                 this._textValueFilter = value;
 
                 ICollectionView view = CollectionViewSource.GetDefaultView(this.Children);
-                view.Filter = child =>
+                if (string.IsNullOrEmpty(value))
                 {
-                    try
+                    view.Filter = x => true;
+                }
+                else
+                {
+                    view.Filter = child =>
                     {
-                        if (child is BinTreeParentViewModel parent)
+                        try
                         {
-                            if (parent.GetAllProperties().Any(x => DoesValueMatch(x)))
+                            if (child is BinTreeParentViewModel parent)
                             {
-                                parent.TextValueFilter = value;
-                                return true;
+                                if (parent.GetAllProperties().Any(x => DoesValueMatch(x)))
+                                {
+                                    parent.TextValueFilter = value;
+                                    return true;
+                                }
+                            }
+                            else if (child is BinTreePropertyViewModel property)
+                            {
+                                return DoesValueMatch(property);
                             }
                         }
-                        else if (child is BinTreePropertyViewModel property)
+                        catch (Exception)
                         {
-                            return DoesValueMatch(property);
+                            return false;
                         }
-                    }
-                    catch (Exception)
-                    {
-                        return false;
-                    }
 
-                    return false;
-                };
+                        return false;
+                    };
+                }
 
                 NotifyPropertyChanged();
             

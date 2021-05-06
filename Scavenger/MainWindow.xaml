@@ -108,7 +108,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -178,7 +178,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -253,7 +253,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -331,7 +331,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -415,7 +415,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -516,7 +516,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -618,7 +618,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -688,7 +688,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -758,7 +758,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -828,7 +828,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -906,7 +906,7 @@
                                             <Style TargetType="MaterialDesign:PackIcon">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                        <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                        <Setter Property="Kind" Value="AlertCircleOutline"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                         <Setter Property="Kind" Value="Check"/>
@@ -987,7 +987,7 @@
                                             <Style TargetType="MaterialDesign:PackIcon">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                        <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                        <Setter Property="Kind" Value="AlertCircleOutline"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                         <Setter Property="Kind" Value="Check"/>
@@ -1059,7 +1059,7 @@
                                             <Style TargetType="MaterialDesign:PackIcon">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                        <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                        <Setter Property="Kind" Value="AlertCircleOutline"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                         <Setter Property="Kind" Value="Check"/>
@@ -1149,7 +1149,7 @@
                                             <Style TargetType="MaterialDesign:PackIcon">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                        <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                        <Setter Property="Kind" Value="AlertCircleOutline"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                         <Setter Property="Kind" Value="Check"/>
@@ -1215,7 +1215,7 @@
                                     <Style TargetType="MaterialDesign:PackIcon">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                <Setter Property="Kind" Value="AlertCircleOutline"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                 <Setter Property="Kind" Value="Check"/>
@@ -1486,7 +1486,7 @@
                                                                                         <Style TargetType="MaterialDesign:PackIcon">
                                                                                             <Style.Triggers>
                                                                                                 <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Warning}">
-                                                                                                    <Setter Property="Kind" Value="AlertBoxOutline"/>
+                                                                                                    <Setter Property="Kind" Value="AlertCircleOutline"/>
                                                                                                 </DataTrigger>
                                                                                                 <DataTrigger Binding="{Binding LintStatus}" Value="{x:Static ViewModels:LintStatus.Valid}">
                                                                                                     <Setter Property="Kind" Value="Check"/>

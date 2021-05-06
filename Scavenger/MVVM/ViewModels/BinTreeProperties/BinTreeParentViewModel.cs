@@ -15,7 +15,8 @@ namespace Scavenger.MVVM.ViewModels
 {
     public class BinTreeParentViewModel : BinTreePropertyViewModel
     {
-        [JsonIgnore] public string PropertyFilter
+        [JsonIgnore]
+        public string PropertyFilter
         {
             get => this._propertyFilter;
             set
@@ -23,17 +24,18 @@ namespace Scavenger.MVVM.ViewModels
                 this._propertyFilter = value;
 
                 ICollectionView view = CollectionViewSource.GetDefaultView(this.Children);
-                if (string.IsNullOrEmpty(value))
+                view.Filter = child =>
                 {
-                    view.Filter = x => true;
-                }
-                else
-                {
-                    view.Filter = child =>
+                    try
                     {
-                        try
+                        if (child is BinTreeParentViewModel parent)
                         {
-                            if (child is BinTreeParentViewModel parent)
+                            if(string.IsNullOrEmpty(value))
+                            {
+                                parent.PropertyFilter = value;
+                                return true;
+                            }
+                            else
                             {
                                 bool thisNameMatches = Regex.IsMatch(this.Name, value) is false;
                                 if (parent.Find(x => Regex.IsMatch(x.Name, value)) == null
@@ -51,24 +53,26 @@ namespace Scavenger.MVVM.ViewModels
                                     return true;
                                 }
                             }
-                            else if (child is BinTreePropertyViewModel property)
-                            {
-                                return Regex.IsMatch(property.Name, value);
-                            }
                         }
-                        catch (Exception)
+                        else if (child is BinTreePropertyViewModel property)
                         {
-                            return false;
+                            if (string.IsNullOrEmpty(value)) return true;
+                            else return Regex.IsMatch(property.Name, value);
                         }
-
+                    }
+                    catch (Exception)
+                    {
                         return false;
-                    };
-                }
+                    }
+
+                    return false;
+                };
 
                 NotifyPropertyChanged();
             }
         }
-        [JsonIgnore] public string TextValueFilter
+        [JsonIgnore]
+        public string TextValueFilter
         {
             get => this._textValueFilter;
             set
@@ -76,40 +80,40 @@ namespace Scavenger.MVVM.ViewModels
                 this._textValueFilter = value;
 
                 ICollectionView view = CollectionViewSource.GetDefaultView(this.Children);
-                if (string.IsNullOrEmpty(value))
+                view.Filter = child =>
                 {
-                    view.Filter = x => true;
-                }
-                else
-                {
-                    view.Filter = child =>
+                    try
                     {
-                        try
+                        if (child is BinTreeParentViewModel parent)
                         {
-                            if (child is BinTreeParentViewModel parent)
+                            if (string.IsNullOrEmpty(value)
+                            || parent.GetAllProperties().Any(x => DoesValueMatch(x)))
                             {
-                                if (parent.GetAllProperties().Any(x => DoesValueMatch(x)))
-                                {
-                                    parent.TextValueFilter = value;
-                                    return true;
-                                }
+                                parent.TextValueFilter = value;
+                                return true;
                             }
-                            else if (child is BinTreePropertyViewModel property)
+                            else if (string.IsNullOrEmpty(value))
                             {
-                                return DoesValueMatch(property);
+                                parent.TextValueFilter = value;
+                                return true;
                             }
                         }
-                        catch (Exception)
+                        else if (child is BinTreePropertyViewModel property)
                         {
-                            return false;
+                            if (string.IsNullOrEmpty(value) is false) return DoesValueMatch(property);
+                            else return true;
                         }
-
+                    }
+                    catch (Exception)
+                    {
                         return false;
-                    };
-                }
+                    }
+
+                    return false;
+                };
 
                 NotifyPropertyChanged();
-            
+
                 bool DoesValueMatch(BinTreePropertyViewModel property)
                 {
                     return property switch
@@ -123,7 +127,8 @@ namespace Scavenger.MVVM.ViewModels
                 }
             }
         }
-        [JsonIgnore] public BinTreeViewModel BinTree
+        [JsonIgnore]
+        public BinTreeViewModel BinTree
         {
             get => this._binTree;
             set => this._binTree = value;
@@ -142,7 +147,7 @@ namespace Scavenger.MVVM.ViewModels
         private string _textValueFilter;
         private BinTreeViewModel _binTree;
         private ObservableCollection<BinTreePropertyViewModel> _children = new ObservableCollection<BinTreePropertyViewModel>();
-    
+
         public BinTreeParentViewModel(BinTreeViewModel tree, BinTreeParentViewModel parent, BinTreeProperty treeProperty) : base(parent, treeProperty)
         {
             this._binTree = tree;
@@ -156,16 +161,16 @@ namespace Scavenger.MVVM.ViewModels
             if (e.Action is NotifyCollectionChangedAction.Add)
             {
                 IEnumerable<BinTreePropertyViewModel> newProperties = e.NewItems.Cast<BinTreePropertyViewModel>();
-                foreach(BinTreePropertyViewModel newProperty in newProperties)
+                foreach (BinTreePropertyViewModel newProperty in newProperties)
                 {
                     newProperty.Lint(metaAssembly, metaClassType);
 
                     if (newProperty.LintStatus == LintStatus.Warning) this.LintStatus = LintStatus.Warning;
                 }
             }
-            else if(e.Action is NotifyCollectionChangedAction.Remove)
+            else if (e.Action is NotifyCollectionChangedAction.Remove)
             {
-                LintChildren(metaAssembly, metaClassType);
+                Lint(metaAssembly, metaClassType);
             }
         }
 
@@ -181,13 +186,13 @@ namespace Scavenger.MVVM.ViewModels
 
         public IEnumerable<BinTreePropertyViewModel> GetAllProperties()
         {
-            foreach(BinTreePropertyViewModel property in this.Children)
+            foreach (BinTreePropertyViewModel property in this.Children)
             {
                 switch (property)
                 {
                     case BinTreeParentViewModel parentChild:
                     {
-                        foreach(BinTreePropertyViewModel childProperty in parentChild.GetAllProperties() ?? Enumerable.Empty<BinTreePropertyViewModel>())
+                        foreach (BinTreePropertyViewModel childProperty in parentChild.GetAllProperties() ?? Enumerable.Empty<BinTreePropertyViewModel>())
                         {
                             yield return childProperty;
                         }
@@ -215,7 +220,7 @@ namespace Scavenger.MVVM.ViewModels
 
         public override void SyncTreeProperty()
         {
-            if(this is not BinTreeObjectViewModel)
+            if (this is not BinTreeObjectViewModel)
             {
                 this._binTree = this.Parent?.BinTree;
             }

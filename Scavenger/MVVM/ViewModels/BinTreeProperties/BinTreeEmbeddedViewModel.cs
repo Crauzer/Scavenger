@@ -37,6 +37,8 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this.Children.Add(BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty));
             }
+
+            this.Children.CollectionChanged += OnChildrenCollectionChanged;
         }
 
         public override void SyncTreeProperty()

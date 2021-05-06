@@ -48,6 +48,8 @@ namespace Scavenger.MVVM.ViewModels
 
                 itemIndex++;
             }
+
+            this.Children.CollectionChanged += OnChildrenCollectionChanged;
         }
 
         public override void SyncTreeProperty()

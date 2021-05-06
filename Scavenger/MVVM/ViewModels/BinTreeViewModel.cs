@@ -107,7 +107,7 @@ namespace Scavenger.MVVM.ViewModels
             }
         }
     
-        private void Lint()
+        public void Lint()
         {
             Assembly metaAssembly = Assembly.GetAssembly(typeof(ValueVector3));
 

@@ -1,8 +1,10 @@
 ﻿using LeagueToolkit.IO.PropertyBin;
+using LeagueToolkit.Meta.Classes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -124,6 +126,21 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeParentViewModel(BinTreeViewModel tree, BinTreeParentViewModel parent, BinTreeProperty treeProperty) : base(parent, treeProperty)
         {
             this._binTree = tree;
+        }
+
+        protected void OnChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action is NotifyCollectionChangedAction.Add)
+            {
+                Assembly metaAssembly = Assembly.GetAssembly(typeof(ValueVector3));
+                TypeInfo metaClassType = FindMetaClassType(metaAssembly);
+
+                IEnumerable<BinTreePropertyViewModel> newProperties = e.NewItems.Cast<BinTreePropertyViewModel>();
+                foreach(BinTreePropertyViewModel newProperty in newProperties)
+                {
+                    newProperty.Lint(metaAssembly, metaClassType);
+                }
+            }
         }
 
         public void RemoveField(BinTreePropertyViewModel propertyViewModel)

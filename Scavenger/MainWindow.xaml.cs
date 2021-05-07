@@ -65,6 +65,31 @@ namespace Scavenger
             Hashtables.Load();
         }
 
+        private async void OnWindowDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                bool triedToImportInvalidFiles = false;
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                for (int i = 0; i < files.Length; i++)
+                {
+                    if (PathIO.GetExtension(files[i]) == ".bin")
+                    {
+                        await this.ViewModel.LoadBinTree(files[i], new BinTree(files[i]));
+                    }
+                    else
+                    {
+                        triedToImportInvalidFiles = true;
+                    }
+                }
+
+                if (triedToImportInvalidFiles)
+                {
+                    await DialogHelper.ShowMessgeDialog("Scavenger was unable to import one or more of the files you tried to import");
+                }
+            }
+        }
+
         private async void OnBinFileOpen(object sender, RoutedEventArgs e)
         {
             using CommonOpenFileDialog dialog = new CommonOpenFileDialog();

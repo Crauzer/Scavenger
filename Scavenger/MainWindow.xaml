@@ -19,7 +19,9 @@
         FontFamily="{MaterialDesign:MaterialDesignFont}"
         Icon="Resources/icon.ico"
         mc:Ignorable="d"
-        Title="Scavenger" Height="720" Width="1280">
+        Title="Scavenger" Height="720" Width="1280" 
+                                         AllowDrop="True"
+                                         Drop="OnWindowDrop">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Copy" CanExecute="CopyCommandCanExecute" Executed="CopyCommandOnExecuted"/>
         <CommandBinding Command="ApplicationCommands.Paste" CanExecute="PasteCommandCanExecute" Executed="PasteCommandOnExecuted"/>

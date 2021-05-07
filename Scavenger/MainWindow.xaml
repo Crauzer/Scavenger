@@ -19,7 +19,8 @@
         FontFamily="{MaterialDesign:MaterialDesignFont}"
         Icon="Resources/icon.ico"
         mc:Ignorable="d"
-        Title="Scavenger" Height="720" Width="1280" 
+        Title="Scavenger" Height="720" Width="1280"
+                                         WindowState="Maximized"
                                          AllowDrop="True"
                                          Drop="OnWindowDrop">
     <Window.CommandBindings>

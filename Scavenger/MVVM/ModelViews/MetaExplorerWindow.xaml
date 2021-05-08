@@ -1,0 +1,76 @@
+﻿<MaterialDesignExtensions:MaterialWindow x:Class="Scavenger.MVVM.ModelViews.MetaExplorerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Scavenger.MVVM.ModelViews"
+        xmlns:TemplateSelectors="clr-namespace:Scavenger.MVVM.TemplateSelectors"
+        xmlns:WpfToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+        xmlns:Helix="http://helix-toolkit.org/wpf"
+        xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{MaterialDesign:MaterialDesignFont}"
+        Icon="../../Resources/icon.ico"
+        mc:Ignorable="d"
+        Title="Scavenger - Meta Explorer" Height="700" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <MaterialDesign:ColorZone Grid.Column="0" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" VerticalAlignment="Stretch" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Margin="16"
+                         Text="{Binding MetaClassFilter, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         MaterialDesign:HintAssist.Hint="Class Filter"
+                         MaterialDesign:HintAssist.IsFloating="True"/>
+                <ListView Grid.Row="1"
+                          ItemsSource="{Binding MetaClasses}"
+                          SelectedItem="{Binding SelectedMetaClass, UpdateSourceTrigger=PropertyChanged}"
+                          VirtualizingStackPanel.IsVirtualizing="True"
+                          VirtualizingStackPanel.VirtualizationMode="Recycling">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="14"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </MaterialDesign:ColorZone>
+        <GridSplitter Grid.Column="1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Width="4" ResizeBehavior="PreviousAndNext"/>
+        <ListView Grid.Column="2" ItemsSource="{Binding SelectedMetaClass.Properties}" Margin="16">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth1" MinWidth="500">
+                        <StackPanel Orientation="Horizontal" Margin="10">
+                            <MaterialDesign:Chip Content="{Binding Type}" MinWidth="100"/>
+                            <StackPanel Orientation="Horizontal" Margin="10,0">
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                            </StackPanel>
+                            <Border VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Name}"/>
+                            </Border>
+                        </StackPanel>
+                    </MaterialDesign:ColorZone>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</MaterialDesignExtensions:MaterialWindow>

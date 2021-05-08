@@ -130,6 +130,13 @@ namespace Scavenger
             }
         }
 
+        private void OnOpenMetaExplorer(object sender, RoutedEventArgs e)
+        {
+            MetaExplorerWindow metaExplorerWindow = new MetaExplorerWindow();
+
+            metaExplorerWindow.Show();
+        }
+
         private void OnBinTreeTabClose(object sender, RoutedEventArgs e)
         {
             if (e.Source is FrameworkElement frameworkElement &&

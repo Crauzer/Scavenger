@@ -1393,6 +1393,9 @@
                     <MaterialDesign:ColorZone DockPanel.Dock="Top" Margin="0,0,0,10" MaterialDesign:ShadowAssist.ShadowDepth="Depth3">
                         <Menu>
                             <MenuItem Header="File">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="File"/>
+                                </MenuItem.Icon>
                                 <MenuItem Header="Open BIN" Click="OnBinFileOpen">
                                     <MenuItem.Icon>
                                         <MaterialDesign:PackIcon Kind="FileCodeOutline"/>
@@ -1401,6 +1404,16 @@
                                 <MenuItem Header="Save BIN" Click="OnBinFileSave" IsEnabled="{Binding IsBinTreeSelected, UpdateSourceTrigger=PropertyChanged}">
                                     <MenuItem.Icon>
                                         <MaterialDesign:PackIcon Kind="ContentSave"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </MenuItem>
+                            <MenuItem Header="Tools">
+                                <MenuItem.Icon>
+                                    <MaterialDesign:PackIcon Kind="Toolbox"/>
+                                </MenuItem.Icon>
+                                <MenuItem Header="Meta Explorer" Click="OnOpenMetaExplorer">
+                                    <MenuItem.Icon>
+                                        <MaterialDesign:PackIcon Kind="FormatListText"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>

@@ -2,18 +2,27 @@
 using LeagueToolkit.Helpers.Structures;
 using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
+using LeagueToolkit.Meta;
+using Scavenger.MVVM.ModelViews.ObjectEditors;
 using Scavenger.MVVM.ViewModels;
+using Scavenger.MVVM.ViewModels.ObjectEditors;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Windows;
 
 namespace Scavenger.Utilities
 {
     public static class BinTreeUtilities
     {
+        private static readonly Dictionary<string, (Type EditorWindowType, Type EditorViewModelType)> OBJECT_EDITOR_TYPES = new()
+        {
+            { "VfxSystemDefinitionData", (typeof(VfxSystemDefinitionDataEditor), typeof(VfxSystemDefinitionDataViewModel)) }
+        };
+
         public static BinTreePropertyViewModel ConstructTreePropertyViewModel(BinTreeParentViewModel parent, BinTreeProperty genericProperty)
         {
             return genericProperty switch
@@ -100,7 +109,7 @@ namespace Scavenger.Utilities
                 && treeString.Parent is not null)
             {
                 string binPath = treeString.Parent.BinTree.BinPath;
-                
+
                 int indexOfData = binPath.LastIndexOf("\\data\\");
                 string binFolder = indexOfData == -1 ? Path.GetDirectoryName(binPath) : binPath.Remove(binPath.LastIndexOf("\\data\\"));
                 string assetPath = Path.Combine(binFolder, treeString.Value);
@@ -118,6 +127,21 @@ namespace Scavenger.Utilities
             }
 
             return false;
+        }
+
+        public static Window GetObjectEditorWindow(MetaEnvironment metaEnvironment, BinTreeObject treeObject)
+        {
+            string metaClassName = Hashtables.GetType(treeObject.MetaClassHash);
+            if (OBJECT_EDITOR_TYPES.TryGetValue(metaClassName, out (Type EditorWindowType, Type EditorViewModelType) editorData))
+            {
+                object viewModel = Activator.CreateInstance(editorData.EditorViewModelType, new object[] { metaEnvironment, treeObject });
+                Window window = (Window)Activator.CreateInstance(editorData.EditorWindowType);
+
+                window.DataContext = viewModel;
+
+                return window;
+            }
+            else return null;
         }
     }
 }

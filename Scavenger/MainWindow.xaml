@@ -1549,6 +1549,12 @@
                                                                         <MaterialDesign:PackIcon Kind="ContentPaste"/>
                                                                     </MenuItem.Icon>
                                                                 </MenuItem>
+                                                                <Separator/>
+                                                                <MenuItem Header="Open in Editor" Click="OnBinTreeObjectOpenInEditor">
+                                                                    <MenuItem.Icon>
+                                                                        <MaterialDesign:PackIcon Kind="TableEdit"/>
+                                                                    </MenuItem.Icon>
+                                                                </MenuItem>
                                                             </ContextMenu>
                                                         </MaterialDesign:ColorZone.ContextMenu>
                                                     </MaterialDesign:ColorZone>

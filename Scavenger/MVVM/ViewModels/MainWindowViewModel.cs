@@ -1,5 +1,7 @@
 ﻿using LeagueToolkit.IO.PropertyBin;
 using LeagueToolkit.IO.PropertyBin.Properties;
+using LeagueToolkit.Meta;
+using LeagueToolkit.Meta.Classes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using Octokit;
@@ -11,8 +13,10 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Scavenger.MVVM.ViewModels
 {
@@ -72,6 +76,8 @@ namespace Scavenger.MVVM.ViewModels
         private bool _isGloballyEnabled = true;
         private InfobarViewModel _infobar = new();
 
+        private MetaEnvironment _metaEnvironment;
+
         public MainWindowViewModel()
         {
 
@@ -81,6 +87,7 @@ namespace Scavenger.MVVM.ViewModels
         {
             Config.Load();
             LoadStructureTemplates();
+            InitializeMetaEnvironment();
 
             this.Infobar.Progress = 100;
         }
@@ -93,6 +100,14 @@ namespace Scavenger.MVVM.ViewModels
                 this.StructureTemplates.Add(JsonConvert.DeserializeObject<StructureTemplate>(File.ReadAllText(fileName)));
             }
         }
+        public void InitializeMetaEnvironment()
+        {
+            this._metaEnvironment = MetaEnvironment.Create(
+                Assembly.GetAssembly(typeof(ValueVector3))
+                .GetTypes()
+                .Where(x => x.IsClass && x.Namespace == "LeagueToolkit.Meta.Classes")
+                .ToList());
+        }
 
         public async Task LoadBinTree(string binPath, BinTree binTree)
         {
@@ -100,7 +115,7 @@ namespace Scavenger.MVVM.ViewModels
 
             this.BinTrees.Add(binTreeViewModel);
             this.SelectedBinTree = binTreeViewModel;
-            
+
             Task<BinTreeViewModel> CreateBinTreeViewModel()
             {
                 return Task.FromResult(new BinTreeViewModel(binPath, binTree, this._structureTemplates));
@@ -156,11 +171,11 @@ namespace Scavenger.MVVM.ViewModels
                     Directory.CreateDirectory("Templates");
 
                     StructureTemplate structureTemplate;
-                    if(parentViewModel is BinTreeStructureViewModel structureViewModel)
+                    if (parentViewModel is BinTreeStructureViewModel structureViewModel)
                     {
                         structureTemplate = new StructureTemplate(templateName, structureViewModel);
                     }
-                    else if(parentViewModel is BinTreeEmbeddedViewModel embeddedViewModel)
+                    else if (parentViewModel is BinTreeEmbeddedViewModel embeddedViewModel)
                     {
                         structureTemplate = new StructureTemplate(templateName, embeddedViewModel);
                     }
@@ -206,6 +221,13 @@ namespace Scavenger.MVVM.ViewModels
                     containerViewModel.Children.Add(newPropertyViewModel);
                 }
             }
+        }
+    
+        public void OpenTreeObjectInEditor(BinTreeObjectViewModel treeObject)
+        {
+            Window editorWindow = BinTreeUtilities.GetObjectEditorWindow(this._metaEnvironment, treeObject.TreeObject);
+
+            editorWindow.Show();
         }
     }
 }

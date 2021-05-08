@@ -171,9 +171,17 @@ namespace Scavenger
         private void OnBinTreeObjectDelete(object sender, RoutedEventArgs e)
         {
             if (e.Source is FrameworkElement frameworkElement &&
-                frameworkElement.DataContext is BinTreeObjectViewModel propertyViewModel)
+                frameworkElement.DataContext is BinTreeObjectViewModel objectViewModel)
             {
-                this.ViewModel.SelectedBinTree.Objects.Remove(propertyViewModel);
+                this.ViewModel.SelectedBinTree.Objects.Remove(objectViewModel);
+            }
+        }
+        private void OnBinTreeObjectOpenInEditor(object sender, RoutedEventArgs e)
+        {
+            if (e.Source is FrameworkElement frameworkElement &&
+                frameworkElement.DataContext is BinTreeObjectViewModel objectViewModel)
+            {
+                this.ViewModel.OpenTreeObjectInEditor(objectViewModel);
             }
         }
 

@@ -26,7 +26,7 @@ namespace Scavenger.MVVM.ViewModels.MetaExplorer
                     {
                         if(item is MetaClassViewModel metaClass)
                         {
-                            return Regex.IsMatch(metaClass.Name, value);
+                            return Regex.IsMatch(metaClass.Header, value);
                         }
                     }
                     catch (Exception)

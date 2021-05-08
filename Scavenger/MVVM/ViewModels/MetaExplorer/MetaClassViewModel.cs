@@ -1,4 +1,5 @@
-﻿using LeagueToolkit.Meta.Attributes;
+﻿using LeagueToolkit.Meta;
+using LeagueToolkit.Meta.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -8,7 +9,7 @@ namespace Scavenger.MVVM.ViewModels.MetaExplorer
 {
     public class MetaClassViewModel : PropertyNotifier
     {
-        public string Name { get; }
+        public string Header { get; }
 
         public List<MetaPropertyViewModel> Properties { get; } = new();
 
@@ -16,16 +17,35 @@ namespace Scavenger.MVVM.ViewModels.MetaExplorer
         {
             MetaClassAttribute attribute = metaClassTypeInfo.GetCustomAttribute<MetaClassAttribute>();
 
-            if (string.IsNullOrEmpty(attribute.Name))
+            string name = GetNameFromMetaAttribute(attribute);
+
+            if (metaClassTypeInfo.BaseType is TypeInfo baseType
+                && baseType.GetInterface(nameof(IMetaClass)) is not null)
             {
-                this.Name = $"0x{attribute.NameHash:X8}";
+                MetaClassAttribute baseTypeMetaAttribute = baseType.GetCustomAttribute<MetaClassAttribute>();
+                string baseTypeName = GetNameFromMetaAttribute(baseTypeMetaAttribute);
+
+                this.Header = $"{name} <extends> {baseTypeName}";
             }
-            else this.Name = attribute.Name;
+            else
+            {
+                this.Header = name;
+            }
 
             foreach(PropertyInfo property in metaClassTypeInfo.GetProperties())
             {
                 this.Properties.Add(new MetaPropertyViewModel(property));
             }
+        }
+
+        private string GetNameFromMetaAttribute(MetaClassAttribute attribute)
+        {
+            return attribute.Name switch
+            {
+                "" => $"0x{attribute.NameHash:X8}",
+                null => $"0x{attribute.NameHash:X8}",
+                _ => attribute.Name
+            };
         }
     }
 }

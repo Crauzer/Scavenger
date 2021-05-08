@@ -44,7 +44,7 @@
                           VirtualizingStackPanel.VirtualizationMode="Recycling">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"
+                            <TextBlock Text="{Binding Header}"
                                        FontSize="14"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -55,22 +55,29 @@
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       Width="4" ResizeBehavior="PreviousAndNext"/>
-        <ListView Grid.Column="2" ItemsSource="{Binding SelectedMetaClass.Properties}" Margin="16">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth1" MinWidth="500">
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <MaterialDesign:Chip Content="{Binding Type}" MinWidth="100"/>
-                            <StackPanel Orientation="Horizontal" Margin="10,0">
-                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <MaterialDesign:Chip Content="{Binding SelectedMetaClass.Header}" FontSize="20" Margin="15"/>
+            <ListView Grid.Row="1" ItemsSource="{Binding SelectedMetaClass.Properties}" Margin="16">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth1" MinWidth="500">
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <MaterialDesign:Chip Content="{Binding Type}" MinWidth="100"/>
+                                <StackPanel Orientation="Horizontal" Margin="10,0">
+                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
+                                </StackPanel>
+                                <Border VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Name}"/>
+                                </Border>
                             </StackPanel>
-                            <Border VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Name}"/>
-                            </Border>
-                        </StackPanel>
-                    </MaterialDesign:ColorZone>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                        </MaterialDesign:ColorZone>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </MaterialDesignExtensions:MaterialWindow>

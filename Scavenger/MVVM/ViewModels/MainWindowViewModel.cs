@@ -201,7 +201,7 @@ namespace Scavenger.MVVM.ViewModels
             if (dialogViewModel is not null)
             {
                 BinTreeProperty newProperty = dialogViewModel.BuildProperty(parentViewModel.TreeProperty.Parent);
-                BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(parentViewModel, newProperty);
+                BinTreePropertyViewModel newPropertyViewModel = BinUtilities.ConstructTreePropertyViewModel(parentViewModel, newProperty);
 
                 parentViewModel.Children.Add(newPropertyViewModel);
             }
@@ -213,7 +213,7 @@ namespace Scavenger.MVVM.ViewModels
             if (dialogViewModel is not null)
             {
                 BinTreeProperty newProperty = dialogViewModel.BuildProperty(container);
-                BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(containerViewModel, newProperty);
+                BinTreePropertyViewModel newPropertyViewModel = BinUtilities.ConstructTreePropertyViewModel(containerViewModel, newProperty);
                 if (newPropertyViewModel is not null)
                 {
                     newPropertyViewModel.ShowName = false;
@@ -225,9 +225,9 @@ namespace Scavenger.MVVM.ViewModels
     
         public void OpenTreeObjectInEditor(BinTreeObjectViewModel treeObject)
         {
-            Window editorWindow = BinTreeUtilities.GetObjectEditorWindow(this._metaEnvironment, treeObject.TreeObject);
+            Window editorWindow = BinUtilities.GetObjectEditorWindow(this._metaEnvironment, treeObject.TreeObject, this.SelectedBinTree.BinPath);
 
-            editorWindow.Show();
+            editorWindow?.Show();
         }
     }
 }

@@ -37,8 +37,8 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeMapEntryViewModel() { }
         public BinTreeMapEntryViewModel(BinTreeParentViewModel parent, KeyValuePair<BinTreeProperty, BinTreeProperty> pair) : base(parent, null)
         {
-            this.KeyProperty = BinTreeUtilities.ConstructTreePropertyViewModel(parent, pair.Key);
-            this.ValueProperty = BinTreeUtilities.ConstructTreePropertyViewModel(parent, pair.Value);
+            this.KeyProperty = BinUtilities.ConstructTreePropertyViewModel(parent, pair.Key);
+            this.ValueProperty = BinUtilities.ConstructTreePropertyViewModel(parent, pair.Value);
 
             this.KeyProperty.ShowName = false;
             this.ValueProperty.ShowName = false;

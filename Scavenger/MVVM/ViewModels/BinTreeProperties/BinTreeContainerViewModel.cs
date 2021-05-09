@@ -39,7 +39,7 @@ namespace Scavenger.MVVM.ViewModels
 
             foreach (BinTreeProperty genericProperty in treeProperty.Properties)
             {
-                BinTreePropertyViewModel propertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty);
+                BinTreePropertyViewModel propertyViewModel = BinUtilities.ConstructTreePropertyViewModel(this, genericProperty);
                 propertyViewModel.ShowName = false;
 
                 this.Children.Add(propertyViewModel);

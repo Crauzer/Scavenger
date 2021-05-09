@@ -62,7 +62,7 @@ namespace Scavenger.MVVM.ViewModels
                 List<BinTreeProperty> properties = new();
                 foreach (PropertyTemplate propertyTemplate in this.StructureTemplate.Properties)
                 {
-                    BinTreeProperty templateProperty = BinTreeUtilities.BuildProperty(propertyTemplate.Name, propertyTemplate.MetaClass, null,
+                    BinTreeProperty templateProperty = BinUtilities.BuildProperty(propertyTemplate.Name, propertyTemplate.MetaClass, null,
                         propertyTemplate.Type, propertyTemplate.PrimaryType, propertyTemplate.SecondaryType);
 
                     properties.Add(templateProperty);

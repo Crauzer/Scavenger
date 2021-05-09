@@ -38,7 +38,7 @@ namespace Scavenger.MVVM.ViewModels
 
             foreach (BinTreeProperty genericProperty in treeProperty.Properties ?? Enumerable.Empty<BinTreeProperty>())
             {
-                this.Children.Add(BinTreeUtilities.ConstructTreePropertyViewModel(this, genericProperty));
+                this.Children.Add(BinUtilities.ConstructTreePropertyViewModel(this, genericProperty));
             }
 
             this.Children.CollectionChanged += OnChildrenCollectionChanged;

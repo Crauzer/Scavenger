@@ -199,11 +199,11 @@ namespace Scavenger.MVVM.ViewModels
         {
             if (this.StructureTemplate is not null)
             {
-                BinTreeStructure structureProperty = BinTreeUtilities.BuildProperty(this.Name, this.MetaClass, parent, this.PropertyType, this.PrimaryType, this.SecondaryType) as BinTreeStructure;
+                BinTreeStructure structureProperty = BinUtilities.BuildProperty(this.Name, this.MetaClass, parent, this.PropertyType, this.PrimaryType, this.SecondaryType) as BinTreeStructure;
 
                 foreach(PropertyTemplate propertyTemplate in this.StructureTemplate.Properties)
                 {
-                    BinTreeProperty templateProperty = BinTreeUtilities.BuildProperty(propertyTemplate.Name, propertyTemplate.MetaClass, structureProperty,
+                    BinTreeProperty templateProperty = BinUtilities.BuildProperty(propertyTemplate.Name, propertyTemplate.MetaClass, structureProperty,
                         propertyTemplate.Type, propertyTemplate.PrimaryType, propertyTemplate.SecondaryType);
 
                     structureProperty.AddProperty(templateProperty);
@@ -213,7 +213,7 @@ namespace Scavenger.MVVM.ViewModels
             }
             else
             {
-                return BinTreeUtilities.BuildProperty(this.Name, this.MetaClass, parent, this.PropertyType, this.PrimaryType, this.SecondaryType);
+                return BinUtilities.BuildProperty(this.Name, this.MetaClass, parent, this.PropertyType, this.PrimaryType, this.SecondaryType);
             }
         }
 

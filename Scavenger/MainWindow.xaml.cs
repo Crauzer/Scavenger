@@ -160,7 +160,7 @@ namespace Scavenger
                 if (dialogViewModel is not null)
                 {
                     BinTreeProperty newProperty = dialogViewModel.BuildProperty(objectViewModel.TreeObject);
-                    BinTreePropertyViewModel newPropertyViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(objectViewModel, newProperty);
+                    BinTreePropertyViewModel newPropertyViewModel = BinUtilities.ConstructTreePropertyViewModel(objectViewModel, newProperty);
                     if (newPropertyViewModel is not null)
                     {
                         objectViewModel.Children.Add(newPropertyViewModel);
@@ -207,8 +207,8 @@ namespace Scavenger
                 frameworkElement.DataContext is BinTreeMapViewModel mapViewModel)
             {
                 BinTreeMap map = mapViewModel.TreeProperty as BinTreeMap;
-                BinTreeProperty keyProperty = BinTreeUtilities.BuildProperty("", "", map, map.KeyType, BinPropertyType.None, BinPropertyType.None);
-                BinTreeProperty valueProperty = BinTreeUtilities.BuildProperty("", "", map, map.ValueType, BinPropertyType.None, BinPropertyType.None);
+                BinTreeProperty keyProperty = BinUtilities.BuildProperty("", "", map, map.KeyType, BinPropertyType.None, BinPropertyType.None);
+                BinTreeProperty valueProperty = BinUtilities.BuildProperty("", "", map, map.ValueType, BinPropertyType.None, BinPropertyType.None);
 
                 BinTreeMapEntryViewModel newEntryViewModel = new BinTreeMapEntryViewModel(mapViewModel, new KeyValuePair<BinTreeProperty, BinTreeProperty>(keyProperty, valueProperty));
 

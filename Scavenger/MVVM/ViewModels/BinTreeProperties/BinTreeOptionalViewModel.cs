@@ -40,7 +40,7 @@ namespace Scavenger.MVVM.ViewModels
         {
             this.ValueType = treeProperty.ValueType;
 
-            BinTreePropertyViewModel valueViewModel = BinTreeUtilities.ConstructTreePropertyViewModel(this, treeProperty.Value);
+            BinTreePropertyViewModel valueViewModel = BinUtilities.ConstructTreePropertyViewModel(this, treeProperty.Value);
             if (valueViewModel is not null)
             {
                 this.IsSome = true;

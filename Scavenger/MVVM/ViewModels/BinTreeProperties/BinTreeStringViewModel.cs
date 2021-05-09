@@ -53,7 +53,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 this._value = value;
 
-                this.IsAsset = BinTreeUtilities.IsAsset(this) && BinTreeUtilities.IsPreviewableAsset(this);
+                this.IsAsset = BinUtilities.IsAsset(this) && BinUtilities.IsPreviewableAsset(this);
                 PreviewAsset();
 
                 NotifyPropertyChanged();
@@ -70,7 +70,7 @@ namespace Scavenger.MVVM.ViewModels
         public BinTreeStringViewModel(BinTreeParentViewModel parent, BinTreeString treeProperty) : base(parent, treeProperty)
         {
             this._value = treeProperty.Value;
-            this._isAsset = BinTreeUtilities.IsAsset(this) && BinTreeUtilities.IsPreviewableAsset(this);
+            this._isAsset = BinUtilities.IsAsset(this) && BinUtilities.IsPreviewableAsset(this);
         }
 
         private void PreviewAsset()
@@ -80,15 +80,10 @@ namespace Scavenger.MVVM.ViewModels
             if (string.IsNullOrEmpty(extension) is false
                 && this.Parent is not null)
             {
-                string binPath = this.Parent.BinTree.BinPath;
-                int indexOfData = binPath.LastIndexOf("\\data\\");
-                string binFolder = indexOfData == -1 ? Path.GetDirectoryName(binPath) : binPath.Remove(binPath.LastIndexOf("\\data\\"));
-                string assetPath = Path.Combine(binFolder, this.Value);
-                string assetExtension = Path.GetExtension(assetPath);
-
+                string assetPath = BinUtilities.ResolveAssetPath(this.Parent.BinTree.BinPath, this.Value);
                 if (File.Exists(assetPath))
                 {
-                    switch (assetExtension)
+                    switch (Path.GetExtension(assetPath))
                     {
                         case ".skn":
                         {

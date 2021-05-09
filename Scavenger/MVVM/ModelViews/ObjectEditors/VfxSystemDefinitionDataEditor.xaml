@@ -8,7 +8,7 @@
                                          xmlns:WpfToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
                                          xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                                          xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
-                                         xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels"
+                                         xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels" xmlns:PrimitiveStructures="clr-namespace:Scavenger.MVVM.ModelViews.PrimitiveStructures"
                                          Icon="../../../Resources/icon.ico"
                                          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                                          TextElement.FontWeight="Regular"
@@ -19,7 +19,141 @@
                                          FontFamily="{MaterialDesign:MaterialDesignFont}"
                                          mc:Ignorable="d"
                                          Title="Scavenger - VfxSystemDefinitionData Editor" Height="720" Width="1280" WindowState="Maximized">
+    <Window.Resources>
+        <TemplateSelectors:EmitterComponentTemplateSelector x:Key="EmitterComponentTemplateSelector"/>
+        <DataTemplate x:Key="ScaleEmitterComponentTemplate">
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
+                <StackPanel Orientation="Vertical" Margin="20">
+                    <CheckBox IsChecked="{Binding IsUniformScale, UpdateSourceTrigger=PropertyChanged}"
+                              Content="Is Uniform Scale"
+                              Margin="10"
+                              Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"/>
+                    <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                        <PrimitiveStructures:ValueVector3Editor PropertyName="Initial Scale" 
+                                                            Vector="{Binding InitialScale, UpdateSourceTrigger=PropertyChanged}"/>
+                    </MaterialDesign:ColorZone>
+                    <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                        <PrimitiveStructures:ValueVector3Editor PropertyName="Scale 0" 
+                                                            Vector="{Binding Scale0, UpdateSourceTrigger=PropertyChanged}"/>
+                    </MaterialDesign:ColorZone>
+                </StackPanel>
+            </MaterialDesign:ColorZone>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <ListView SelectedItem="{Binding SelectedComplexEmitter}"
+                      ItemsSource="{Binding ComplexEmitters}"
+                      HorizontalContentAlignment="Stretch"
+                      VerticalContentAlignment="Stretch">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5" VerticalAlignment="Stretch">
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Top"
+                                            Orientation="Vertical">
+                                    <TextBox Margin="5"
+                                             Width="250"
+                                             Text="{Binding EmitterName, UpdateSourceTrigger=PropertyChanged}"
+                                             Style="{StaticResource MaterialDesignFilledTextBox}"/>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="5">
+                                        <Image Width="100" Height="100"
+                                               Source="{Binding PreviewImage, UpdateSourceTrigger=PropertyChanged}"
+                                               Margin="10"/>
+                                        <DockPanel>
+                                            <CheckBox Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
+                                                      IsChecked="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}"
+                                                      Content="Is Enabled"
+                                                      DockPanel.Dock="Top"
+                                                      Margin="5"/>
+                                            <MaterialDesign:Chip Content="{Binding Importance}"
+                                                                 Margin="5"
+                                                                 DockPanel.Dock="Top"
+                                                                 HorizontalAlignment="Center"/>
+                                        </DockPanel>
+                                    </StackPanel>
+                                    <ListView SelectedItem="{Binding SelectedComponent, UpdateSourceTrigger=PropertyChanged}"
+                                              ItemsSource="{Binding Components, UpdateSourceTrigger=PropertyChanged}"
+                                              HorizontalContentAlignment="Stretch"
+                                              VerticalContentAlignment="Stretch">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                                                          VerticalAlignment="Stretch"
+                                                                          HorizontalAlignment="Stretch">
+                                                    <TextBlock Margin="10" Text="{Binding Name}" FontSize="14"/>
+                                                </MaterialDesign:ColorZone>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackPanel>
+                                <Button DockPanel.Dock="Bottom"
+                                        Command="{Binding AddComponentCommand}"
+                                        Margin="15"
+                                        VerticalAlignment="Bottom">
+                                    <Border HorizontalAlignment="Center">
+                                        <MaterialDesign:PackIcon Kind="Plus"/>
+                                    </Border>
+                                </Button>
+                            </DockPanel>
+                        </MaterialDesign:ColorZone>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <MaterialDesign:Chip Content="{Binding ParticleName}" FontSize="20"/>
+                    <Border VerticalAlignment="Center">
+                        <MaterialDesign:PackIcon Kind="ArrowRight" Margin="15,0,15,0"/>
+                    </Border>
+                    <MaterialDesign:Chip Content="{Binding SelectedComplexEmitter.EmitterName}" FontSize="20"/>
+                    <Border VerticalAlignment="Center">
+                        <MaterialDesign:PackIcon Kind="ArrowRight" Margin="15,0,15,0"/>
+                    </Border>
+                    <MaterialDesign:Chip Content="{Binding SelectedComplexEmitter.SelectedComponent.Name}" FontSize="20"/>
+                </StackPanel>
+            </Grid>
+            <ContentPresenter Grid.Row="1"
+                              Content="{Binding SelectedComplexEmitter.SelectedComponent}"
+                              ContentTemplateSelector="{StaticResource EmitterComponentTemplateSelector}"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="3">
+
+        </Grid>
+        <GridSplitter Grid.Column="1"
+                      Grid.RowSpan="3"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Width="4" ResizeBehavior="PreviousAndNext"/>
+        <GridSplitter Grid.Row="1"
+                      Grid.ColumnSpan="3"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Height="4" ResizeBehavior="PreviousAndNext"/>
     </Grid>
 </MaterialDesignExtensions:MaterialWindow>

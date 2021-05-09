@@ -6,6 +6,7 @@ using LeagueToolkit.Meta;
 using Scavenger.MVVM.ModelViews.ObjectEditors;
 using Scavenger.MVVM.ViewModels;
 using Scavenger.MVVM.ViewModels.ObjectEditors;
+using Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,7 @@ using System.Windows;
 
 namespace Scavenger.Utilities
 {
-    public static class BinTreeUtilities
+    public static class BinUtilities
     {
         private static readonly Dictionary<string, (Type EditorWindowType, Type EditorViewModelType)> OBJECT_EDITOR_TYPES = new()
         {
@@ -97,6 +98,14 @@ namespace Scavenger.Utilities
             };
         }
 
+        public static string ResolveAssetPath(string binPath, string assetPath)
+        {
+            int indexOfData = binPath.LastIndexOf("\\data\\");
+            string binFolder = indexOfData == -1 ? Path.GetDirectoryName(binPath) : binPath.Remove(binPath.LastIndexOf("\\data\\"));
+
+            return Path.Combine(binFolder, assetPath);
+        }
+
         public static bool IsAsset(BinTreeStringViewModel treeString)
         {
             string extension = Path.GetExtension(treeString.Value);
@@ -129,12 +138,12 @@ namespace Scavenger.Utilities
             return false;
         }
 
-        public static Window GetObjectEditorWindow(MetaEnvironment metaEnvironment, BinTreeObject treeObject)
+        public static Window GetObjectEditorWindow(MetaEnvironment metaEnvironment, BinTreeObject treeObject, string binPath)
         {
             string metaClassName = Hashtables.GetType(treeObject.MetaClassHash);
             if (OBJECT_EDITOR_TYPES.TryGetValue(metaClassName, out (Type EditorWindowType, Type EditorViewModelType) editorData))
             {
-                object viewModel = Activator.CreateInstance(editorData.EditorViewModelType, new object[] { metaEnvironment, treeObject });
+                object viewModel = Activator.CreateInstance(editorData.EditorViewModelType, new object[] { metaEnvironment, treeObject, binPath });
                 Window window = (Window)Activator.CreateInstance(editorData.EditorWindowType);
 
                 window.DataContext = viewModel;

@@ -55,6 +55,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="MVVM\ModelViews\PrimitiveStructures\ValueVector2Editor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\ModelViews\PrimitiveStructures\Vector2Editor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\ModelViews\PrimitiveStructures\Vector3Editor - Copy - Copy.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>Vector3Editor - Copy.xaml.cs</DependentUpon>
+    </Compile>
+    <Compile Update="MVVM\ModelViews\PrimitiveStructures\Vector3Editor - Copy.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>Vector3Editor.xaml.cs</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -67,6 +81,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="MVVM\ModelViews\PrimitiveStructures\ValueVector2Editor.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\ModelViews\PrimitiveStructures\Vector2Editor.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

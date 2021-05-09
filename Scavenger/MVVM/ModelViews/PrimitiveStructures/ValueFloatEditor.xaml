@@ -18,7 +18,7 @@
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{MaterialDesign:MaterialDesignFont}"
              mc:Ignorable="d" 
-             d:DesignHeight="80" d:DesignWidth="800">
+             d:DesignHeight="80" d:DesignWidth="1000">
     <Grid>
         <StackPanel Orientation="Horizontal">
             <Border VerticalAlignment="Center">
@@ -26,6 +26,12 @@
             </Border>
             <WpfToolkit:SingleUpDown Value="{Binding Value, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="10"
                                      Width="150"/>
+            <ToggleButton Content="{MaterialDesign:PackIcon Kind=Timer, Size=21}"
+                          Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                          IsChecked="True" Margin="15,0,0,0" />
+            <ToggleButton Content="{MaterialDesign:PackIcon Kind=Checkerboard, Size=21}"
+                          Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                          IsChecked="True" Margin="15,0,0,0" />
         </StackPanel>
     </Grid>
 </UserControl>

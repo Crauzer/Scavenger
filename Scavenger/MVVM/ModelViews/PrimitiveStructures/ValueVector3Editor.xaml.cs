@@ -23,23 +23,12 @@ namespace Scavenger.MVVM.ModelViews.PrimitiveStructures
     /// </summary>
     public partial class ValueVector3Editor : UserControl, INotifyPropertyChanged
     {
-        public string PropertyName
-        {
-            get => (string)GetValue(PropertyNameProperty);
-            set => SetValue(PropertyNameProperty, value);
-        }
         public ValueVector3ViewModel Vector
         {
             get => (ValueVector3ViewModel)GetValue(VectorProperty);
             set => SetValue(VectorProperty, value);
         }
 
-        public static readonly DependencyProperty PropertyNameProperty = DependencyProperty.Register(
-            "PropertyName",
-            typeof(string), 
-            typeof(ValueVector3Editor), 
-            new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.AffectsRender, OnPropertyNameChanged));
-       
         public static readonly DependencyProperty VectorProperty = DependencyProperty.Register(
             "Vector", 
             typeof(ValueVector3ViewModel),
@@ -53,11 +42,6 @@ namespace Scavenger.MVVM.ModelViews.PrimitiveStructures
             InitializeComponent();
         }
 
-        private static void OnPropertyNameChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
-        {
-            ValueVector3Editor control = (ValueVector3Editor)dependencyObject;
-            control.PropertyName = (string)eventArgs.NewValue;
-        }
         private static void OnVectorChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
         {
             ValueVector3Editor control = (ValueVector3Editor)dependencyObject;

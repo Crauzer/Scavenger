@@ -8,7 +8,7 @@
                                          xmlns:WpfToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
                                          xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                                          xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
-                                         xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels" xmlns:PrimitiveStructures="clr-namespace:Scavenger.MVVM.ModelViews.PrimitiveStructures"
+                                         xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels" xmlns:PrimitiveStructures="clr-namespace:Scavenger.MVVM.ModelViews.PrimitiveStructures" xmlns:meta="clr-namespace:Scavenger.MVVM.ModelViews.Meta"
                                          Icon="../../../Resources/icon.ico"
                                          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                                          TextElement.FontWeight="Regular"
@@ -23,20 +23,156 @@
         <TemplateSelectors:EmitterComponentTemplateSelector x:Key="EmitterComponentTemplateSelector"/>
         <DataTemplate x:Key="ScaleEmitterComponentTemplate">
             <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
-                <StackPanel Orientation="Vertical" Margin="20">
-                    <CheckBox IsChecked="{Binding IsUniformScale, UpdateSourceTrigger=PropertyChanged}"
-                              Content="Is Uniform Scale"
-                              Margin="10"
-                              Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"/>
-                    <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
-                        <PrimitiveStructures:ValueVector3Editor PropertyName="Initial Scale" 
-                                                            Vector="{Binding InitialScale, UpdateSourceTrigger=PropertyChanged}"/>
-                    </MaterialDesign:ColorZone>
-                    <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
-                        <PrimitiveStructures:ValueVector3Editor PropertyName="Scale 0" 
-                                                            Vector="{Binding Scale0, UpdateSourceTrigger=PropertyChanged}"/>
-                    </MaterialDesign:ColorZone>
-                </StackPanel>
+                <ScrollViewer MaxHeight="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualHeight}">
+                    <StackPanel Orientation="Vertical" Margin="20">
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <CheckBox IsChecked="{Binding IsUniformScale, UpdateSourceTrigger=PropertyChanged}"
+                                          Content="Is Uniform Scale"
+                                          Margin="10"
+                                          Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"/>
+                                <CheckBox IsChecked="{Binding ScaleUpFromOrigin, UpdateSourceTrigger=PropertyChanged}"
+                                          Content="Scale up from Origin"
+                                          Margin="10"
+                                          Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"/>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <meta:ComponentProperty PropertyName="Scale Emit Offset By Bound Object Height">
+                                    <WpfToolkit:SingleUpDown Value="{Binding ScaleEmitOffsetByBoundObjectHeight, UpdateSourceTrigger=PropertyChanged}"
+                                                             HorizontalAlignment="Left"
+                                                             Width="150"/>
+                                </meta:ComponentProperty>
+                                <meta:ComponentProperty PropertyName="Scale Emit Offset by Bound Object Radius">
+                                    <WpfToolkit:SingleUpDown Value="{Binding ScaleEmitOffsetByBoundObjectRadius, UpdateSourceTrigger=PropertyChanged}"
+                                                             HorizontalAlignment="Left"
+                                                             Width="150"/>
+                                </meta:ComponentProperty>
+                                <meta:ComponentProperty PropertyName="Scale Emit Offset by Bound Object Size">
+                                    <WpfToolkit:SingleUpDown Value="{Binding ScaleEmitOffsetByBoundObjectSize, UpdateSourceTrigger=PropertyChanged}"
+                                                             HorizontalAlignment="Left"
+                                                             Width="150"/>
+                                </meta:ComponentProperty>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <meta:ComponentProperty PropertyName="Scale Birth Scale By Bound Object Height">
+                                    <WpfToolkit:SingleUpDown Value="{Binding ScaleBirthScaleByBoundObjectHeight, UpdateSourceTrigger=PropertyChanged}"
+                                                             HorizontalAlignment="Left"
+                                                             Width="150"/>
+                                </meta:ComponentProperty>
+                                <meta:ComponentProperty PropertyName="Scale Birth Scale by Bound Object Radius">
+                                    <WpfToolkit:SingleUpDown Value="{Binding ScaleBirthScaleByBoundObjectRadius, UpdateSourceTrigger=PropertyChanged}"
+                                                             HorizontalAlignment="Left"
+                                                             Width="150"/>
+                                </meta:ComponentProperty>
+                                <meta:ComponentProperty PropertyName="Scale Birth Scale by Bound Object Size">
+                                    <WpfToolkit:SingleUpDown Value="{Binding ScaleBirthScaleByBoundObjectSize, UpdateSourceTrigger=PropertyChanged}"
+                                                             HorizontalAlignment="Left"
+                                                             Width="150"/>
+                                </meta:ComponentProperty>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <meta:ComponentProperty PropertyName="Direction Velocity Scale">
+                                    <WpfToolkit:SingleUpDown Value="{Binding DirectionVelocityScale, UpdateSourceTrigger=PropertyChanged}"
+                                                             HorizontalAlignment="Left"
+                                                             Width="150"/>
+                                </meta:ComponentProperty>
+                                <meta:ComponentProperty PropertyName="Direction Velocity Min Scale">
+                                    <WpfToolkit:SingleUpDown Value="{Binding DirectionVelocityMinScale, UpdateSourceTrigger=PropertyChanged}"
+                                                             HorizontalAlignment="Left"
+                                                             Width="150"/>
+                                </meta:ComponentProperty>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10" HorizontalAlignment="Left">
+                            <Expander DataContext="{Binding FlexScaleBirthScale}">
+                                <Expander.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border VerticalAlignment="Center">
+                                            <TextBlock Text="Flex Scale Birth Scale"/>
+                                        </Border>
+                                        <CheckBox IsChecked="{Binding IsSome, UpdateSourceTrigger=PropertyChanged}"
+                                                  Content="Is Some"
+                                                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
+                                                  Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                </Expander.Header>
+                                <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                            </Expander>
+                        </MaterialDesign:ColorZone>
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10" HorizontalAlignment="Left">
+                            <Expander DataContext="{Binding FlexScaleEmitOffset}">
+                                <Expander.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border VerticalAlignment="Center">
+                                            <TextBlock Text="Flex Scale Emit Offset"/>
+                                        </Border>
+                                        <CheckBox IsChecked="{Binding IsSome, UpdateSourceTrigger=PropertyChanged}"
+                                                  Content="Is Some"
+                                                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
+                                                  Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                </Expander.Header>
+                                <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                            </Expander>
+                        </MaterialDesign:ColorZone>
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10" HorizontalAlignment="Left">
+                            <Expander DataContext="{Binding FlexInstanceScale}">
+                                <Expander.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border VerticalAlignment="Center">
+                                            <TextBlock Text="Flex Instance Scale"/>
+                                        </Border>
+                                        <CheckBox IsChecked="{Binding IsSome, UpdateSourceTrigger=PropertyChanged}"
+                                                  Content="Is Some"
+                                                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
+                                                  Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                </Expander.Header>
+                                <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                            </Expander>
+                        </MaterialDesign:ColorZone>
+
+                        <meta:ComponentProperty PropertyName="Scale Bias">
+                            <PrimitiveStructures:Vector2Editor Vector="{Binding ScaleBias, UpdateSourceTrigger=PropertyChanged}"/>
+                        </meta:ComponentProperty>
+                        <meta:ComponentProperty PropertyName="Linger Scale 0">
+                            <PrimitiveStructures:ValueVector3Editor Vector="{Binding LingerScale0, UpdateSourceTrigger=PropertyChanged}"/>
+                        </meta:ComponentProperty>
+                        <meta:ComponentProperty PropertyName="Emission Mesh Scale">
+                            <WpfToolkit:SingleUpDown Value="{Binding EmissionMeshScale, UpdateSourceTrigger=PropertyChanged}"
+                                                     Width="150"
+                                                     Margin="10"
+                                                     HorizontalAlignment="Left"/>
+                        </meta:ComponentProperty>
+                        
+                        <meta:ComponentProperty PropertyName="Scale 0">
+                            <PrimitiveStructures:ValueVector3Editor Vector="{Binding Scale0, UpdateSourceTrigger=PropertyChanged}"/>
+                        </meta:ComponentProperty>
+                        <meta:ComponentProperty PropertyName="Scale 1">
+                            <PrimitiveStructures:ValueFloatEditor Value="{Binding Scale1, UpdateSourceTrigger=PropertyChanged}"/>
+                        </meta:ComponentProperty>
+                        <meta:ComponentProperty PropertyName="Scale Override">
+                            <PrimitiveStructures:Vector3Editor Vector="{Binding ScaleOverride, UpdateSourceTrigger=PropertyChanged}"/>
+                        </meta:ComponentProperty>
+
+                        <meta:ComponentProperty PropertyName="Birth Scale 0">
+                            <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthScale0, UpdateSourceTrigger=PropertyChanged}"/>
+                        </meta:ComponentProperty>
+                        <meta:ComponentProperty PropertyName="Birth Scale 1">
+                            <PrimitiveStructures:ValueFloatEditor Value="{Binding BirthScale1, UpdateSourceTrigger=PropertyChanged}"/>
+                        </meta:ComponentProperty>
+                    </StackPanel>
+                </ScrollViewer>
             </MaterialDesign:ColorZone>
         </DataTemplate>
     </Window.Resources>
@@ -52,7 +188,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
-            <ListView SelectedItem="{Binding SelectedComplexEmitter}"
+            <ListView SelectedItem="{Binding SelectedComplexEmitter, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding ComplexEmitters}"
                       HorizontalContentAlignment="Stretch"
                       VerticalContentAlignment="Stretch">

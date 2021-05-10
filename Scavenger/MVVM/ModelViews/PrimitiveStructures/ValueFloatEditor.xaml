@@ -21,9 +21,6 @@
              d:DesignHeight="80" d:DesignWidth="1000">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Border VerticalAlignment="Center">
-                <TextBlock Text="{Binding PropertyName, RelativeSource={RelativeSource AncestorType=UserControl}}" Width="200" Margin="10"/>
-            </Border>
             <WpfToolkit:SingleUpDown Value="{Binding Value, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="10"
                                      Width="150"/>
             <ToggleButton Content="{MaterialDesign:PackIcon Kind=Timer, Size=21}"

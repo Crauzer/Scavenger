@@ -21,9 +21,6 @@
              d:DesignHeight="80" d:DesignWidth="1000">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Border VerticalAlignment="Center">
-                <TextBlock Text="{Binding PropertyName, RelativeSource={RelativeSource AncestorType=UserControl}}" Width="200" Margin="10"/>
-            </Border>
             <local:Vector2Editor Vector="{Binding Vector.ConstantValue, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"/>
             <ToggleButton Content="{MaterialDesign:PackIcon Kind=Timer, Size=21}"
                           Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"

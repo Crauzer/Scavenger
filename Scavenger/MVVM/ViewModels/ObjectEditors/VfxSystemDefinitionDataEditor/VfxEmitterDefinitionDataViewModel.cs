@@ -60,6 +60,9 @@ namespace Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor
             set
             {
                 this._selectedComponent = value;
+
+                this.System.SelectedComplexEmitter = this;
+
                 NotifyPropertyChanged();
             }
         }

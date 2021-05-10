@@ -21,8 +21,8 @@
              d:DesignHeight="80" d:DesignWidth="1000">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <WpfToolkit:UIntegerUpDown Value="{Binding FlexId, UpdateSourceTrigger=PropertyChanged}"/>
-            <local:ValueFloatEditor Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}"/>
+            <WpfToolkit:UIntegerUpDown Value="{Binding FlexValue.FlexId, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="50"/>
+            <local:ValueFloatEditor Value="{Binding FlexValue.Value, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </Grid>
 </UserControl>

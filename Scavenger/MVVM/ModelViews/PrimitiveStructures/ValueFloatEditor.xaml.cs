@@ -20,22 +20,11 @@ namespace Scavenger.MVVM.ModelViews.PrimitiveStructures
     /// </summary>
     public partial class ValueFloatEditor : UserControl, INotifyPropertyChanged
     {
-        public string PropertyName
-        {
-            get => (string)GetValue(PropertyNameProperty);
-            set => SetValue(PropertyNameProperty, value);
-        }
         public float Value
         {
             get => (float)GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
         }
-
-        public static readonly DependencyProperty PropertyNameProperty = DependencyProperty.Register(
-            "PropertyName",
-            typeof(string),
-            typeof(ValueFloatEditor),
-            new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.AffectsRender, OnPropertyNameChanged));
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             "Value",
@@ -50,11 +39,6 @@ namespace Scavenger.MVVM.ModelViews.PrimitiveStructures
             InitializeComponent();
         }
 
-        private static void OnPropertyNameChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
-        {
-            ValueFloatEditor control = (ValueFloatEditor)dependencyObject;
-            control.PropertyName = (string)eventArgs.NewValue;
-        }
         private static void OnValueChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
         {
             ValueFloatEditor control = (ValueFloatEditor)dependencyObject;

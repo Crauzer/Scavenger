@@ -18,18 +18,18 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <Border VerticalAlignment="Center">
-                <TextBlock Text="X" FontSize="20"/>
+                <TextBlock Text="X: " FontSize="15"/>
             </Border>
             <WpfToolkit:SingleUpDown Value="{Binding Vector.X, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="10"
                                      Width="150"/>
 
             <Border VerticalAlignment="Center">
-                <TextBlock Text="Y" FontSize="20"/>
+                <TextBlock Text="Y: " FontSize="15"/>
             </Border>
             <WpfToolkit:SingleUpDown Value="{Binding Vector.Y, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="10"
                                      Width="150"/>
             <Border VerticalAlignment="Center">
-                <TextBlock Text="Z" FontSize="20"/>
+                <TextBlock Text="Z: " FontSize="15"/>
             </Border>
             <WpfToolkit:SingleUpDown Value="{Binding Vector.Z, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="10"
                                      Width="150"/>

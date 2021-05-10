@@ -117,5 +117,13 @@ namespace Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor
             }
             catch (Exception) { }
         }
+
+        public VfxEmitterDefinitionData ToVfxEmitterDefinitionData()
+        {
+            return new VfxEmitterDefinitionData()
+            { 
+                
+            };
+        }
     }
 }

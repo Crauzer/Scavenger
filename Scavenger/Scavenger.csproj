@@ -37,6 +37,7 @@
   <ItemGroup>
     <PackageReference Include="CSharpImageLibrary" Version="4.2.0" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
+    <PackageReference Include="gong-wpf-dragdrop" Version="2.3.2" />
     <PackageReference Include="HelixToolkit.Wpf" Version="2.16.1" />
     <PackageReference Include="LeagueToolkit" Version="2.3.2" />
     <PackageReference Include="LeagueToolkit.Meta.Classes" Version="11.10.374.3777" />

@@ -9,7 +9,7 @@
              xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
              xmlns:Helix="http://helix-toolkit.org/wpf"
-             xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels"
+             xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels" xmlns:structures="clr-namespace:Scavenger.MVVM.ModelViews.Meta.Structures"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Regular"
              TextElement.FontSize="13"
@@ -22,12 +22,11 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <local:Vector3Editor Vector="{Binding Vector.ConstantValue, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"/>
-            <ToggleButton Content="{MaterialDesign:PackIcon Kind=Timer, Size=21}"
-                          Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                          IsChecked="True" Margin="15,0,0,0" />
-            <ToggleButton Content="{MaterialDesign:PackIcon Kind=Checkerboard, Size=21}"
-                          Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                          IsChecked="True" Margin="15,0,0,0" />
+            <Button Content="{MaterialDesign:PackIcon Kind=Timer, Size=21}"
+                    Margin="15,0,0,0" 
+                    Command="{x:Static MaterialDesign:DialogHost.OpenDialogCommand}"
+                    CommandParameter="{Binding Vector.Dynamics, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}">
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

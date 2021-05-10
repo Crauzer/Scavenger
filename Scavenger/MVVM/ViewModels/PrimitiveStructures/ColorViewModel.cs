@@ -1,6 +1,7 @@
 ﻿using LeagueToolkit.Helpers.Structures;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
@@ -56,10 +57,21 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
             this.B = color.B;
             this.A = color.A;
         }
-        
+        public ColorViewModel(Vector4 color)
+        {
+            this.R = color.X;
+            this.G = color.Y;
+            this.B = color.Z;
+            this.A = color.W;
+        }
+
         public Color ToColor()
         {
             return new Color(this.R, this.G, this.B, this.A);
+        }
+        public Vector4 ToVector4()
+        {
+            return new Vector4(this.R, this.G, this.B, this.A);
         }
     }
 }

@@ -1427,7 +1427,7 @@
                         </Grid.RowDefinitions>
                         <MaterialDesign:ColorZone Grid.Row="0" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
                             <StackPanel Orientation="Horizontal">
-                                <TextBox Text="{Binding SelectedBinTree.ObjectFilter, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Delay=400}"
+                                <TextBox Text="{Binding SelectedBinTree.ObjectFilter, UpdateSourceTrigger=PropertyChanged, Delay=400}"
                                          MaterialDesign:HintAssist.Hint="Object Filter"
                                          MaterialDesign:HintAssist.IsFloating="True"
                                          Margin="10" MinWidth="500"/>
@@ -1483,11 +1483,11 @@
                                                             <TreeViewItem.Header>
                                                                 <StackPanel Orientation="Vertical">
                                                                     <StackPanel Orientation="Horizontal">
-                                                                        <TextBox Text="{Binding PropertyFilter, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Delay=400}"
+                                                                        <TextBox Text="{Binding PropertyFilter, UpdateSourceTrigger=PropertyChanged, Delay=400}"
                                                                                  MaterialDesign:HintAssist.Hint="Property Filter"
                                                                                  MaterialDesign:HintAssist.IsFloating="True"
                                                                                  Margin="5" MinWidth="300"/>
-                                                                        <TextBox Text="{Binding TextValueFilter, UpdateSourceTrigger=PropertyChanged, IsAsync=True, Delay=400}"
+                                                                        <TextBox Text="{Binding TextValueFilter, UpdateSourceTrigger=PropertyChanged, Delay=400}"
                                                                                  MaterialDesign:HintAssist.Hint="Text Value Filter"
                                                                                  MaterialDesign:HintAssist.IsFloating="True"
                                                                                  Margin="5" MinWidth="300"/>

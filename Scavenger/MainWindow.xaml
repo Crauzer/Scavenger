@@ -1435,8 +1435,8 @@
                         </MaterialDesign:ColorZone>
                         <MaterialDesign:ColorZone Grid.Row="1" MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
                             <TabControl SelectedItem="{Binding SelectedBinTree, UpdateSourceTrigger=PropertyChanged}"
-                                    ItemsSource="{Binding BinTrees, UpdateSourceTrigger=PropertyChanged}"
-                                    Style="{StaticResource MaterialDesignTabControl}">
+                                        ItemsSource="{Binding BinTrees, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+                                        Style="{StaticResource MaterialDesignTabControl}">
                                 <TabControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -1471,7 +1471,7 @@
                                 </TabControl.ItemTemplate>
                                 <TabControl.ContentTemplate>
                                     <DataTemplate>
-                                        <TreeView ItemsSource="{Binding Objects, UpdateSourceTrigger=PropertyChanged}"
+                                        <TreeView ItemsSource="{Binding Objects, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
                                                   VirtualizingStackPanel.IsVirtualizing="True"
                                                   MaterialDesign:RippleAssist.IsDisabled="True">
                                             <TreeView.ItemTemplate>

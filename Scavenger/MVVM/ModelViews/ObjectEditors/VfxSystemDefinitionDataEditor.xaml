@@ -188,7 +188,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
-            <ListView SelectedItem="{Binding SelectedComplexEmitter, UpdateSourceTrigger=PropertyChanged}"
+            <ListView SelectedItem="{Binding SelectedComplexEmitter, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
                       ItemsSource="{Binding ComplexEmitters}"
                       HorizontalContentAlignment="Stretch"
                       VerticalContentAlignment="Stretch">
@@ -225,7 +225,7 @@
                                         </DockPanel>
                                     </StackPanel>
                                     <ListView SelectedItem="{Binding SelectedComponent, UpdateSourceTrigger=PropertyChanged}"
-                                              ItemsSource="{Binding Components, UpdateSourceTrigger=PropertyChanged}"
+                                              ItemsSource="{Binding Components, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
                                               IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
                                               HorizontalContentAlignment="Stretch"
                                               VerticalContentAlignment="Stretch">

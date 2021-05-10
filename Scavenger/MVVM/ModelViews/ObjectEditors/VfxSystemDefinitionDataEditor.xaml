@@ -226,6 +226,7 @@
                                     </StackPanel>
                                     <ListView SelectedItem="{Binding SelectedComponent, UpdateSourceTrigger=PropertyChanged}"
                                               ItemsSource="{Binding Components, UpdateSourceTrigger=PropertyChanged}"
+                                              IsEnabled="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
                                               HorizontalContentAlignment="Stretch"
                                               VerticalContentAlignment="Stretch">
                                         <ListView.ItemTemplate>
@@ -274,9 +275,12 @@
                     <MaterialDesign:Chip Content="{Binding SelectedComplexEmitter.SelectedComponent.Name}" FontSize="20"/>
                 </StackPanel>
             </Grid>
-            <ContentPresenter Grid.Row="1"
-                              Content="{Binding SelectedComplexEmitter.SelectedComponent}"
+            <Grid DataContext="{Binding SelectedComplexEmitter, UpdateSourceTrigger=PropertyChanged}"
+                  Grid.Row="1">
+                <ContentControl 
+                              Content="{Binding SelectedComponent, UpdateSourceTrigger=PropertyChanged}"
                               ContentTemplateSelector="{StaticResource EmitterComponentTemplateSelector}"/>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="3">
 

@@ -1,4 +1,6 @@
-﻿using MaterialDesignExtensions.Controls;
+﻿using LeagueToolkit.Meta.Classes;
+using MaterialDesignExtensions.Controls;
+using Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -25,7 +25,14 @@ namespace Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor
             get => this._selectedComplexEmitter;
             set
             {
+                if(this._selectedComplexEmitter is not null)
+                {
+                    this._selectedComplexEmitter.IsSelected = false;
+                }
+                
+                value.IsSelected = true;
                 this._selectedComplexEmitter = value;
+
                 NotifyPropertyChanged();
             }
         }

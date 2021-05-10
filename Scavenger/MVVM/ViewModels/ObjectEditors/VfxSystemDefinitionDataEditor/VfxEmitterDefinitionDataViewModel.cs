@@ -16,6 +16,18 @@ namespace Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor
 {
     public class VfxEmitterDefinitionDataViewModel : PropertyNotifier
     {
+        public bool IsSelected
+        {
+            get => this._isSelected;
+            set
+            {
+                this._isSelected = value;
+
+                this.SelectedComponent = null;
+
+                NotifyPropertyChanged();
+            }
+        }
         public VfxSystemDefinitionDataViewModel System { get; }
 
         public BitmapSource PreviewImage
@@ -61,8 +73,6 @@ namespace Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor
             {
                 this._selectedComponent = value;
 
-                this.System.SelectedComplexEmitter = this;
-
                 NotifyPropertyChanged();
             }
         }
@@ -76,6 +86,8 @@ namespace Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor
             }
         }
 
+        private bool _isSelected;
+
         private BitmapSource _previewImage;
         private string _emitterName;
         private bool _isDisabled;
@@ -83,8 +95,6 @@ namespace Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor
 
         private EmitterComponent _selectedComponent;
         private ObservableCollection<EmitterComponent> _components = new();
-
-        public ICommand AddComponentCommand => new RelayCommand(OnAddComponent);
 
         public VfxEmitterDefinitionDataViewModel(VfxSystemDefinitionDataViewModel system, VfxEmitterDefinitionData vfxEmitterDefinitionData)
         {
@@ -106,11 +116,6 @@ namespace Scavenger.MVVM.ViewModels.ObjectEditors.VfxSystemDefinitionDataEditor
                 this.PreviewImage = new ImageEngineImage(imageStream).GetWPFBitmap(ShowAlpha:true);
             }
             catch (Exception) { }
-        }
-
-        private void OnAddComponent(object o)
-        {
-
         }
     }
 }

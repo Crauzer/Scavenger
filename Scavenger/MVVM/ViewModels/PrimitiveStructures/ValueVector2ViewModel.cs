@@ -1,4 +1,5 @@
 ﻿using LeagueToolkit.Meta.Classes;
+using Scavenger.MVVM.ViewModels.Meta.Structures;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,19 +17,31 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
                 NotifyPropertyChanged();
             }
         }
+        public ValueVector2Dynamics Dynamics
+        {
+            get => this._dynamics;
+            set
+            {
+                this._dynamics = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private Vector2ViewModel _constantValue;
+        private ValueVector2Dynamics _dynamics;
 
-        public ValueVector2ViewModel(ValueVector2 valueVector2)
+        public ValueVector2ViewModel(ValueVector2 vector)
         {
-            this.ConstantValue = new Vector2ViewModel(valueVector2.ConstantValue);
+            this.ConstantValue = new Vector2ViewModel(vector.ConstantValue);
+            this.Dynamics = new ValueVector2Dynamics(vector.Dynamics);
         }
 
         public ValueVector2 ToValueVector2()
         {
             return new ValueVector2() 
             {
-                ConstantValue = this.ConstantValue.ToVector()
+                ConstantValue = this.ConstantValue.ToVector(),
+                Dynamics = this.Dynamics.ToVfxAnimatedVector2fVariableData()
             };
         }
     }

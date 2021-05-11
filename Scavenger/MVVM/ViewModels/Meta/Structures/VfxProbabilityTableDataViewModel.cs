@@ -1,7 +1,9 @@
 ﻿using LeagueToolkit.Meta;
 using LeagueToolkit.Meta.Classes;
+using Scavenger.MVVM.Commands;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace Scavenger.MVVM.ViewModels.Meta.Structures
 {
@@ -29,13 +31,32 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         private float _singleValue;
         private ObservableCollection<VfxProbabilityTableDataKeyViewModel> _keys = new();
 
+        public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
+        public ICommand RemoveKeyCommand => new RelayCommand(OnRemoveKey);
+
+        public VfxProbabilityTableDataViewModel() { }
         public VfxProbabilityTableDataViewModel(VfxProbabilityTableData probabilityTableData)
         {
-            this.SingleValue = probabilityTableData.SingleValue;
-
-            for (int i = 0; i < probabilityTableData.KeyTimes.Count; i++)
+            if (probabilityTableData is not null)
             {
-                this.Keys.Add(new VfxProbabilityTableDataKeyViewModel(probabilityTableData.KeyTimes[i], probabilityTableData.KeyValues[i]));
+                this.SingleValue = probabilityTableData.SingleValue;
+
+                for (int i = 0; i < probabilityTableData.KeyTimes.Count; i++)
+                {
+                    this.Keys.Add(new VfxProbabilityTableDataKeyViewModel(probabilityTableData.KeyTimes[i], probabilityTableData.KeyValues[i]));
+                }
+            }
+        }
+
+        private void OnAddKey(object parameter)
+        {
+            this.Keys.Add(new VfxProbabilityTableDataKeyViewModel(0f, 0f));
+        }
+        private void OnRemoveKey(object parameter)
+        {
+            if (parameter is VfxProbabilityTableDataKeyViewModel key)
+            {
+                this.Keys.Remove(key);
             }
         }
 

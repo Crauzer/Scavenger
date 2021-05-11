@@ -21,14 +21,12 @@
              d:DesignHeight="80" d:DesignWidth="1000">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <WpfToolkit:SingleUpDown Value="{Binding Value, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="10"
+            <WpfToolkit:SingleUpDown Value="{Binding Value.ConstantValue, RelativeSource={RelativeSource AncestorType=UserControl}}" Margin="10"
                                      Width="150"/>
-            <ToggleButton Content="{MaterialDesign:PackIcon Kind=Timer, Size=21}"
-                          Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                          IsChecked="True" Margin="15,0,0,0" />
-            <ToggleButton Content="{MaterialDesign:PackIcon Kind=Checkerboard, Size=21}"
-                          Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                          IsChecked="True" Margin="15,0,0,0" />
+            <Button Content="{MaterialDesign:PackIcon Kind=Timer, Size=21}"
+                    Margin="15,0,0,0" 
+                    Command="{x:Static MaterialDesign:DialogHost.OpenDialogCommand}"
+                    CommandParameter="{Binding Value.Dynamics, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </Grid>
 </UserControl>

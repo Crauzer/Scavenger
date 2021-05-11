@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="Scavenger.MVVM.ModelViews.Meta.Structures.ProbabilityTableEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scavenger.MVVM.ModelViews.Meta.Structures"
+             xmlns:TemplateSelectors="clr-namespace:Scavenger.MVVM.TemplateSelectors"
+             xmlns:WpfToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             xmlns:Helix="http://helix-toolkit.org/wpf"
+             xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels" 
+             xmlns:structures="clr-namespace:Scavenger.MVVM.ModelViews.Meta.Structures"
+             xmlns:dd="urn:gong-wpf-dragdrop" xmlns:structures1="clr-namespace:Scavenger.MVVM.ViewModels.Meta.Structures"
+             d:DataContext="{d:DesignInstance Type=structures1:VfxProbabilityTableDataViewModel}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{MaterialDesign:MaterialDesignFont}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10">
+            <DockPanel Margin="10">
+                <Border VerticalAlignment="Center" DockPanel.Dock="Left">
+                    <TextBlock Text="Keys:" FontSize="15"/>
+                </Border>
+                <Button Content="{MaterialDesign:PackIcon Kind=Plus}"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Command="{Binding AddKeyCommand}"
+                        Margin="10"
+                        DockPanel.Dock="Right"/>
+                <WpfToolkit:SingleUpDown Value="{Binding SingleValue, UpdateSourceTrigger=PropertyChanged}"
+                                         ToolTip="Single Value"
+                                         DockPanel.Dock="Right"
+                                         Margin="15"
+                                         Width="100"/>
+            </DockPanel>
+            <ListView ItemsSource="{Binding Keys, UpdateSourceTrigger=PropertyChanged, IsAsync=True}"
+                      dd:DragDrop.IsDragSource="True"
+                      dd:DragDrop.IsDropTarget="True"
+                      dd:DragDrop.UseDefaultDragAdorner="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Border VerticalAlignment="Center">
+                                <TextBlock Text="Time: "/>
+                            </Border>
+                            <WpfToolkit:SingleUpDown Value="{Binding Time, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="Time"
+                                                     Margin="10,10,30,10"
+                                                     Maximum="1"
+                                                     Minimum="0"
+                                                     Width="75"/>
+                            <WpfToolkit:SingleUpDown Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                                                     ToolTip="Value"
+                                                     Margin="10"
+                                                     Width="100"/>
+                            <Button Content="{MaterialDesign:PackIcon Kind=Minus}"
+                                    Style="{StaticResource MaterialDesignFlatAccentButton}"
+                                    Margin="5"
+                                    Command="{Binding DataContext.RemoveKeyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ProbabilityTableEditor}}}"
+                                    CommandParameter="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>

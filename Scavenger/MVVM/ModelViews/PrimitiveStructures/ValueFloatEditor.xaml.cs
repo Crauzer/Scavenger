@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scavenger.MVVM.ViewModels.PrimitiveStructures;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -20,17 +21,17 @@ namespace Scavenger.MVVM.ModelViews.PrimitiveStructures
     /// </summary>
     public partial class ValueFloatEditor : UserControl, INotifyPropertyChanged
     {
-        public float Value
+        public ValueFloatViewModel Value
         {
-            get => (float)GetValue(ValueProperty);
+            get => (ValueFloatViewModel)GetValue(ValueProperty);
             set => SetValue(ValueProperty, value);
         }
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             "Value",
-            typeof(float),
+            typeof(ValueFloatViewModel),
             typeof(ValueFloatEditor),
-            new FrameworkPropertyMetadata(default(float), FrameworkPropertyMetadataOptions.AffectsRender, OnValueChanged));
+            new FrameworkPropertyMetadata(default(ValueFloatViewModel), FrameworkPropertyMetadataOptions.AffectsRender, OnValueChanged));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -42,7 +43,10 @@ namespace Scavenger.MVVM.ModelViews.PrimitiveStructures
         private static void OnValueChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
         {
             ValueFloatEditor control = (ValueFloatEditor)dependencyObject;
-            control.Value = (float)eventArgs.NewValue;
+            if(eventArgs.NewValue is ValueFloatViewModel value)
+            {
+                control.Value = value;
+            }
         }
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

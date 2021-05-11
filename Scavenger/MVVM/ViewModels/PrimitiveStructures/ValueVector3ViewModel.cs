@@ -30,17 +30,18 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
         private Vector3ViewModel _constantValue;
         private ValueVector3Dynamics _dynamics;
 
-        public ValueVector3ViewModel(ValueVector3 valueVector3)
+        public ValueVector3ViewModel(ValueVector3 vector)
         {
-            this.ConstantValue = new Vector3ViewModel(valueVector3.ConstantValue);
-            this.Dynamics = new ValueVector3Dynamics(valueVector3.Dynamics);
+            this.ConstantValue = new Vector3ViewModel(vector.ConstantValue);
+            this.Dynamics = new ValueVector3Dynamics(vector.Dynamics);
         }
 
         public ValueVector3 ToValueVector3()
         {
             return new ValueVector3() 
             {
-                ConstantValue = this.ConstantValue.ToVector()
+                ConstantValue = this.ConstantValue.ToVector(),
+                Dynamics = this.Dynamics.ToVfxAnimatedVector3fVariableData()
             };
         }
     }

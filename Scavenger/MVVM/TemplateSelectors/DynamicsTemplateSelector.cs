@@ -15,7 +15,10 @@ namespace Scavenger.MVVM.TemplateSelectors
             {
                 return item switch
                 {
-                    ValueVector3Dynamics dynamics => element.FindResource("ValueVector3DynamicsTemplate") as DataTemplate
+                    ValueFloatDynamics _ => element.FindResource("ValueFloatDynamicsTemplate") as DataTemplate,
+                    ValueVector2Dynamics _ => element.FindResource("ValueVector2DynamicsTemplate") as DataTemplate,
+                    ValueVector3Dynamics _ => element.FindResource("ValueVector3DynamicsTemplate") as DataTemplate,
+                    ValueColorDynamics _ => element.FindResource("ValueColorDynamicsTemplate") as DataTemplate
                 };
             }
 

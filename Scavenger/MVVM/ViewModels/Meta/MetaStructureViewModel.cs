@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Scavenger.MVVM.ViewModels.Meta
+﻿namespace Scavenger.MVVM.ViewModels.Meta
 {
-    public class MetaStructureViewModel<T> : PropertyNotifier where T : PropertyNotifier
+    public class MetaStructureViewModel<T> : PropertyNotifier, ISomeableProperty where T : PropertyNotifier, new()
     {
         public bool IsSome
         {
@@ -31,11 +27,17 @@ namespace Scavenger.MVVM.ViewModels.Meta
         public MetaStructureViewModel()
         {
             this.IsSome = false;
+            this.Structure = new T();
         }
         public MetaStructureViewModel(T structure)
         {
             this.IsSome = structure is not null;
             this.Structure = structure;
         }
+    }
+
+    public interface ISomeableProperty
+    {
+
     }
 }

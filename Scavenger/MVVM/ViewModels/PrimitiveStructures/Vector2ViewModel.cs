@@ -28,6 +28,7 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
 
         public delegate void ComponentChanged();
 
+        public Vector2ViewModel() { }
         public Vector2ViewModel(Vector2 vector)
         {
             this.X = vector.X;

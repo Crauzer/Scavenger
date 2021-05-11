@@ -21,6 +21,7 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
 
         private MediaColor _color;
 
+        public ColorViewModel() { }
         public ColorViewModel(Color color)
         {
             this.Color = new MediaColor()

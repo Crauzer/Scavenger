@@ -30,6 +30,11 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
         private ColorViewModel _constantValue;
         private ValueColorDynamics _dynamics;
         
+        public ValueColorViewModel()
+        {
+            this.ConstantValue = new ColorViewModel();
+            this.Dynamics = new ValueColorDynamics();
+        }
         public ValueColorViewModel(ValueColor valueColor)
         {
             this.ConstantValue = new ColorViewModel(valueColor.ConstantValue);

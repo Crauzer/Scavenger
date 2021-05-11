@@ -27,6 +27,10 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
         private float _constantValue;
         private ValueFloatDynamics _dynamics;
 
+        public ValueFloatViewModel()
+        {
+            this.Dynamics = new ValueFloatDynamics();
+        }
         public ValueFloatViewModel(ValueFloat valueFloat)
         {
             this.ConstantValue = valueFloat.ConstantValue;

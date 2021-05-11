@@ -109,21 +109,11 @@
                         </MaterialDesign:ColorZone>
 
                         <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10" HorizontalAlignment="Left">
-                            <Expander DataContext="{Binding FlexScaleBirthScale}">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border VerticalAlignment="Center">
-                                            <TextBlock Text="Flex Scale Birth Scale"/>
-                                        </Border>
-                                        <CheckBox IsChecked="{Binding IsSome, UpdateSourceTrigger=PropertyChanged}"
-                                                  Content="Is Some"
-                                                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
-                                                  Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                </Expander.Header>
-                                <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-                            </Expander>
+                            <Meta:SomeablePropertyEditor PropertyName="Flex Scale Birth Scale" Someable="{Binding FlexScaleBirthScale}">
+                                <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding FlexScaleBirthScale.Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                            </Meta:SomeablePropertyEditor>
                         </MaterialDesign:ColorZone>
+                        
                         <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10" HorizontalAlignment="Left">
                             <Expander DataContext="{Binding FlexScaleEmitOffset}">
                                 <Expander.Header>

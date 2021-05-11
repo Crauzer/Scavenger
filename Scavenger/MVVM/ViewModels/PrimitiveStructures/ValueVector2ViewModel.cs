@@ -2,6 +2,7 @@
 using Scavenger.MVVM.ViewModels.Meta.Structures;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
@@ -30,6 +31,11 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
         private Vector2ViewModel _constantValue;
         private ValueVector2Dynamics _dynamics;
 
+        public ValueVector2ViewModel()
+        {
+            this.ConstantValue = new Vector2ViewModel(new Vector2());
+            this.Dynamics = new ValueVector2Dynamics();
+        }
         public ValueVector2ViewModel(ValueVector2 vector)
         {
             this.ConstantValue = new Vector2ViewModel(vector.ConstantValue);

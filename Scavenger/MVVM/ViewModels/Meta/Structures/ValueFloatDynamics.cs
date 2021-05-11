@@ -41,6 +41,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
         public ICommand RemoveKeyCommand => new RelayCommand(OnRemoveKey);
 
+        public ValueFloatDynamics() { }
         public ValueFloatDynamics(VfxAnimatedFloatVariableData dynamics)
         {
             if (dynamics is not null)

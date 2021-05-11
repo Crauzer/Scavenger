@@ -30,6 +30,11 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
         private Vector3ViewModel _constantValue;
         private ValueVector3Dynamics _dynamics;
 
+        public ValueVector3ViewModel()
+        {
+            this.ConstantValue = new Vector3ViewModel();
+            this.Dynamics = new ValueVector3Dynamics();
+        }
         public ValueVector3ViewModel(ValueVector3 vector)
         {
             this.ConstantValue = new Vector3ViewModel(vector.ConstantValue);

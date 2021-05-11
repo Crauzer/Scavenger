@@ -30,6 +30,10 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
         private ValueVector2ViewModel _value;
         private uint _flexId;
 
+        public FlexValueVector2ViewModel() 
+        {
+            this.Value = new ValueVector2ViewModel();
+        }
         public FlexValueVector2ViewModel(FlexValueVector2 vector)
         {
             this.Value = new ValueVector2ViewModel(vector.Value);

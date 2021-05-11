@@ -73,6 +73,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
         public ICommand RemoveKeyCommand => new RelayCommand(OnRemoveKey);
 
+        public ValueColorDynamics() { }
         public ValueColorDynamics(VfxAnimatedColorVariableData dynamics)
         {
             if (dynamics is not null)

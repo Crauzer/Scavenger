@@ -63,6 +63,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
         public ICommand RemoveKeyCommand => new RelayCommand(OnRemoveKey);
 
+        public ValueVector3Dynamics() { }
         public ValueVector3Dynamics(VfxAnimatedVector3fVariableData dynamics)
         {
             if (dynamics is not null)

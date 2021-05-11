@@ -29,6 +29,7 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
         private float _value;
         private uint _flexId;
 
+        public FlexTypeFloatViewModel() { }
         public FlexTypeFloatViewModel(FlexTypeFloat flexTypeFloat)
         {
             this.Value = flexTypeFloat.Value;

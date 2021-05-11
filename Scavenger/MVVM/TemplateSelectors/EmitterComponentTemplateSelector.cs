@@ -16,7 +16,7 @@ namespace Scavenger.MVVM.TemplateSelectors
             {
                 return emitterComponent switch
                 {
-                    //BirthEmitterComponent _ => element.FindResource("BirthEmitterComponentTemplate") as DataTemplate,
+                    BirthEmitterComponent _ => element.FindResource("BirthEmitterComponentTemplate") as DataTemplate,
                     //PositionEmitterComponent _ => element.FindResource("PositionEmitterComponentTemplate") as DataTemplate,
                     //RotationEmitterComponent _ => element.FindResource("RotationEmitterComponentTemplate") as DataTemplate,
                     ScaleEmitterComponent _ => element.FindResource("ScaleEmitterComponentTemplate") as DataTemplate,

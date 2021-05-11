@@ -24,20 +24,23 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:SomeablePropertyEditor}">
-                        <Expander>
-                            <Expander.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <Border VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding PropertyName, RelativeSource={RelativeSource TemplatedParent}}"/>
-                                    </Border>
-                                    <CheckBox IsChecked="{Binding Someable.IsSome, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
+                        <MaterialDesign:Card Margin="10">
+                            <Expander>
+                                <Expander.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding PropertyName, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                        </Border>
+                                        <CheckBox IsChecked="{Binding Someable.IsSome, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
                                                   Content="Is Some"
                                                   Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
                                                   Margin="10,0,0,0"/>
-                                </StackPanel>
-                            </Expander.Header>
-                            <ContentPresenter DataContext="{Binding Someable, RelativeSource={RelativeSource TemplatedParent}}"/>
-                        </Expander>
+                                    </StackPanel>
+                                </Expander.Header>
+                                <ContentPresenter DataContext="{Binding Someable, RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Margin="10"/>
+                            </Expander>
+                        </MaterialDesign:Card>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

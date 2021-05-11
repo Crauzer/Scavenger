@@ -196,9 +196,116 @@
             </MaterialDesign:ColorZone>
         </DataTemplate>
         <DataTemplate x:Key="BirthEmitterComponentTemplate">
-            <MaterialDesign:ColorZone>
-                <ScrollViewer>
-                    <StackPanel>
+            <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="5">
+                <ScrollViewer MaxHeight="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualHeight}">
+                    <StackPanel Orientation="Vertical" Margin="20">
+
+                        <Meta:ComponentProperty PropertyName="Birth Frame Rate">
+                            <PrimitiveStructures:ValueFloatEditor Value="{Binding BirthFrameRate, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Meta:ComponentProperty>
+
+                        <Meta:SomeablePropertyEditor PropertyName="Flex Birth Translation" Someable="{Binding FlexBirthTranslation, UpdateSourceTrigger=PropertyChanged}">
+                            <PrimitiveStructures:FlexValueVector3Editor FlexValue="{Binding FlexBirthTranslation.Structure, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Meta:SomeablePropertyEditor>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <Meta:ComponentProperty PropertyName="Birth Rotation 0">
+                                    <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthRotation0, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:ComponentProperty PropertyName="Birth Rotation 1">
+                                    <PrimitiveStructures:ValueFloatEditor Value="{Binding BirthRotation1, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <Meta:ComponentProperty PropertyName="Birth Velocity">
+                                    <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthVelocity, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:SomeablePropertyEditor PropertyName="Flex Birth Velocity" Someable="{Binding FlexBirthVelocity, UpdateSourceTrigger=PropertyChanged}">
+                                    <PrimitiveStructures:FlexValueVector3Editor FlexValue="{Binding FlexBirthVelocity.Structure, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:SomeablePropertyEditor>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <Meta:ComponentProperty PropertyName="Birth Orbital Velocity">
+                            <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthOrbitalVelocity, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Meta:ComponentProperty>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <Meta:ComponentProperty PropertyName="Birth Rotational Velocity 0">
+                                    <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthRotationalVelocity0, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:SomeablePropertyEditor PropertyName="Flex Birth Rotational Velocity 0" Someable="{Binding FlexBirthRotationalVelocity0, UpdateSourceTrigger=PropertyChanged}">
+                                    <PrimitiveStructures:FlexValueVector3Editor FlexValue="{Binding FlexBirthRotationalVelocity0.Structure, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:SomeablePropertyEditor>
+
+                                <Meta:ComponentProperty PropertyName="Birth Rotational Velocity 1">
+                                    <PrimitiveStructures:ValueFloatEditor Value="{Binding BirthRotationalVelocity1, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:SomeablePropertyEditor PropertyName="Flex Birth Rotational Velocity 1" Someable="{Binding FlexBirthRotationalVelocity1, UpdateSourceTrigger=PropertyChanged}">
+                                    <PrimitiveStructures:FlexValueFloatEditor FlexValue="{Binding FlexBirthRotationalVelocity1.Structure, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:SomeablePropertyEditor>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <Meta:ComponentProperty PropertyName="Birth Acceleration">
+                            <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthAcceleration, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Meta:ComponentProperty>
+
+                        <Meta:ComponentProperty PropertyName="Birth Rotational Acceleration">
+                            <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthRotationalAcceleration, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Meta:ComponentProperty>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <Meta:ComponentProperty PropertyName="Birth Uv Offset">
+                                    <PrimitiveStructures:ValueVector2Editor Vector="{Binding BirthUvOffset, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:SomeablePropertyEditor PropertyName="Flex Birth Uv Offset" Someable="{Binding FlexBirthUvOffset, UpdateSourceTrigger=PropertyChanged}">
+                                    <PrimitiveStructures:FlexValueVector2Editor FlexValue="{Binding FlexBirthUvOffset.Structure, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:SomeablePropertyEditor>
+                                <Meta:ComponentProperty PropertyName="Birth Uv Offset Mult">
+                                    <PrimitiveStructures:ValueVector2Editor Vector="{Binding BirthUvOffsetMult, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <Meta:ComponentProperty PropertyName="Birth Uv Rotate Rate">
+                                    <PrimitiveStructures:ValueFloatEditor Value="{Binding BirthUvRotateRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:ComponentProperty PropertyName="Birth Uv Rotate Rate Mult">
+                                    <PrimitiveStructures:ValueFloatEditor Value="{Binding BirthUvRotateRateMult, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10">
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <Meta:ComponentProperty PropertyName="Birth Uv Scroll Rate">
+                                    <PrimitiveStructures:ValueVector2Editor Vector="{Binding BirthUvScrollRate, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:SomeablePropertyEditor PropertyName="Flex Birth Uv Scroll Rate" Someable="{Binding FlexBirthUvScrollRate, UpdateSourceTrigger=PropertyChanged}">
+                                    <PrimitiveStructures:FlexValueVector2Editor FlexValue="{Binding FlexBirthUvScrollRate.Structure, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:SomeablePropertyEditor>
+
+                                <Meta:ComponentProperty PropertyName="Birth Uv Scroll Rate Mult">
+                                    <PrimitiveStructures:ValueVector2Editor Vector="{Binding BirthUvScrollRateMult, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:SomeablePropertyEditor PropertyName="Flex Birth Uv Scroll Rate Mult" Someable="{Binding FlexBirthUvScrollRateMult, UpdateSourceTrigger=PropertyChanged}">
+                                    <PrimitiveStructures:FlexValueVector2Editor FlexValue="{Binding FlexBirthUvScrollRateMult.Structure, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:SomeablePropertyEditor>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <Meta:ComponentProperty PropertyName="Birth Rotational Acceleration">
+                            <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthRotationalAcceleration, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Meta:ComponentProperty>
 
                     </StackPanel>
                 </ScrollViewer>

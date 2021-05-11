@@ -9,8 +9,8 @@
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:MaterialDesignExtensions="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
         xmlns:Helix="http://helix-toolkit.org/wpf"
-        xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels" xmlns:ColorPicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+                                         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
@@ -451,10 +451,6 @@
                     <StackPanel Orientation="Horizontal" Margin="10,0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
                     </StackPanel>
-                    <CheckBox Content="Is Color" IsChecked="{Binding IsColorMode, UpdateSourceTrigger=PropertyChanged}"/>
-                    <StackPanel Orientation="Horizontal" Margin="10,0">
-                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="2" Margin="8,0"/>
-                    </StackPanel>
                     <WpfToolkit:SingleUpDown Value="{Binding X, UpdateSourceTrigger=PropertyChanged}" 
                                              MaterialDesign:HintAssist.Hint="X" Margin="10,0,0,0"
                                              MinWidth="150"
@@ -479,13 +475,9 @@
                                              Background="{DynamicResource MaterialDesignPaper}"
                                              BorderBrush="{DynamicResource MaterialDesignTextFieldBoxBackground}"
                                              Foreground="{DynamicResource MaterialDesignBodyLight}"/>
-                    <WpfToolkit:ColorCanvas SelectedColor="{Binding SelectedColor, UpdateSourceTrigger=PropertyChanged}"
-                                            Visibility="{Binding IsColorMode, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"
-                                            Margin="10,0,0,0"
-                                            MinWidth="150"
-                                            Background="{DynamicResource MaterialDesignPaper}"
-                                            BorderBrush="{DynamicResource MaterialDesignTextFieldBoxBackground}"
-                                            Foreground="{DynamicResource MaterialDesignBodyLight}"/>
+                    <ColorPicker:PortableColorPicker ShowAlpha="True" Style="{StaticResource DefaultColorPickerStyle}"
+                                                     SelectedColor="{Binding SelectedColor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                     Margin="10"/>
                 </StackPanel>
                 <MaterialDesign:ColorZone.ContextMenu>
                     <ContextMenu>

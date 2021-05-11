@@ -178,7 +178,7 @@ namespace Scavenger.MVVM.ViewModels
 
                     foreach (PropertyInfo propertyInfo in parentMetaClassType.GetProperties())
                     {
-                        MetaPropertyAttribute metaPropertyAttribute = propertyInfo.GetCustomAttribute(typeof(MetaPropertyAttribute)) as MetaPropertyAttribute;
+                        MetaPropertyAttribute metaPropertyAttribute = propertyInfo.GetCustomAttribute<MetaPropertyAttribute>();
 
                         if (metaPropertyAttribute.NameHash == this.NameHash)
                         {
@@ -210,7 +210,7 @@ namespace Scavenger.MVVM.ViewModels
         {
             foreach (PropertyInfo propertyInfo in parentMetaClassType.GetProperties())
             {
-                MetaPropertyAttribute metaPropertyAttribute = propertyInfo.GetCustomAttribute(typeof(MetaPropertyAttribute)) as MetaPropertyAttribute;
+                MetaPropertyAttribute metaPropertyAttribute = propertyInfo.GetCustomAttribute<MetaPropertyAttribute>();
                 if (metaPropertyAttribute.NameHash == this.NameHash)
                 {
                     return propertyInfo;

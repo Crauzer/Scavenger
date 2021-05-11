@@ -242,6 +242,7 @@ namespace Scavenger
                 && (originalSource.DataContext is BinTreeContainerViewModel || originalSource.DataContext is BinTreeUnorderedContainerViewModel))
             {
                 treeViewItem.IsExpanded = false;
+                e.Handled = true;
             }
         }
         private void OnBinTreeObjectDoubleClick(object sender, MouseButtonEventArgs e)
@@ -253,6 +254,7 @@ namespace Scavenger
                 && originalSource.DataContext is BinTreeObjectViewModel)
             {
                 treeViewItem.IsExpanded = false;
+                e.Handled = true;
             }
         }
         private void OnBinTreeStructureDoubleClick(object sender, MouseButtonEventArgs e)
@@ -264,6 +266,7 @@ namespace Scavenger
                 && (originalSource.DataContext is BinTreeStructureViewModel || originalSource.DataContext is BinTreeEmbeddedViewModel))
             {
                 treeViewItem.IsExpanded = false;
+                e.Handled = true;
             }
         }
         private void OnBinTreeMapDoubleClick(object sender, MouseButtonEventArgs e)
@@ -275,6 +278,7 @@ namespace Scavenger
                 && originalSource.DataContext is BinTreeMapViewModel)
             {
                 treeViewItem.IsExpanded = false;
+                e.Handled = true;
             }
         }
 

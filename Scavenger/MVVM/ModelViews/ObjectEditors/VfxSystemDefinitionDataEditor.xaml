@@ -113,38 +113,15 @@
                                 <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding FlexScaleBirthScale.Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
                             </Meta:SomeablePropertyEditor>
                         </MaterialDesign:ColorZone>
-                        
                         <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10" HorizontalAlignment="Left">
-                            <Expander DataContext="{Binding FlexScaleEmitOffset}">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border VerticalAlignment="Center">
-                                            <TextBlock Text="Flex Scale Emit Offset"/>
-                                        </Border>
-                                        <CheckBox IsChecked="{Binding IsSome, UpdateSourceTrigger=PropertyChanged}"
-                                                  Content="Is Some"
-                                                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
-                                                  Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                </Expander.Header>
-                                <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-                            </Expander>
+                            <Meta:SomeablePropertyEditor PropertyName="Flex Scale Emit Offset" Someable="{Binding FlexScaleEmitOffset}">
+                                <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding FlexScaleEmitOffset.Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                            </Meta:SomeablePropertyEditor>
                         </MaterialDesign:ColorZone>
                         <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2" Margin="10" HorizontalAlignment="Left">
-                            <Expander DataContext="{Binding FlexInstanceScale}">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Border VerticalAlignment="Center">
-                                            <TextBlock Text="Flex Instance Scale"/>
-                                        </Border>
-                                        <CheckBox IsChecked="{Binding IsSome, UpdateSourceTrigger=PropertyChanged}"
-                                                  Content="Is Some"
-                                                  Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}"
-                                                  Margin="10,0,0,0"/>
-                                    </StackPanel>
-                                </Expander.Header>
-                                <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
-                            </Expander>
+                            <Meta:SomeablePropertyEditor PropertyName="Flex Scale Instance Scale" Someable="{Binding FlexInstanceScale}">
+                                <PrimitiveStructures:FlexTypeFloatEditor FlexValue="{Binding FlexInstanceScale.Structure, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+                            </Meta:SomeablePropertyEditor>
                         </MaterialDesign:ColorZone>
 
                         <Meta:ComponentProperty PropertyName="Scale Bias">
@@ -159,23 +136,31 @@
                                                      Margin="10"
                                                      HorizontalAlignment="Left"/>
                         </Meta:ComponentProperty>
-                        
-                        <Meta:ComponentProperty PropertyName="Scale 0">
-                            <PrimitiveStructures:ValueVector3Editor Vector="{Binding Scale0, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Meta:ComponentProperty>
-                        <Meta:ComponentProperty PropertyName="Scale 1">
-                            <PrimitiveStructures:ValueFloatEditor Value="{Binding Scale1, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Meta:ComponentProperty>
-                        <Meta:ComponentProperty PropertyName="Scale Override">
-                            <PrimitiveStructures:Vector3Editor Vector="{Binding ScaleOverride, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Meta:ComponentProperty>
 
-                        <Meta:ComponentProperty PropertyName="Birth Scale 0">
-                            <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthScale0, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Meta:ComponentProperty>
-                        <Meta:ComponentProperty PropertyName="Birth Scale 1">
-                            <PrimitiveStructures:ValueFloatEditor Value="{Binding BirthScale1, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Meta:ComponentProperty>
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2">
+                            <StackPanel Orientation="Vertical">
+                                <Meta:ComponentProperty PropertyName="Scale 0">
+                                    <PrimitiveStructures:ValueVector3Editor Vector="{Binding Scale0, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:ComponentProperty PropertyName="Scale 1">
+                                    <PrimitiveStructures:ValueFloatEditor Value="{Binding Scale1, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:ComponentProperty PropertyName="Scale Override">
+                                    <PrimitiveStructures:Vector3Editor Vector="{Binding ScaleOverride, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
+
+                        <MaterialDesign:ColorZone MaterialDesign:ShadowAssist.ShadowDepth="Depth2">
+                            <StackPanel Orientation="Vertical">
+                                <Meta:ComponentProperty PropertyName="Birth Scale 0">
+                                    <PrimitiveStructures:ValueVector3Editor Vector="{Binding BirthScale0, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                                <Meta:ComponentProperty PropertyName="Birth Scale 1">
+                                    <PrimitiveStructures:ValueFloatEditor Value="{Binding BirthScale1, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Meta:ComponentProperty>
+                            </StackPanel>
+                        </MaterialDesign:ColorZone>
                     </StackPanel>
                 </ScrollViewer>
             </MaterialDesign:ColorZone>

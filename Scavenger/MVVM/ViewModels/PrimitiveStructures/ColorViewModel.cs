@@ -3,66 +3,43 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using MediaColor = System.Windows.Media.Color;
 
 namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
 {
     public class ColorViewModel : PropertyNotifier
     {
-        public float R
+        public MediaColor Color
         {
-            get => this._r;
+            get => this._color;
             set
             {
-                this._r = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public float G
-        {
-            get => this._g;
-            set
-            {
-                this._g = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public float B
-        {
-            get => this._b;
-            set
-            {
-                this._b = value;
-                NotifyPropertyChanged();
-            }
-        }
-        public float A
-        {
-            get => this._a;
-            set
-            {
-                this._a = value;
+                this._color = value;
                 NotifyPropertyChanged();
             }
         }
 
-        private float _r;
-        private float _g;
-        private float _b;
-        private float _a;
+        private MediaColor _color;
 
         public ColorViewModel(Color color)
         {
-            this.R = color.R;
-            this.G = color.G;
-            this.B = color.B;
-            this.A = color.A;
+            this.Color = new MediaColor()
+            {
+                R = (byte)(color.R * 255),
+                G = (byte)(color.G * 255),
+                B = (byte)(color.B * 255),
+                A = (byte)(color.A * 255),
+            };
         }
         public ColorViewModel(Vector4 color)
         {
-            this.R = color.X;
-            this.G = color.Y;
-            this.B = color.Z;
-            this.A = color.W;
+            this.Color = new MediaColor()
+            {
+                R = (byte)(color.X * 255),
+                G = (byte)(color.Y * 255),
+                B = (byte)(color.Z * 255),
+                A = (byte)(color.W * 255),
+            };
         }
 
         public Color ToColor()

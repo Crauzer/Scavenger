@@ -31,6 +31,7 @@ namespace Scavenger.MVVM.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
         [JsonIgnore] public virtual string Header { get; set; }
 
         public string Name
@@ -237,7 +238,7 @@ namespace Scavenger.MVVM.ViewModels
             {
                 if (typeInfo.GetInterface(nameof(IMetaClass)) is not null)
                 {
-                    MetaClassAttribute metaPropertyAttribute = typeInfo.GetCustomAttribute(typeof(MetaClassAttribute)) as MetaClassAttribute;
+                    MetaClassAttribute metaPropertyAttribute = typeInfo.GetCustomAttribute<MetaClassAttribute>();
                     if (metaPropertyAttribute.NameHash == metaClassHash)
                     {
                         return typeInfo;

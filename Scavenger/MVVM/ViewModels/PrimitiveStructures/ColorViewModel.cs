@@ -44,11 +44,17 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
 
         public Color ToColor()
         {
-            return new Color(this.R, this.G, this.B, this.A);
+            return new Color(this.Color.R, this.Color.G, this.Color.B, this.Color.A);
         }
         public Vector4 ToVector4()
         {
-            return new Vector4(this.R, this.G, this.B, this.A);
+            return new Vector4()
+            {
+                X = this.Color.R / 255f,
+                Y = this.Color.R / 255f,
+                Z = this.Color.R / 255f,
+                W = this.Color.R / 255f,
+            };
         }
     }
 }

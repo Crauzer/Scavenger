@@ -52,7 +52,9 @@
                             <primitivestructures:Vector3Editor Vector="{Binding Value, UpdateSourceTrigger=PropertyChanged}"/>
                             <Button Content="{MaterialDesign:PackIcon Kind=Minus}"
                                     Style="{StaticResource MaterialDesignFlatAccentButton}"
-                                    Margin="5"/>
+                                    Margin="5"
+                                    Command="{Binding DataContext.RemoveKeyCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Vector3DynamicsEditor}}}"
+                                    CommandParameter="{Binding}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

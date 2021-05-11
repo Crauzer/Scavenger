@@ -26,6 +26,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         private VfxProbabilityTableDataViewModel[] _probabilityTables = new VfxProbabilityTableDataViewModel[3];
 
         public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
+        public ICommand RemoveKeyCommand => new RelayCommand(OnRemoveKey);
 
         public ValueVector3Dynamics(VfxAnimatedVector3fVariableData dynamics)
         {
@@ -41,6 +42,13 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         private void OnAddKey(object o)
         {
             this.Keys.Add(new ValueVector3DynamicsKey(0f, new Vector3()));
+        }
+        private void OnRemoveKey(object o)
+        {
+            if(o is ValueVector3DynamicsKey key)
+            {
+                this.Keys.Remove(key);
+            }
         }
 
         public VfxAnimatedVector3fVariableData ToVfxAnimatedVector3fVariableData()

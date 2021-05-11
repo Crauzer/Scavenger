@@ -12,9 +12,9 @@ using System.Windows.Input;
 
 namespace Scavenger.MVVM.ViewModels.Meta.Structures
 {
-    public class ValueVector3Dynamics : PropertyNotifier
+    public class ValueVector2Dynamics : PropertyNotifier
     {
-        public ObservableCollection<ValueVector3DynamicsKey> Keys
+        public ObservableCollection<ValueVector2DynamicsKey> Keys
         {
             get => this._keys;
             set
@@ -42,20 +42,10 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
                 NotifyPropertyChanged();
             }
         }
-        public VfxProbabilityTableDataViewModel ProbabilityTableZ
-        {
-            get => this._probabilityTables[2];
-            set
-            {
-                this._probabilityTables[2] = value;
-                NotifyPropertyChanged();
-            }
-        }
 
-        private ObservableCollection<ValueVector3DynamicsKey> _keys = new();
-        private VfxProbabilityTableDataViewModel[] _probabilityTables = new VfxProbabilityTableDataViewModel[3]
+        private ObservableCollection<ValueVector2DynamicsKey> _keys = new();
+        private VfxProbabilityTableDataViewModel[] _probabilityTables = new VfxProbabilityTableDataViewModel[2]
         {
-            new VfxProbabilityTableDataViewModel(),
             new VfxProbabilityTableDataViewModel(),
             new VfxProbabilityTableDataViewModel()
         };
@@ -63,13 +53,13 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
         public ICommand RemoveKeyCommand => new RelayCommand(OnRemoveKey);
 
-        public ValueVector3Dynamics(VfxAnimatedVector3fVariableData dynamics)
+        public ValueVector2Dynamics(VfxAnimatedVector2fVariableData dynamics)
         {
             if (dynamics is not null)
             {
                 for (int i = 0; i < dynamics.Times.Count; i++)
                 {
-                    this.Keys.Add(new ValueVector3DynamicsKey(dynamics.Times[i], dynamics.Values[i]));
+                    this.Keys.Add(new ValueVector2DynamicsKey(dynamics.Times[i], dynamics.Values[i]));
                 }
 
                 for (int i = 0; i < dynamics.ProbabilityTables.Count; i++)
@@ -81,28 +71,28 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
 
         private void OnAddKey(object o)
         {
-            this.Keys.Add(new ValueVector3DynamicsKey(0f, new Vector3()));
+            this.Keys.Add(new ValueVector2DynamicsKey(0f, new Vector2()));
         }
         private void OnRemoveKey(object o)
         {
-            if (o is ValueVector3DynamicsKey key)
+            if (o is ValueVector2DynamicsKey key)
             {
                 this.Keys.Remove(key);
             }
         }
 
-        public VfxAnimatedVector3fVariableData ToVfxAnimatedVector3fVariableData()
+        public VfxAnimatedVector2fVariableData ToVfxAnimatedVector2fVariableData()
         {
-            return new VfxAnimatedVector3fVariableData()
+            return new VfxAnimatedVector2fVariableData()
             {
                 Times = new MetaContainer<float>(this.Keys.Select(x => x.Time).ToList()),
-                Values = new MetaContainer<Vector3>(this.Keys.Select(x => x.Value.ToVector()).ToList()),
+                Values = new MetaContainer<Vector2>(this.Keys.Select(x => x.Value.ToVector()).ToList()),
                 ProbabilityTables = new MetaContainer<VfxProbabilityTableData>(this._probabilityTables.Select(x => x.ToVfxProbabilityTableData()).ToList())
             };
         }
     }
 
-    public class ValueVector3DynamicsKey : PropertyNotifier
+    public class ValueVector2DynamicsKey : PropertyNotifier
     {
         public float Time
         {
@@ -113,7 +103,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
                 NotifyPropertyChanged();
             }
         }
-        public Vector3ViewModel Value
+        public Vector2ViewModel Value
         {
             get => this._value;
             set
@@ -124,12 +114,12 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         }
 
         private float _time;
-        private Vector3ViewModel _value;
+        private Vector2ViewModel _value;
 
-        public ValueVector3DynamicsKey(float time, Vector3 value)
+        public ValueVector2DynamicsKey(float time, Vector2 value)
         {
             this.Time = time;
-            this.Value = new Vector3ViewModel(value);
+            this.Value = new Vector2ViewModel(value);
         }
     }
 }

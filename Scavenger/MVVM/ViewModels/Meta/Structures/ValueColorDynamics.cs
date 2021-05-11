@@ -12,9 +12,9 @@ using System.Windows.Input;
 
 namespace Scavenger.MVVM.ViewModels.Meta.Structures
 {
-    public class ValueVector3Dynamics : PropertyNotifier
+    public class ValueColorDynamics : PropertyNotifier
     {
-        public ObservableCollection<ValueVector3DynamicsKey> Keys
+        public ObservableCollection<ValueColorDynamicsKey> Keys
         {
             get => this._keys;
             set
@@ -24,7 +24,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
             }
         }
 
-        public VfxProbabilityTableDataViewModel ProbabilityTableX
+        public VfxProbabilityTableDataViewModel ProbabilityTableR
         {
             get => this._probabilityTables[0];
             set
@@ -33,7 +33,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
                 NotifyPropertyChanged();
             }
         }
-        public VfxProbabilityTableDataViewModel ProbabilityTableY
+        public VfxProbabilityTableDataViewModel ProbabilityTableG
         {
             get => this._probabilityTables[1];
             set
@@ -42,7 +42,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
                 NotifyPropertyChanged();
             }
         }
-        public VfxProbabilityTableDataViewModel ProbabilityTableZ
+        public VfxProbabilityTableDataViewModel ProbabilityTableB
         {
             get => this._probabilityTables[2];
             set
@@ -51,10 +51,20 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
                 NotifyPropertyChanged();
             }
         }
-
-        private ObservableCollection<ValueVector3DynamicsKey> _keys = new();
-        private VfxProbabilityTableDataViewModel[] _probabilityTables = new VfxProbabilityTableDataViewModel[3]
+        public VfxProbabilityTableDataViewModel ProbabilityTableA
         {
+            get => this._probabilityTables[3];
+            set
+            {
+                this._probabilityTables[3] = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<ValueColorDynamicsKey> _keys = new();
+        private VfxProbabilityTableDataViewModel[] _probabilityTables = new VfxProbabilityTableDataViewModel[4]
+        {
+            new VfxProbabilityTableDataViewModel(),
             new VfxProbabilityTableDataViewModel(),
             new VfxProbabilityTableDataViewModel(),
             new VfxProbabilityTableDataViewModel()
@@ -63,13 +73,13 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
         public ICommand RemoveKeyCommand => new RelayCommand(OnRemoveKey);
 
-        public ValueVector3Dynamics(VfxAnimatedVector3fVariableData dynamics)
+        public ValueColorDynamics(VfxAnimatedColorVariableData dynamics)
         {
             if (dynamics is not null)
             {
                 for (int i = 0; i < dynamics.Times.Count; i++)
                 {
-                    this.Keys.Add(new ValueVector3DynamicsKey(dynamics.Times[i], dynamics.Values[i]));
+                    this.Keys.Add(new ValueColorDynamicsKey(dynamics.Times[i], dynamics.Values[i]));
                 }
 
                 for (int i = 0; i < dynamics.ProbabilityTables.Count; i++)
@@ -81,28 +91,28 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
 
         private void OnAddKey(object o)
         {
-            this.Keys.Add(new ValueVector3DynamicsKey(0f, new Vector3()));
+            this.Keys.Add(new ValueColorDynamicsKey(0f, new Vector4()));
         }
         private void OnRemoveKey(object o)
         {
-            if (o is ValueVector3DynamicsKey key)
+            if (o is ValueColorDynamicsKey key)
             {
                 this.Keys.Remove(key);
             }
         }
 
-        public VfxAnimatedVector3fVariableData ToVfxAnimatedVector3fVariableData()
+        public VfxAnimatedColorVariableData ToVfxAnimatedColorVariableData()
         {
-            return new VfxAnimatedVector3fVariableData()
+            return new VfxAnimatedColorVariableData()
             {
                 Times = new MetaContainer<float>(this.Keys.Select(x => x.Time).ToList()),
-                Values = new MetaContainer<Vector3>(this.Keys.Select(x => x.Value.ToVector()).ToList()),
+                Values = new MetaContainer<Vector4>(this.Keys.Select(x => x.Value.ToVector4()).ToList()),
                 ProbabilityTables = new MetaContainer<VfxProbabilityTableData>(this._probabilityTables.Select(x => x.ToVfxProbabilityTableData()).ToList())
             };
         }
     }
 
-    public class ValueVector3DynamicsKey : PropertyNotifier
+    public class ValueColorDynamicsKey : PropertyNotifier
     {
         public float Time
         {
@@ -113,7 +123,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
                 NotifyPropertyChanged();
             }
         }
-        public Vector3ViewModel Value
+        public ColorViewModel Value
         {
             get => this._value;
             set
@@ -124,12 +134,12 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         }
 
         private float _time;
-        private Vector3ViewModel _value;
+        private ColorViewModel _value;
 
-        public ValueVector3DynamicsKey(float time, Vector3 value)
+        public ValueColorDynamicsKey(float time, Vector4 value)
         {
             this.Time = time;
-            this.Value = new Vector3ViewModel(value);
+            this.Value = new ColorViewModel(value);
         }
     }
 }

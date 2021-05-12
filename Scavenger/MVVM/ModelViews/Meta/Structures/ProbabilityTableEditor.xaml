@@ -12,7 +12,7 @@
              xmlns:ViewModels="clr-namespace:Scavenger.MVVM.ViewModels" 
              xmlns:structures="clr-namespace:Scavenger.MVVM.ModelViews.Meta.Structures"
              xmlns:dd="urn:gong-wpf-dragdrop" xmlns:structures1="clr-namespace:Scavenger.MVVM.ViewModels.Meta.Structures"
-             d:DataContext="{d:DesignInstance Type=structures1:VfxProbabilityTableDataViewModel}"
+             d:DataContext="{d:DesignInstance Type=structures1:VfxProbabilityTableViewModel}"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Regular"
              TextElement.FontSize="13"

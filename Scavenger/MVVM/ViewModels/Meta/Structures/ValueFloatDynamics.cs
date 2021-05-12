@@ -22,7 +22,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
             }
         }
 
-        public VfxProbabilityTableDataViewModel ProbabilityTable
+        public VfxProbabilityTableViewModel ProbabilityTable
         {
             get => this._probabilityTables[0];
             set
@@ -33,9 +33,9 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         }
 
         private ObservableCollection<ValueFloatDynamicsKey> _keys = new();
-        private VfxProbabilityTableDataViewModel[] _probabilityTables = new VfxProbabilityTableDataViewModel[1]
+        private VfxProbabilityTableViewModel[] _probabilityTables = new VfxProbabilityTableViewModel[1]
         {
-            new VfxProbabilityTableDataViewModel()
+            new VfxProbabilityTableViewModel()
         };
 
         public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
@@ -53,7 +53,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
 
                 for (int i = 0; i < dynamics.ProbabilityTables.Count; i++)
                 {
-                    this._probabilityTables[i] = new VfxProbabilityTableDataViewModel(dynamics.ProbabilityTables[i]);
+                    this._probabilityTables[i] = new VfxProbabilityTableViewModel(dynamics.ProbabilityTables[i]);
                 }
             }
         }

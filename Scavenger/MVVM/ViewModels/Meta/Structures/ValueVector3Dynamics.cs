@@ -24,7 +24,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
             }
         }
 
-        public VfxProbabilityTableDataViewModel ProbabilityTableX
+        public VfxProbabilityTableViewModel ProbabilityTableX
         {
             get => this._probabilityTables[0];
             set
@@ -33,7 +33,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
                 NotifyPropertyChanged();
             }
         }
-        public VfxProbabilityTableDataViewModel ProbabilityTableY
+        public VfxProbabilityTableViewModel ProbabilityTableY
         {
             get => this._probabilityTables[1];
             set
@@ -42,7 +42,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
                 NotifyPropertyChanged();
             }
         }
-        public VfxProbabilityTableDataViewModel ProbabilityTableZ
+        public VfxProbabilityTableViewModel ProbabilityTableZ
         {
             get => this._probabilityTables[2];
             set
@@ -53,11 +53,11 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         }
 
         private ObservableCollection<ValueVector3DynamicsKey> _keys = new();
-        private VfxProbabilityTableDataViewModel[] _probabilityTables = new VfxProbabilityTableDataViewModel[3]
+        private VfxProbabilityTableViewModel[] _probabilityTables = new VfxProbabilityTableViewModel[3]
         {
-            new VfxProbabilityTableDataViewModel(),
-            new VfxProbabilityTableDataViewModel(),
-            new VfxProbabilityTableDataViewModel()
+            new VfxProbabilityTableViewModel(),
+            new VfxProbabilityTableViewModel(),
+            new VfxProbabilityTableViewModel()
         };
 
         public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
@@ -75,7 +75,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
 
                 for (int i = 0; i < dynamics.ProbabilityTables.Count; i++)
                 {
-                    this._probabilityTables[i] = new VfxProbabilityTableDataViewModel(dynamics.ProbabilityTables[i]);
+                    this._probabilityTables[i] = new VfxProbabilityTableViewModel(dynamics.ProbabilityTables[i]);
                 }
             }
         }

@@ -217,9 +217,6 @@
                     <WpfToolkit:SingleUpDown Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
                                              Minimum="{Binding MinValue}" 
                                              Maximum="{Binding MaxValue}"
-                                             Background="{DynamicResource MaterialDesignPaper}"
-                                             BorderBrush="{StaticResource MaterialDesignTextFieldBoxBackground}"
-                                             Foreground="{StaticResource MaterialDesignBodyLight}"
                                              MinWidth="150"
                                              Margin="10,0,0,0"/>
 

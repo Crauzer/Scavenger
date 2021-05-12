@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Scavenger.MVVM.ViewModels.Meta.Structures
 {
-    public class VfxProbabilityTableDataViewModel : PropertyNotifier
+    public class VfxProbabilityTableViewModel : PropertyNotifier
     {
         public float SingleValue
         {
@@ -18,7 +18,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
                 NotifyPropertyChanged();
             }
         }
-        public ObservableCollection<VfxProbabilityTableDataKeyViewModel> Keys
+        public ObservableCollection<VfxProbabilityTableKeyViewModel> Keys
         {
             get => this._keys;
             set
@@ -29,13 +29,13 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         }
 
         private float _singleValue;
-        private ObservableCollection<VfxProbabilityTableDataKeyViewModel> _keys = new();
+        private ObservableCollection<VfxProbabilityTableKeyViewModel> _keys = new();
 
         public ICommand AddKeyCommand => new RelayCommand(OnAddKey);
         public ICommand RemoveKeyCommand => new RelayCommand(OnRemoveKey);
 
-        public VfxProbabilityTableDataViewModel() { }
-        public VfxProbabilityTableDataViewModel(VfxProbabilityTableData probabilityTableData)
+        public VfxProbabilityTableViewModel() { }
+        public VfxProbabilityTableViewModel(VfxProbabilityTableData probabilityTableData)
         {
             if (probabilityTableData is not null)
             {
@@ -43,18 +43,18 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
 
                 for (int i = 0; i < probabilityTableData.KeyTimes.Count; i++)
                 {
-                    this.Keys.Add(new VfxProbabilityTableDataKeyViewModel(probabilityTableData.KeyTimes[i], probabilityTableData.KeyValues[i]));
+                    this.Keys.Add(new VfxProbabilityTableKeyViewModel(probabilityTableData.KeyTimes[i], probabilityTableData.KeyValues[i]));
                 }
             }
         }
 
         private void OnAddKey(object parameter)
         {
-            this.Keys.Add(new VfxProbabilityTableDataKeyViewModel(0f, 0f));
+            this.Keys.Add(new VfxProbabilityTableKeyViewModel(0f, 0f));
         }
         private void OnRemoveKey(object parameter)
         {
-            if (parameter is VfxProbabilityTableDataKeyViewModel key)
+            if (parameter is VfxProbabilityTableKeyViewModel key)
             {
                 this.Keys.Remove(key);
             }
@@ -71,7 +71,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         }
     }
 
-    public class VfxProbabilityTableDataKeyViewModel : PropertyNotifier
+    public class VfxProbabilityTableKeyViewModel : PropertyNotifier
     {
         public float Time
         {
@@ -95,7 +95,7 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         private float _keyTime;
         private float _keyValue;
 
-        public VfxProbabilityTableDataKeyViewModel(float keyTime, float keyValue)
+        public VfxProbabilityTableKeyViewModel(float keyTime, float keyValue)
         {
             this.Time = keyTime;
             this.Value = Value;

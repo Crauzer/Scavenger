@@ -41,7 +41,7 @@ namespace Scavenger.MVVM.ViewModels.PrimitiveStructures
             this.Dynamics = new ValueColorDynamics(valueColor.Dynamics);
         }
 
-        public ValueColor ToValueVector3()
+        public ValueColor ToValueColor()
         {
             return new ValueColor()
             {

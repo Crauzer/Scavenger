@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Scavenger.MVVM.ViewModels.Meta.Structures
 {
-    public class VfxPaletteDefinition : PropertyNotifier
+    public class VfxPaletteDefinitionViewModel : PropertyNotifier
     {
         public int PaletteCount
         {
@@ -87,8 +87,8 @@ namespace Scavenger.MVVM.ViewModels.Meta.Structures
         private ValueFloatViewModel _m886635206;
         private ValueFloatViewModel _m1157448907;
 
-        public VfxPaletteDefinition() : this(new VfxPaletteDefinitionData()) { }
-        public VfxPaletteDefinition(VfxPaletteDefinitionData paletteDefiniton)
+        public VfxPaletteDefinitionViewModel() : this(new VfxPaletteDefinitionData()) { }
+        public VfxPaletteDefinitionViewModel(VfxPaletteDefinitionData paletteDefiniton)
         {
             this.PaletteCount = paletteDefiniton.PaletteCount;
             this.PaletteTextureAddressMode = paletteDefiniton.PaletteTextureAddressMode;
